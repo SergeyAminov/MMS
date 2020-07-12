@@ -20,8 +20,6 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public List<Product> allProducts() {
         Session session = sessionFactory.getCurrentSession();
-
-        /* Unsafe conversion has to be corrected here! */
-        return session.createQuery("from Product ").list();
+        return session.createQuery("select product from Product product", Product.class).list();
     }
 }
