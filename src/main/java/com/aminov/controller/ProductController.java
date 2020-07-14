@@ -21,12 +21,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView allFilms() {
+    public ModelAndView allProducts() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
 
-        List<Product> games = productService.allProducts();
-        modelAndView.addObject("productsList", games);
+        List<Product> products = productService.allProducts();
+        modelAndView.addObject("productsList", products);
 
         return modelAndView;
     }

@@ -4,6 +4,7 @@ import com.aminov.dao.ProductDAO;
 import com.aminov.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<Product> allProducts() {
         return productDAO.allProducts();
     }
