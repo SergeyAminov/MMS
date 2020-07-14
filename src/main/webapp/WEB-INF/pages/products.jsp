@@ -14,7 +14,7 @@
 <body>
     <h1>Catalog</h1>
     <c:forEach var="product" items="${productsList}">
-        <div class>
+        <div>
             <h3>${product.title}</h3>
             <p>Category : ${product.category}</p>
             <p>Price : ${product.price}</p>
