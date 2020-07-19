@@ -1,7 +1,6 @@
 package com.aminov.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -19,19 +18,19 @@ public class Order {
     private ClientAddress clientAddress;
 
     @Column(name = "payment_method")
-    private PaymentMethod paymentMethod;
+    private String paymentMethod;
 
     @Column(name = "delivery_method")
     private String deliveryMethod;
 
-    @Column(name = "goods")
-    private List<Product> goods;
+    @Column(name = "product")
+    private Product product;
 
     @Column(name = "payment_status")
-    private PaymentStatus paymentStatus;
+    private String paymentStatus;
 
     @Column(name = "order_status")
-    private OrderStatus orderStatus;
+    private String orderStatus;
 
     public Order(){}
 
@@ -59,11 +58,11 @@ public class Order {
         this.clientAddress = clientAddress;
     }
 
-    public PaymentMethod getPaymentMethod() {
+    public String getPaymentMethod() {
         return paymentMethod;
     }
 
-    public void setPaymentMethod(PaymentMethod paymentMethod) {
+    public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
 
@@ -75,27 +74,27 @@ public class Order {
         this.deliveryMethod = deliveryMethod;
     }
 
-    public List<Product> getGoods() {
-        return goods;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setGoods(List<Product> goods) {
-        this.goods = goods;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
-    public PaymentStatus getPaymentStatus() {
+    public String getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(PaymentStatus paymentStatus) {
+    public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
-    public OrderStatus getOrderStatus() {
+    public String getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(OrderStatus orderStatus) {
+    public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
 
