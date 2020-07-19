@@ -18,16 +18,10 @@ public class Product {
     private double price;
 
     @Column(name = "category")
-    private String category;
+    private ProductCategory productCategory;
 
-    @Column(name = "weight")
-    private double weight;
-
-    @Column(name = "size")
-    private double size;
-
-    @Column(name = "count")
-    private int count;
+    @Column (name="parameters")
+    private ProductParams productParams;
 
     public Product(){
 
@@ -57,36 +51,20 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategory() {
-        return category;
+    public ProductCategory getProductCategory() {
+        return productCategory;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProductCategory(ProductCategory productCategory) {
+        this.productCategory = productCategory;
     }
 
-    public double getWeight() {
-        return weight;
+    public ProductParams getProductParams() {
+        return productParams;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getSize() {
-        return size;
-    }
-
-    public void setSize(double size) {
-        this.size = size;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
+    public void setProductParams(ProductParams productParams) {
+        this.productParams = productParams;
     }
 
     @Override
