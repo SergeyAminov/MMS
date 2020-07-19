@@ -35,7 +35,6 @@ public class HibernateConfig {
 
     @Bean
     public DataSource dataSource(){
-
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(environment.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(environment.getRequiredProperty("jdbc.url"));

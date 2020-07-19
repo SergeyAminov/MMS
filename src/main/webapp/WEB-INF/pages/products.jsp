@@ -17,9 +17,9 @@
 <header>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
-				<span class="navbar-brand mb-0 h1 font-weight-bold text-uppercase">
-					Online-shop
-				</span>
+            <span class="navbar-brand mb-0 h1 font-weight-bold text-uppercase">
+                Online-shop
+            </span>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-white font-weight-bold" href="#">Catalog</a>
@@ -35,8 +35,8 @@
 <!-- Main -->
 <main class="flex-shrink-0">
     <h1 class="container text-dark font-weight-bold">Goods Catalog</h1>
-    <!-- Dropdown menues -->
-    <div class="dropdown-menues container d-flex flex-row bd-highlight mb-3">
+    <!-- Dropdown menu -->
+    <div class="dropdown-menu container d-flex flex-row bd-highlight mb-3">
         <!-- Sort -->
         <div class="dropdown sort-menu">
             <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
@@ -87,6 +87,7 @@
                 </div>
             </div>
         </c:forEach>
+        <hr>
     </div>
 </main>
 
@@ -97,7 +98,7 @@
     </div>
 </footer>
 
-<!-- Bootstrap scropts -->
+<!-- Bootstrap scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous">

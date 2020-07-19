@@ -1,6 +1,5 @@
 package com.aminov.model;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -29,6 +28,10 @@ public class Product {
 
     @Column(name = "count")
     private int count;
+
+    public Product(){
+
+    }
 
     public int getId() {
         return id;
