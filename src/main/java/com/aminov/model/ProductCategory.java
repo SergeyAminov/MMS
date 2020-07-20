@@ -7,23 +7,10 @@ import javax.persistence.*;
 public class ProductCategory {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     @Column(name = "category")
     private String category;
 
-    public ProductCategory() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    public ProductCategory() {}
 
     public String getCategory() {
         return category;

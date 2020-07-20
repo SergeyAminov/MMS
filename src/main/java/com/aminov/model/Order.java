@@ -11,10 +11,12 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "client")
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    @Column(name = "client_address")
+    @ManyToOne
+    @JoinColumn(name = "client_address_id")
     private ClientAddress clientAddress;
 
     @Column(name = "payment_method")
@@ -22,9 +24,6 @@ public class Order {
 
     @Column(name = "delivery_method")
     private String deliveryMethod;
-
-    @Column(name = "product")
-    private Product product;
 
     @Column(name = "payment_status")
     private String paymentStatus;
@@ -72,14 +71,6 @@ public class Order {
 
     public void setDeliveryMethod(String deliveryMethod) {
         this.deliveryMethod = deliveryMethod;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     public String getPaymentStatus() {

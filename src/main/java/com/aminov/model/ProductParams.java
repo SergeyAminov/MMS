@@ -25,6 +25,9 @@ public class ProductParams {
     @Column(name = "count")
     private int count;
 
+    @OneToOne(optional = false, mappedBy="productParams")
+    public Product product;
+
     public ProductParams(){}
 
     public int getId() {
@@ -73,6 +76,14 @@ public class ProductParams {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

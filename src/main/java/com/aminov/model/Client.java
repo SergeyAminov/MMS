@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "clients")
@@ -25,6 +26,9 @@ public class Client {
 
     @Column(name = "password")
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private List<Order> orders;
 
     public Client() {
     }
@@ -75,6 +79,14 @@ public class Client {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
     @Override

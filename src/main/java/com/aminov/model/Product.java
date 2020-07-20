@@ -20,7 +20,8 @@ public class Product {
     @Column(name = "category")
     private ProductCategory productCategory;
 
-    @Column (name="parameters")
+    @OneToOne(optional = false)
+    @JoinColumn(name="parameters_id")
     private ProductParams productParams;
 
     public Product(){

@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "client_addresses")
@@ -28,6 +29,9 @@ public class ClientAddress {
 
     @Column(name = "apartment_number")
     private String apartmentNumber;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientAddress")
+    private List<Order> orders;
 
     public ClientAddress(){
 
