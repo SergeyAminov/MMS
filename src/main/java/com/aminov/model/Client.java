@@ -30,6 +30,9 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<Order> orders;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    private List<ClientAddress> clientAddress;
+
     public Client() {
     }
 
@@ -87,6 +90,14 @@ public class Client {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public List<ClientAddress> getClientsAddresses() {
+        return clientAddress;
+    }
+
+    public void setClientsAddresses(List<ClientAddress> clientsAddresses) {
+        this.clientAddress = clientsAddresses;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -18,11 +19,17 @@ public class Product {
     private double price;
 
     @Column(name = "category")
-    private ProductCategory productCategory;
+    private Category category;
 
     @OneToOne(optional = false)
     @JoinColumn(name="parameters_id")
-    private ProductParams productParams;
+    private Parameters parameters;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<OrderProduct> orderProduct;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private List<ProductCategory> productCategory;
 
     public Product(){
 
@@ -52,20 +59,36 @@ public class Product {
         this.price = price;
     }
 
-    public ProductCategory getProductCategory() {
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Parameters getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameters parameters) {
+        this.parameters = parameters;
+    }
+
+    public List<OrderProduct> getOrderProduct() {
+        return orderProduct;
+    }
+
+    public void setOrderProduct(List<OrderProduct> orderProduct) {
+        this.orderProduct = orderProduct;
+    }
+
+    public List<ProductCategory> getProductCategory() {
         return productCategory;
     }
 
-    public void setProductCategory(ProductCategory productCategory) {
+    public void setProductCategory(List<ProductCategory> productCategory) {
         this.productCategory = productCategory;
-    }
-
-    public ProductParams getProductParams() {
-        return productParams;
-    }
-
-    public void setProductParams(ProductParams productParams) {
-        this.productParams = productParams;
     }
 
     @Override

@@ -1,27 +1,20 @@
 package com.aminov.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "product_category")
 public class ProductCategory {
 
-    @Id
-    @Column(name = "category")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 
-    public ProductCategory() {}
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    @Override
-    public String toString() {
-        return this.category;
-    }
 }

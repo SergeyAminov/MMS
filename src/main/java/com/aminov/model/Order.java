@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -16,8 +17,8 @@ public class Order {
     private Client client;
 
     @ManyToOne
-    @JoinColumn(name = "client_address_id")
-    private ClientAddress clientAddress;
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(name = "payment_method")
     private String paymentMethod;
@@ -30,6 +31,9 @@ public class Order {
 
     @Column(name = "order_status")
     private String orderStatus;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    private List<OrderProduct> orderProduct;
 
     public Order(){}
 
@@ -49,12 +53,12 @@ public class Order {
         this.client = client;
     }
 
-    public ClientAddress getClientAddress() {
-        return clientAddress;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setClientAddress(ClientAddress clientAddress) {
-        this.clientAddress = clientAddress;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getPaymentMethod() {
@@ -87,6 +91,14 @@ public class Order {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public List<OrderProduct> getOrderProduct() {
+        return orderProduct;
+    }
+
+    public void setOrderProduct(List<OrderProduct> orderProduct) {
+        this.orderProduct = orderProduct;
     }
 
     @Override

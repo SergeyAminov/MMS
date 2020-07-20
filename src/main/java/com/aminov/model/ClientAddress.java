@@ -1,104 +1,37 @@
 package com.aminov.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name = "client_addresses")
+@Table(name = "client_address")
 public class ClientAddress {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    @Column(name = "country")
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
-    @Column(name = "city")
-    private String city;
+    public ClientAddress(){}
 
-    @Column(name = "postcode")
-    private String postcode;
-
-    @Column(name = "street")
-    private String street;
-
-    @Column(name = "duilding")
-    private String building;
-
-    @Column(name = "apartment_number")
-    private String apartmentNumber;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientAddress")
-    private List<Order> orders;
-
-    public ClientAddress(){
-
+    public Client getClient() {
+        return client;
     }
 
-    public int getId() {
-        return id;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Address getAddress() {
+        return address;
     }
 
-    public String getCountry() {
-        return country;
+    public void setAddress(Address address) {
+        this.address = address;
     }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getBuilding() {
-        return building;
-    }
-
-    public void setBuilding(String building) {
-        this.building = building;
-    }
-
-    public String getApartmentNumber() {
-        return apartmentNumber;
-    }
-
-    public void setApartmentNumber(String apartmentNumber) {
-        this.apartmentNumber = apartmentNumber;
-    }
-
-    @Override
-    public String toString() {
-        return this.city + ", " +
-               this.street + ", " +
-               this.building + ", " +
-               this.apartmentNumber;
-    }
-
 }

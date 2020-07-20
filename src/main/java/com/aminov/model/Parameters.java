@@ -3,7 +3,7 @@ package com.aminov.model;
 import javax.persistence.*;
 
 @Entity
-public class ProductParams {
+public class Parameters {
 
     @Id
     @Column(name = "id")
@@ -25,10 +25,10 @@ public class ProductParams {
     @Column(name = "count")
     private int count;
 
-    @OneToOne(optional = false, mappedBy="productParams")
+    @OneToOne(optional = false, mappedBy="parameters")
     public Product product;
 
-    public ProductParams(){}
+    public Parameters(){}
 
     public int getId() {
         return id;
