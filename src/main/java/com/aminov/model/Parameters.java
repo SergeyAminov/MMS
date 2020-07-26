@@ -97,4 +97,11 @@ public class Parameters {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    @Override
+    public String toString() {
+        return this.brand + "; " + this.diagonal + " inch; " + this.weight + " kg; " +
+                this.color + "; " + this.ram + "GB RAM; " + this.storage + "GB Storage";
+    }
+    
 }

@@ -3,8 +3,7 @@ drop table if exists parameters;
 drop table if exists products;
 
 create table category(
-    category varchar(64) primary key,
-    title varchar(64)
+    category varchar(64) primary key
 );
 
 create table parameters(
