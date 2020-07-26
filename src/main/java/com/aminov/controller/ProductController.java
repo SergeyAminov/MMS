@@ -1,6 +1,8 @@
 package com.aminov.controller;
 
+import com.aminov.model.Category;
 import com.aminov.model.Product;
+import com.aminov.service.CategoryService;
 import com.aminov.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,16 @@ import java.util.List;
 public class ProductController {
 
     private ProductService productService;
+    private CategoryService categoryService;
 
     @Autowired
     public void setProductService(ProductService productService){
         this.productService = productService;
+    }
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService){
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -27,6 +35,17 @@ public class ProductController {
 
         List<Product> products = productService.allProducts();
         modelAndView.addObject("productsList", products);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    public ModelAndView allCategories() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("categories");
+
+        List<Category> categories = categoryService.allCategories();
+        modelAndView.addObject("categoriesList", categories);
 
         return modelAndView;
     }

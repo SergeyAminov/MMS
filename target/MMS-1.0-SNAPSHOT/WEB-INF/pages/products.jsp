@@ -35,42 +35,6 @@
 <!-- Main -->
 <main class="flex-shrink-0">
     <h1 class="container text-dark font-weight-bold">Goods Catalog</h1>
-    <!-- Dropdown menu -->
-    <div class="dropdown-menu container d-flex flex-row bd-highlight mb-3">
-        <!-- Sort -->
-        <div class="dropdown sort-menu">
-            <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
-                    type="button"
-                    id="dropdownMenuSort"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                Sort
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuSort">
-                <a class="dropdown-item" href="#">Title: A-Z</a>
-                <a class="dropdown-item" href="#">Title: Z-A</a>
-                <a class="dropdown-item" href="#">Cheeper first</a>
-                <a class="dropdown-item" href="#">Richer first</a>
-            </div>
-        </div>
-        <!-- Categories -->
-        <div class="dropdown categories-menu">
-            <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
-                    type="button" id="dropdownMenuCategories"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false">
-                Categories
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuCategories">
-                <a class="dropdown-item" href="#">Category 1</a>
-                <a class="dropdown-item" href="#">Category 2</a>
-                <a class="dropdown-item" href="#">Category 3</a>
-                <a class="dropdown-item" href="#">Category 4</a>
-            </div>
-        </div>
-    </div>
     <!-- All items container -->
     <div class="shop-items container">
         <c:forEach var="product" items="${productsList}">
@@ -84,7 +48,7 @@
                     <p class="card-text text-secondary">${product.category}</p>
                     <p class="card-text font-weight-bold text-dark">${product.parameters}</p>
                     <p class="card-text font-weight-bold text-dark">${product.price} &#36;</p>
-                    <button type="button" class="btn btn-warning text-white font-weight-bold">To basket</button>
+                    <button type="button" class="btn btn-warning text-white font-weight-bold">To cart</button>
                 </div>
             </div>
         </c:forEach>
