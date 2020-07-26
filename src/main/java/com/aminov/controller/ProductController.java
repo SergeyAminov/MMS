@@ -6,6 +6,8 @@ import com.aminov.service.CategoryService;
 import com.aminov.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,6 +49,23 @@ public class ProductController {
         List<Category> categories = categoryService.allCategories();
         modelAndView.addObject("categoriesList", categories);
 
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/delete/{category}", method = RequestMethod.GET)
+    public ModelAndView deleteGame(@PathVariable("category") String categoryId){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/categories");
+        Category category = categoryService.getById(categoryId);
+        categoryService.delete(category);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ModelAndView addGame(@ModelAttribute("category") Category category){
+        ModelAndView modelAndView = new ModelAndView();
+        categoryService.add(category);
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
