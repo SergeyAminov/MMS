@@ -27,3 +27,17 @@ create table products(
     foreign key(parameters) references parameters(id) on delete set null,
     foreign key(category) references category(category) on delete set null
 );
+
+insert into category values ("for_students"),
+                            ("gaming"),
+                            ("netbook");
+
+insert into parameters values (1, "ASUS", "gray", 1.15, 13.3, 256, 4),
+                            (2, "ACER", "black", 1.75, 17.3, 512, 8),
+                            (3, "Samsung", "white", 2.5, 15.6, 1024, 16),
+                            (4, "Razer", "black", 2.7, 17.3, 1024, 16);
+
+insert into products values (1, "ASUS Zenbook abc123", 500, 1, "netbook", 5),
+                            (2, "ACER Aspire qwe456", 600, 2, "for_students", 3),
+                            (3, "Samsung NoName", 800, 3, "gaming", 1),
+                            (4, "Razer AnotherName", 750, 4, "gaming", 5);

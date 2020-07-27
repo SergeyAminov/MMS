@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "category")
@@ -10,8 +11,8 @@ public class Category {
     @Column(name = "category")
     private String category;
 
-    @OneToOne(mappedBy="category")
-    public Product product;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Product> productList;
 
     public Category() {}
 
@@ -23,12 +24,12 @@ public class Category {
         this.category = category;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProductList() {
+        return productList;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 
     @Override

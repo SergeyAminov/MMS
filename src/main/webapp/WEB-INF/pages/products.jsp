@@ -25,7 +25,7 @@
                     <a class="nav-link text-white font-weight-bold" href="#">Catalog</a>
                 </li>
             </ul>
-            <a class="nav-link text-white font-weight-bold" href="#">Basket</a>
+            <a class="nav-link text-white font-weight-bold" href="#">Cartt</a>
             <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
             <a class="nav-link text-white font-weight-bold" href="#">Log In</a>
         </nav>

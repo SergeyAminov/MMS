@@ -71,7 +71,7 @@ public class ProductController {
     public ModelAndView editProduct(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(product);
-        modelAndView.setViewName("redirect:/products");
+        modelAndView.setViewName("redirect:/productsAdmin");
         return modelAndView;
     }
 

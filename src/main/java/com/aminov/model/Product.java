@@ -21,8 +21,8 @@ public class Product {
     @JoinColumn(name="parameters")
     private Parameters parameters;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name="category")
+    @ManyToOne
+    @JoinColumn(name = "category")
     private Category category;
 
     @Column(name = "count")
