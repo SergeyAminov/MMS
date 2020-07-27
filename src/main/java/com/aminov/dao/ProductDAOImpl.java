@@ -1,5 +1,6 @@
 package com.aminov.dao;
 
+import com.aminov.model.Category;
 import com.aminov.model.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,5 +22,29 @@ public class ProductDAOImpl implements ProductDAO {
     public List<Product> allProducts() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select product from Product product", Product.class).list();
+    }
+
+    @Override
+    public void add(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(product);
+    }
+
+    @Override
+    public void delete(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(product);
+    }
+
+    @Override
+    public void edit(Product product) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(product);
+    }
+
+    @Override
+    public Product getById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Product.class, id);
     }
 }

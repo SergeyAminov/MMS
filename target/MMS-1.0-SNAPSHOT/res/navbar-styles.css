@@ -5,3 +5,7 @@
 .nav-link:hover {
     color: white!important;
 }
+
+.item-card {
+    width: 65%;
+}

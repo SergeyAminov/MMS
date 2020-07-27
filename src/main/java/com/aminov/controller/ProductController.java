@@ -34,7 +34,7 @@ public class ProductController {
      * Returns list of all products for client's account
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView allProducts() {
+    public ModelAndView productsPageClient() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
 
@@ -45,10 +45,58 @@ public class ProductController {
     }
 
     /**
-     * Returns list of all categories for admin's account
+     * Returns list of all products for administrator's account
+     */
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    public ModelAndView productsPageAdmin() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("productsAdmin");
+        List<Product> products = productService.allProducts();
+        modelAndView.addObject("productsList", products);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "product/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editProductPage(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("productEdit");
+        List<Category> categories = categoryService.allCategories();
+        Product product = productService.getById(id);
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("categoriesList", categories);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "product/edit", method = RequestMethod.POST)
+    public ModelAndView editProduct(@ModelAttribute("product") Product product) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/products");
+        productService.edit(product);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "product/add", method = RequestMethod.GET)
+    public ModelAndView addProductPage(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("productEdit");
+        List<Category> categories = categoryService.allCategories();
+        modelAndView.addObject("categoriesList", categories);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "product/add", method = RequestMethod.POST)
+    public ModelAndView addProduct(@ModelAttribute("game") Product product){
+        ModelAndView modelAndView = new ModelAndView();
+        productService.add(product);
+        modelAndView.setViewName("redirect:/products");
+        return modelAndView;
+    }
+
+    /**
+     * Returns list of all categories for administrator's account
      */
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
-    public ModelAndView allCategories() {
+    public ModelAndView categoriesPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("categories");
 
@@ -61,8 +109,8 @@ public class ProductController {
     /**
      * Deletes chosen category
      */
-    @RequestMapping(value = "/delete/{category}", method = RequestMethod.GET)
-    public ModelAndView deleteGame(@PathVariable("category") String categoryId){
+    @RequestMapping(value = "categories/delete/{category}", method = RequestMethod.GET)
+    public ModelAndView deleteCategory(@PathVariable("category") String categoryId){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/categories");
         Category category = categoryService.getById(categoryId);
@@ -73,11 +121,11 @@ public class ProductController {
     /**
      * Adds written category
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ModelAndView addGame(@ModelAttribute("category") Category category){
+    @RequestMapping(value = "categories/add", method = RequestMethod.POST)
+    public ModelAndView addCategory(@ModelAttribute("category") Category category){
         ModelAndView modelAndView = new ModelAndView();
         categoryService.add(category);
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/categories");
         return modelAndView;
     }
 
