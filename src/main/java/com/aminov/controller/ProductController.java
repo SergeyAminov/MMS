@@ -56,7 +56,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "product/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "products/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -67,15 +67,15 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "product/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "products/edit", method = RequestMethod.POST)
     public ModelAndView editProduct(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/products");
         productService.edit(product);
+        modelAndView.setViewName("redirect:/products");
         return modelAndView;
     }
 
-    @RequestMapping(value = "product/add", method = RequestMethod.GET)
+    @RequestMapping(value = "products/add", method = RequestMethod.GET)
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -84,7 +84,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "product/add", method = RequestMethod.POST)
+    @RequestMapping(value = "products/add", method = RequestMethod.POST)
     public ModelAndView addProduct(@ModelAttribute("game") Product product){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(product);

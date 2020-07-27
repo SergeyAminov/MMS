@@ -25,21 +25,25 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public void add(Product product) {
         productDAO.add(product);
     }
 
     @Override
+    @Transactional
     public void delete(Product product) {
         productDAO.delete(product);
     }
 
     @Override
+    @Transactional
     public void edit(Product product) {
         productDAO.edit(product);
     }
 
     @Override
+    @Transactional
     public Product getById(int id) {
         return productDAO.getById(id);
     }
