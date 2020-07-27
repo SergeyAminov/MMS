@@ -10,7 +10,7 @@ public class Category {
     @Column(name = "category")
     private String category;
 
-    @OneToOne(optional = false, mappedBy="category")
+    @OneToOne(mappedBy="category")
     public Product product;
 
     public Category() {}

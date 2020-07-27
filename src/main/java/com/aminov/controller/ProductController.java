@@ -30,6 +30,9 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
+    /**
+     * Returns list of all products for client's account
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView allProducts() {
         ModelAndView modelAndView = new ModelAndView();
@@ -41,6 +44,9 @@ public class ProductController {
         return modelAndView;
     }
 
+    /**
+     * Returns list of all categories for admin's account
+     */
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public ModelAndView allCategories() {
         ModelAndView modelAndView = new ModelAndView();
@@ -52,6 +58,9 @@ public class ProductController {
         return modelAndView;
     }
 
+    /**
+     * Deletes chosen category
+     */
     @RequestMapping(value = "/delete/{category}", method = RequestMethod.GET)
     public ModelAndView deleteGame(@PathVariable("category") String categoryId){
         ModelAndView modelAndView = new ModelAndView();
@@ -61,6 +70,9 @@ public class ProductController {
         return modelAndView;
     }
 
+    /**
+     * Adds written category
+     */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public ModelAndView addGame(@ModelAttribute("category") Category category){
         ModelAndView modelAndView = new ModelAndView();
