@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Add</h2>
-    <c:url value="products/edit" var="var"/>
+    <c:url value="/products/edit" var="var"/>
     <a href="${var}">Add new product</a>
 
     <h2>All products</h2>

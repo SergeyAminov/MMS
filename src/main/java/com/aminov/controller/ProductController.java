@@ -30,9 +30,6 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    /**
-     * Returns list of all products for client's account
-     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView productsPageClient() {
         ModelAndView modelAndView = new ModelAndView();
@@ -44,9 +41,6 @@ public class ProductController {
         return modelAndView;
     }
 
-    /**
-     * Returns list of all products for administrator's account
-     */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public ModelAndView productsPageAdmin() {
         ModelAndView modelAndView = new ModelAndView();
@@ -89,43 +83,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         productService.add(product);
         modelAndView.setViewName("redirect:/productsAdmin");
-        return modelAndView;
-    }
-
-    /**
-     * Returns list of all categories for administrator's account
-     */
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
-    public ModelAndView categoriesPage() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("categories");
-
-        List<Category> categories = categoryService.allCategories();
-        modelAndView.addObject("categoriesList", categories);
-
-        return modelAndView;
-    }
-
-    /**
-     * Deletes chosen category
-     */
-    @RequestMapping(value = "/categories/delete/{category}", method = RequestMethod.GET)
-    public ModelAndView deleteCategory(@PathVariable("category") String categoryId){
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/categories");
-        Category category = categoryService.getById(categoryId);
-        categoryService.delete(category);
-        return modelAndView;
-    }
-
-    /**
-     * Adds written category
-     */
-    @RequestMapping(value = "/categories/add", method = RequestMethod.POST)
-    public ModelAndView addCategory(@ModelAttribute("category") Category category){
-        ModelAndView modelAndView = new ModelAndView();
-        categoryService.add(category);
-        modelAndView.setViewName("redirect:/categories");
         return modelAndView;
     }
 
