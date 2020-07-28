@@ -42,9 +42,9 @@ public class CategoryDAOImpl implements CategoryDAO{
     }
 
     @Override
-    public Category getById(String category) {
+    public Category getById(int id) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(Category.class, category);
+        return session.get(Category.class, id);
     }
 
 }

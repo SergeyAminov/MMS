@@ -8,21 +8,22 @@
 <body>
     <h3>Categories</h3>
 
-    <c:url value="/categories/add" var="var"/>
-    <form action="${var}" method="POST">
+    <c:url value="/categories/add" var="add"/>
+    <form action="${add}" method="POST">
         <label for="title">Category</label>
-        <input type="text" name="category" id="title">
+        <input type="text" name="title" id="title">
         <input type="submit" value="Add category">
     </form>
 
     <c:forEach var="category" items="${categoriesList}">
-        <c:url value="/categories/delete/${category.category}" var="delete"/>
+        <c:url value="/categories/delete/${category.id}" var="delete"/>
         <c:url value="/categories/edit" var="edit"/>
         <hr>
-        <p>${category.category}
+        <p>${category.title}
             <form action="${edit}" method="POST">
-                <label for="category">Category</label>
-                <input type="text" name="category" id="category">
+                <input type="hidden" name="id" value="${category.id}">
+                <label for="category">Change title:</label>
+                <input type="text" name="title" id="category">
                 <input type="submit" value="Change category">
             </form>
             <a href="${delete}">Delete category</a>

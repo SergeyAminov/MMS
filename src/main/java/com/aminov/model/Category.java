@@ -8,20 +8,32 @@ import java.util.List;
 public class Category {
 
     @Id
-    @Column(name = "category")
-    private String category;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "title")
+    private String title;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Product> productList;
 
     public Category() {}
 
-    public String getCategory() {
-        return category;
+    public int getId() {
+        return this.id;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<Product> getProductList() {
@@ -34,7 +46,7 @@ public class Category {
 
     @Override
     public String toString() {
-        return this.category;
+        return this.title;
     }
 
 }

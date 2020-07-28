@@ -33,11 +33,11 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/categories/delete/{category}", method = RequestMethod.GET)
-    public ModelAndView deleteCategory(@PathVariable("category") String categoryId){
+    @RequestMapping(value = "/categories/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteCategory(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/categories");
-        Category category = categoryService.getById(categoryId);
+        Category category = categoryService.getById(id);
         categoryService.delete(category);
         return modelAndView;
     }

@@ -8,5 +8,5 @@ public interface CategoryDAO {
     void add(Category category);
     void delete(Category category);
     void edit(Category category);
-    Category getById(String category);
+    Category getById(int id);
 }
