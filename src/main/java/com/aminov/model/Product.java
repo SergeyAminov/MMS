@@ -8,7 +8,7 @@ public class Product {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Column(name = "title")
@@ -17,7 +17,7 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    @OneToOne(optional = false)
+    @OneToOne(optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name="parameters")
     private Parameters parameters;
 

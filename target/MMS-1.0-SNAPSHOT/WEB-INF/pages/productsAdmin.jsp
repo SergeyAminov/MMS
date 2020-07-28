@@ -7,8 +7,8 @@
 </head>
 <body>
     <h2>Add</h2>
-    <c:url value="products/add" var="add"/>
-    <a href="${add}">Add new product</a>
+    <c:url value="products/edit" var="var"/>
+    <a href="${var}">Add new product</a>
 
     <h2>All products</h2>
     <c:forEach var="product" items="${productsList}">
@@ -19,8 +19,10 @@
             <p>${product.price} &#36;</p>
             <p>${product.count}</p>
             <p>
-                <a href="products/edit/${product.id}">edit</a>
-                <a href="products/delete/${product.id}">delete</a>
+                <c:url value="/products/edit/${product.id}" var="edit"/>
+                <a href="${edit}">edit</a>
+                <c:url value="/products/delete/${product.id}" var="delete"/>
+                <a href="${delete}">delete</a>
             </p>
         </div>
         <hr>

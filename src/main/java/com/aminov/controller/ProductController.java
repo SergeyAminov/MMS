@@ -56,7 +56,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "products/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -67,7 +67,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "products/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/products/edit", method = RequestMethod.POST)
     public ModelAndView editProduct(@ModelAttribute("product") Product product) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(product);
@@ -75,7 +75,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "products/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/products/add", method = RequestMethod.GET)
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -84,11 +84,11 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "products/add", method = RequestMethod.POST)
-    public ModelAndView addProduct(@ModelAttribute("game") Product product){
+    @RequestMapping(value = "/products/add", method = RequestMethod.POST)
+    public ModelAndView addProduct(@ModelAttribute("product") Product product){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(product);
-        modelAndView.setViewName("redirect:/products");
+        modelAndView.setViewName("redirect:/productsAdmin");
         return modelAndView;
     }
 
@@ -109,7 +109,7 @@ public class ProductController {
     /**
      * Deletes chosen category
      */
-    @RequestMapping(value = "categories/delete/{category}", method = RequestMethod.GET)
+    @RequestMapping(value = "/categories/delete/{category}", method = RequestMethod.GET)
     public ModelAndView deleteCategory(@PathVariable("category") String categoryId){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/categories");
@@ -121,7 +121,7 @@ public class ProductController {
     /**
      * Adds written category
      */
-    @RequestMapping(value = "categories/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/categories/add", method = RequestMethod.POST)
     public ModelAndView addCategory(@ModelAttribute("category") Category category){
         ModelAndView modelAndView = new ModelAndView();
         categoryService.add(category);
