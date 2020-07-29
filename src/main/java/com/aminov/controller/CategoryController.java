@@ -1,7 +1,9 @@
 package com.aminov.controller;
 
+import com.aminov.dto.CategoryDto;
 import com.aminov.model.Category;
 import com.aminov.service.CategoryService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,15 +13,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class CategoryController {
 
     private CategoryService categoryService;
+    private ModelMapper modelMapper;
 
     @Autowired
     public void setCategoryService(CategoryService categoryService){
         this.categoryService = categoryService;
+    }
+
+    @Autowired
+    public void setModelMapper(ModelMapper modelMapper){
+        this.modelMapper = modelMapper;
+    }
+
+    private CategoryDto convertCategoryToDto(Category category) {
+        return modelMapper.map(category, CategoryDto.class);
+    }
+
+    private Category convertCategoryToEntity(CategoryDto categoryDto){
+        return modelMapper.map(categoryDto, Category.class);
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
@@ -28,7 +45,8 @@ public class CategoryController {
         modelAndView.setViewName("categories");
 
         List<Category> categories = categoryService.allCategories();
-        modelAndView.addObject("categoriesList", categories);
+        List<CategoryDto> categoryDtoList = categories.stream().map(this::convertCategoryToDto).collect(Collectors.toList());
+        modelAndView.addObject("categoriesList", categoryDtoList);
 
         return modelAndView;
     }
@@ -43,8 +61,9 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/categories/add", method = RequestMethod.POST)
-    public ModelAndView addCategory(@ModelAttribute("category") Category category){
+    public ModelAndView addCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
+        Category category = convertCategoryToEntity(categoryDto);
         categoryService.add(category);
         modelAndView.setViewName("redirect:/categories");
         return modelAndView;
