@@ -76,4 +76,15 @@ public class ParametersDto {
     public void setProductDto(ProductDto productDto) {
         this.productDto = productDto;
     }
+
+    @Override
+    public String toString() {
+        return
+            this.brand + ", " +
+            this.color + ", " +
+            this.weight + " kg, " +
+            this.diagonal + " inch, " +
+            this.storage + "Gb, " +
+            this.ram + "Gb;";
+    }
 }

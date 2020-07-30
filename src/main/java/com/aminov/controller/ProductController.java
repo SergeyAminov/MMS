@@ -1,7 +1,7 @@
 package com.aminov.controller;
 
+import com.aminov.dto.ProductDto;
 import com.aminov.model.Category;
-import com.aminov.model.Product;
 import com.aminov.service.CategoryService;
 import com.aminov.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,8 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
 
-        List<Product> products = productService.allProducts();
-        modelAndView.addObject("productsList", products);
+        List<ProductDto> productDtoList = productService.allProducts();
+        modelAndView.addObject("productsList", productDtoList);
 
         return modelAndView;
     }
@@ -45,8 +45,8 @@ public class ProductController {
     public ModelAndView productsPageAdmin() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productsAdmin");
-        List<Product> products = productService.allProducts();
-        modelAndView.addObject("productsList", products);
+        List<ProductDto> productDtoList = productService.allProducts();
+        modelAndView.addObject("productsList", productDtoList);
         return modelAndView;
     }
 
@@ -55,16 +55,16 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
         List<Category> categories = categoryService.allCategories();
-        Product product = productService.getById(id);
-        modelAndView.addObject("product", product);
+        ProductDto productDto = productService.getById(id);
+        modelAndView.addObject("product", productDto);
         modelAndView.addObject("categoriesList", categories);
         return modelAndView;
     }
 
     @RequestMapping(value = "/products/edit", method = RequestMethod.POST)
-    public ModelAndView editProduct(@ModelAttribute("product") Product product) {
+    public ModelAndView editProduct(@ModelAttribute("product") ProductDto productDto) {
         ModelAndView modelAndView = new ModelAndView();
-        productService.edit(product);
+        productService.edit(productDto);
         modelAndView.setViewName("redirect:/productsAdmin");
         return modelAndView;
     }
@@ -79,10 +79,19 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/products/add", method = RequestMethod.POST)
-    public ModelAndView addProduct(@ModelAttribute("product") Product product){
+    public ModelAndView addProduct(@ModelAttribute("product") ProductDto productDto){
         ModelAndView modelAndView = new ModelAndView();
-        productService.add(product);
+        productService.add(productDto);
         modelAndView.setViewName("redirect:/productsAdmin");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
+    public ModelAndView deleteProduct(@PathVariable("id") int id){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/productsAdmin");
+        ProductDto productDto = productService.getById(id);
+        productService.delete(productDto);
         return modelAndView;
     }
 

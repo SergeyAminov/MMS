@@ -45,9 +45,9 @@
                     <a class="text-warning" href="#">
                         <h5 class="card-title font-weight-bold text-warning">${product.title}</h5>
                     </a>
-                    <p class="card-text text-secondary">${product.category}</p>
+                    <p class="card-text text-secondary">${product.categoryId}</p>
                     <p class="card-text text-secondary">Left : ${product.count}</p>
-                    <p class="card-text font-weight-bold text-dark">${product.parameters}</p>
+                    <p class="card-text font-weight-bold text-dark">${product.parametersDto}</p>
                     <p class="card-text font-weight-bold text-dark">${product.price} &#36;</p>
                     <button type="button" class="btn btn-warning text-white font-weight-bold">To cart</button>
                 </div>

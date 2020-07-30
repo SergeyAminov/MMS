@@ -1,9 +1,7 @@
 package com.aminov.mapper;
 
 import com.aminov.dao.CategoryDAO;
-import com.aminov.dto.CategoryDto;
 import com.aminov.dto.ProductDto;
-import com.aminov.model.Category;
 import com.aminov.model.Product;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -14,12 +12,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductMapper implements InitializingBean {
 
-    private final ModelMapper modelMapper;
-    private final CategoryDAO categoryDAO;
+    private ModelMapper modelMapper;
+    private CategoryDAO categoryDAO;
 
     @Autowired
-    public ProductMapper(ModelMapper modelMapper, CategoryDAO categoryDAO){
+    public void setModelMapper(ModelMapper modelMapper){
         this.modelMapper = modelMapper;
+    }
+
+    @Autowired
+    public void setCategoryDAO(CategoryDAO categoryDAO){
         this.categoryDAO = categoryDAO;
     }
 
@@ -58,12 +60,12 @@ public class ProductMapper implements InitializingBean {
         destination.setCategory(categoryDAO.getById(source.getCategoryId()));
     }
 
-    private CategoryDto convertToDto(Category category) {
-        return this.modelMapper.map(category, CategoryDto.class);
+    public ProductDto convertToDto(Product product) {
+        return this.modelMapper.map(product, ProductDto.class);
     }
 
-    private Category convertToEntity(CategoryDto categoryDto){
-        return this.modelMapper.map(categoryDto, Category.class);
+    public Product convertToEntity(ProductDto productDto){
+        return this.modelMapper.map(productDto, Product.class);
     }
 
 }

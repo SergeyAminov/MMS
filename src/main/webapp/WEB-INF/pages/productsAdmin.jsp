@@ -14,8 +14,8 @@
     <c:forEach var="product" items="${productsList}">
         <div class="product">
             <h5>${product.title}</h5>
-            <p>${product.category}</p>
-            <p>${product.parameters}</p>
+            <p>${product.categoryId}</p>
+            <p>${product.parametersDto}</p>
             <p>${product.price} &#36;</p>
             <p>${product.count}</p>
             <p>
