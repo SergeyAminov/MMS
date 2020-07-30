@@ -9,7 +9,7 @@ public class ParametersDto {
     private double diagonal;
     private double storage;
     private int ram;
-    public int productId;
+    private ProductDto productDto;
 
     public ParametersDto() {}
 
@@ -68,5 +68,12 @@ public class ParametersDto {
     public void setRam(int ram) {
         this.ram = ram;
     }
-    
+
+    public ProductDto getProductDto() {
+        return productDto;
+    }
+
+    public void setProductDto(ProductDto productDto) {
+        this.productDto = productDto;
+    }
 }

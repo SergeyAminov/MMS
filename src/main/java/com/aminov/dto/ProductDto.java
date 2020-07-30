@@ -5,7 +5,7 @@ public class ProductDto {
     private int id;
     private String title;
     private double price;
-    private int parametersId;
+    private ParametersDto parametersDto;
     private int categoryId;
     private int count;
 
@@ -35,12 +35,12 @@ public class ProductDto {
         this.price = price;
     }
 
-    public int getParametersId() {
-        return parametersId;
+    public ParametersDto getParametersDto() {
+        return parametersDto;
     }
 
-    public void setParametersId(int parametersId) {
-        this.parametersId = parametersId;
+    public void setParametersDto(ParametersDto parametersDto) {
+        this.parametersDto = parametersDto;
     }
 
     public int getCategoryId() {
