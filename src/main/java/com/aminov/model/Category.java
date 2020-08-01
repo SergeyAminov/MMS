@@ -20,6 +20,16 @@ public class Category {
 
     public Category() {}
 
+    public Category(
+            int id,
+            String title,
+            List<Product> productList
+    ) {
+        this.id = id;
+        this.title = title;
+        this.productList = productList;
+    }
+
     public int getId() {
         return this.id;
     }

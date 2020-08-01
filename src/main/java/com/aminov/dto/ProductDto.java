@@ -5,11 +5,27 @@ public class ProductDto {
     private int id;
     private String title;
     private double price;
-    private ParametersDto parametersDto;
-    private int categoryId;
     private int count;
+    private int categoryId;
+    private int parametersId;
 
     public ProductDto() {}
+
+    public ProductDto(
+            int id,
+            String title,
+            double price,
+            int count,
+            int categoryId,
+            int parametersId
+    ) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.count = count;
+        this.categoryId = categoryId;
+        this.parametersId = parametersId;
+    }
 
     public int getId() {
         return id;
@@ -35,12 +51,12 @@ public class ProductDto {
         this.price = price;
     }
 
-    public ParametersDto getParametersDto() {
-        return parametersDto;
+    public int getCount() {
+        return count;
     }
 
-    public void setParametersDto(ParametersDto parametersDto) {
-        this.parametersDto = parametersDto;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public int getCategoryId() {
@@ -51,12 +67,12 @@ public class ProductDto {
         this.categoryId = categoryId;
     }
 
-    public int getCount() {
-        return count;
+    public int getParametersId() {
+        return parametersId;
     }
 
-    public void setCount(int count) {
-        this.count = count;
+    public void setParametersId(int parametersId) {
+        this.parametersId = parametersId;
     }
 
     @Override

@@ -30,9 +30,29 @@ public class Parameters {
     private int ram;
 
     @OneToOne(optional = false, mappedBy="parameters")
-    public Product product;
+    private Product product;
 
     public Parameters() {}
+
+    public Parameters(
+            int id,
+            String brand,
+            String color,
+            double weight,
+            double diagonal,
+            double storage,
+            int ram,
+            Product product
+    ) {
+        this.id = id;
+        this.brand = brand;
+        this.color = color;
+        this.weight = weight;
+        this.diagonal = diagonal;
+        this.storage = storage;
+        this.ram = ram;
+        this.product = product;
+    }
 
     public int getId() {
         return id;

@@ -30,6 +30,15 @@ public class Product {
 
     public Product() {}
 
+    public Product(int id, String title, double price, Parameters parameters, Category category, int count) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.parameters = parameters;
+        this.category = category;
+        this.count = count;
+    }
+
     public int getId() {
         return id;
     }

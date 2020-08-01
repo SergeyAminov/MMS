@@ -26,7 +26,8 @@
             <input type="hidden" name="id" value="${product.id}">
             <input type="hidden" name="title" value="${product.title}">
             <input type="hidden" name="price" value="${product.price}">
-            <input type="hidden" name="parameters" value="${product.parameters}">
+            <input type="hidden" name="parametersId" value="${product.parametersId}">
+            <input type="hidden" name="categoryId" value="${product.categoryId}">
         </c:if>
 
         <%--
@@ -43,14 +44,19 @@
 
         <label for="count">Count</label>
         <input type="number" name="count" id="count" value="${product.count}">
+
+        <%--
+
         <p>
             <label for="category">Choose category</label>
-            <select size="3" multiple name="categories" id="category">
+            <select size="3" multiple name="categoryTitle" id="category">
                 <c:forEach var="category" items="${categoriesList}">
-                    <option value="${category.category}">${category.category}</option>
+                    <option value="${category.title}">${category.title}</option>
                 </c:forEach>
             </select>
         </p>
+
+        --%>
 
         <c:if test="${!empty product.title}">
             <input type="submit" value="Edit product">

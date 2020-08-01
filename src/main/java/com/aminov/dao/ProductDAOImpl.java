@@ -1,6 +1,5 @@
 package com.aminov.dao;
 
-import com.aminov.model.Category;
 import com.aminov.model.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

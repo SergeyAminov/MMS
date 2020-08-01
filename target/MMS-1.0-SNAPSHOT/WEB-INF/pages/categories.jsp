@@ -19,7 +19,7 @@
         <c:url value="/categories/delete/${category.id}" var="delete"/>
         <c:url value="/categories/edit" var="edit"/>
         <hr>
-        <p>${category.title}
+        <div>${category.title}
             <form action="${edit}" method="POST">
                 <input type="hidden" name="id" value="${category.id}">
                 <label for="category">Change title:</label>
@@ -27,7 +27,7 @@
                 <input type="submit" value="Change category">
             </form>
             <a href="${delete}">Delete category</a>
-        </p>
+        </div>
     </c:forEach>
     <hr>
 </body>

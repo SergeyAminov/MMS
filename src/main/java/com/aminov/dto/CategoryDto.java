@@ -6,9 +6,15 @@ public class CategoryDto {
 
     private int id;
     private String title;
-    private List<ProductDto> productDtoList;
+    private List<Integer> productIdList;
 
     public CategoryDto() {}
+
+    public CategoryDto(int id, String title, List<Integer> productIdList) {
+        this.id = id;
+        this.title = title;
+        this.productIdList = productIdList;
+    }
 
     public int getId() {
         return id;
@@ -24,6 +30,14 @@ public class CategoryDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<Integer> getProductIdList() {
+        return productIdList;
+    }
+
+    public void setProductIdList(List<Integer> productIdList) {
+        this.productIdList = productIdList;
     }
 
     @Override public String toString(){
