@@ -22,6 +22,10 @@ public class Product {
     private Parameters parameters;
 
     @ManyToOne
+    @JoinColumn(name = "order")
+    private Order order;
+
+    @ManyToOne
     @JoinColumn(name = "category")
     private Category category;
 
@@ -69,6 +73,14 @@ public class Product {
 
     public void setParameters(Parameters parameters) {
         this.parameters = parameters;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public Category getCategory() {
