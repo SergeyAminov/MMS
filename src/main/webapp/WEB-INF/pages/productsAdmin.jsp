@@ -15,7 +15,7 @@
         <div class="product">
             <h5>${product.title}</h5>
             <p>Category: ${product.categoryId}</p>
-            <p>Parameters: ${product.categoryId}</p>
+            <p>Parameters: ${product.parametersId}</p>
             <p>${product.price} &#36;</p>
             <p>${product.count}</p>
             <p>

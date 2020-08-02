@@ -65,7 +65,7 @@ public class ProductController {
     public ModelAndView editProduct(@ModelAttribute("product") ProductDto productDto) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(productDto);
-        modelAndView.setViewName("redirect:/productsAdmin");
+        modelAndView.setViewName("redirect:/products");
         return modelAndView;
     }
 
@@ -82,14 +82,14 @@ public class ProductController {
     public ModelAndView addProduct(@ModelAttribute("product") ProductDto productDto){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(productDto);
-        modelAndView.setViewName("redirect:/productsAdmin");
+        modelAndView.setViewName("redirect:/products");
         return modelAndView;
     }
 
     @RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/productsAdmin");
+        modelAndView.setViewName("redirect:/products");
         ProductDto productDto = productService.getById(id);
         productService.delete(productDto);
         return modelAndView;

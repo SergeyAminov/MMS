@@ -2,7 +2,7 @@ package com.aminov.service;
 
 import com.aminov.dao.ProductDAO;
 import com.aminov.dto.ProductDto;
-import com.aminov.mapper.ExProductMapper;
+import com.aminov.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
 
     private ProductDAO productDAO;
-    private ExProductMapper exProductMapper;
+    private ProductMapper productMapper;
 
     @Autowired
     public void setProductDAO(ProductDAO productDAO){
@@ -22,8 +22,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Autowired
-    public void setExProductMapper(ExProductMapper exProductMapper){
-        this.exProductMapper = exProductMapper;
+    public void setExProductMapper(ProductMapper productMapper){
+        this.productMapper = productMapper;
     }
 
     @Override
@@ -32,31 +32,31 @@ public class ProductServiceImpl implements ProductService {
         return this.productDAO
                 .allProducts()
                 .stream()
-                .map(this.exProductMapper::toDto)
+                .map(this.productMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     @Transactional
     public void add(ProductDto productDto) {
-        this.productDAO.add(this.exProductMapper.toEntity(productDto));
+        this.productDAO.add(this.productMapper.toEntity(productDto));
     }
 
     @Override
     @Transactional
     public void delete(ProductDto productDto) {
-        this.productDAO.delete(this.exProductMapper.toEntity(productDto));
+        this.productDAO.delete(this.productMapper.toEntity(productDto));
     }
 
     @Override
     @Transactional
     public void edit(ProductDto productDto) {
-        this.productDAO.edit(this.exProductMapper.toEntity(productDto));
+        this.productDAO.edit(this.productMapper.toEntity(productDto));
     }
 
     @Override
     @Transactional
     public ProductDto getById(int id) {
-        return this.exProductMapper.toDto(this.productDAO.getById(id));
+        return this.productMapper.toDto(this.productDAO.getById(id));
     }
 }
