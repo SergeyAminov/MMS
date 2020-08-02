@@ -23,17 +23,23 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Product> productList;
 
-    @Column(name = "payment_method")
-    private String payment_method;
+    @ManyToOne
+    @JoinColumn(name = "payment_method")
+    private PaymentMethod payment_method;
 
-    @Column(name = "delivery_method")
-    private String delivery_method;
+    @ManyToOne
+    @JoinColumn(name = "delivery_method")
+    private DeliveryMethod delivery_method;
 
-    @Column(name = "payment_status")
-    private String payment_status;
+    @ManyToOne
+    @JoinColumn(name = "payment_status")
+    private PaymentStatus payment_status;
 
-    @Column(name = "delivery_status")
-    private String delivery_status;
+    @ManyToOne
+    @JoinColumn(name = "delivery_status")
+    private DeliveryStatus delivery_status;
+
+    public Order() {}
 
     public int getId() {
         return id;
@@ -67,35 +73,35 @@ public class Order {
         this.productList = productList;
     }
 
-    public String getPayment_method() {
+    public PaymentMethod getPayment_method() {
         return payment_method;
     }
 
-    public void setPayment_method(String payment_method) {
+    public void setPayment_method(PaymentMethod payment_method) {
         this.payment_method = payment_method;
     }
 
-    public String getDelivery_method() {
+    public DeliveryMethod getDelivery_method() {
         return delivery_method;
     }
 
-    public void setDelivery_method(String delivery_method) {
+    public void setDelivery_method(DeliveryMethod delivery_method) {
         this.delivery_method = delivery_method;
     }
 
-    public String getPayment_status() {
+    public PaymentStatus getPayment_status() {
         return payment_status;
     }
 
-    public void setPayment_status(String payment_status) {
+    public void setPayment_status(PaymentStatus payment_status) {
         this.payment_status = payment_status;
     }
 
-    public String getDelivery_status() {
+    public DeliveryStatus getDelivery_status() {
         return delivery_status;
     }
 
-    public void setDelivery_status(String delivery_status) {
+    public void setDelivery_status(DeliveryStatus delivery_status) {
         this.delivery_status = delivery_status;
     }
 }

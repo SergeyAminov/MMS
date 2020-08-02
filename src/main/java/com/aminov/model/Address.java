@@ -37,6 +37,8 @@ public class Address {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
     private List<Order> orderList;
 
+    public Address() {}
+
     public int getId() {
         return id;
     }
