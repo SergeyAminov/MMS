@@ -9,19 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
+public class CategoryServiceImpl implements CategoryService<Category>{
 
-    private CategoryDAO categoryDAO;
+    private CategoryDAO<Category> categoryDAO;
 
     @Autowired
-    public void setCategoryDAO(CategoryDAO categoryDAO){
+    public void setCategoryDAO(CategoryDAO<Category> categoryDAO){
         this.categoryDAO = categoryDAO;
     }
 
     @Transactional
     @Override
-    public List<Category> allCategories() {
-        return this.categoryDAO.allCategories();
+    public List<Category> allItems() {
+        return this.categoryDAO.allItems();
     }
 
     @Transactional

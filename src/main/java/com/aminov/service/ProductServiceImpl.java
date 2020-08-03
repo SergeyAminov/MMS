@@ -3,6 +3,7 @@ package com.aminov.service;
 import com.aminov.dao.ProductDAO;
 import com.aminov.dto.ProductDto;
 import com.aminov.mapper.ProductMapper;
+import com.aminov.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl implements ProductService<ProductDto> {
 
-    private ProductDAO productDAO;
+    private ProductDAO<Product> productDAO;
     private ProductMapper productMapper;
 
     @Autowired
-    public void setProductDAO(ProductDAO productDAO){
+    public void setProductDAO(ProductDAO<Product> productDAO){
         this.productDAO = productDAO;
     }
 
@@ -28,9 +29,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     @Transactional
-    public List<ProductDto> allProducts() {
+    public List<ProductDto> allItems() {
         return this.productDAO
-                .allProducts()
+                .allItems()
                 .stream()
                 .map(this.productMapper::toDto)
                 .collect(Collectors.toList());

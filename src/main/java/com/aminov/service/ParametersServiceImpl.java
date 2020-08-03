@@ -6,13 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
-public class ParametersServiceImpl implements ParametersService{
-    private ParametersDAO parametersDAO;
+public class ParametersServiceImpl implements ParametersService<Parameters>{
+    private ParametersDAO<Parameters> parametersDAO;
 
     @Autowired
-    public void setParametersDAO(ParametersDAO parametersDAO){
+    public void setParametersDAO(ParametersDAO<Parameters> parametersDAO){
         this.parametersDAO = parametersDAO;
+    }
+
+    @Override
+    public List<Parameters> allItems() {
+        return this.parametersDAO.allItems();
     }
 
     @Transactional

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CategoryDAOImpl implements CategoryDAO{
+public class CategoryDAOImpl implements CategoryDAO<Category>{
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -18,7 +18,7 @@ public class CategoryDAOImpl implements CategoryDAO{
     }
 
     @Override
-    public List<Category> allCategories() {
+    public List<Category> allItems() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select category from Category category", Category.class).list();
     }

@@ -15,10 +15,10 @@ import java.util.List;
 @Controller
 public class CategoryController {
 
-    private CategoryService categoryService;
+    private CategoryService<Category> categoryService;
 
     @Autowired
-    public void setCategoryService(CategoryService categoryService){
+    public void setCategoryService(CategoryService<Category> categoryService){
         this.categoryService = categoryService;
     }
 
@@ -27,7 +27,7 @@ public class CategoryController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("categories");
 
-        List<Category> categories = categoryService.allCategories();
+        List<Category> categories = categoryService.allItems();
         modelAndView.addObject("categoriesList", categories);
 
         return modelAndView;

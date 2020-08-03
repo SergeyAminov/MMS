@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ProductDAOImpl implements ProductDAO {
+public class ProductDAOImpl implements ProductDAO<Product> {
     private SessionFactory sessionFactory;
 
     @Autowired
@@ -18,7 +18,7 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public List<Product> allProducts() {
+    public List<Product> allItems() {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("select product from Product product", Product.class).list();
     }

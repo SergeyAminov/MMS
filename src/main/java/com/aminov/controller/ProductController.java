@@ -17,16 +17,16 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    private ProductService productService;
-    private CategoryService categoryService;
+    private ProductService<ProductDto> productService;
+    private CategoryService<Category> categoryService;
 
     @Autowired
-    public void setProductService(ProductService productService){
+    public void setProductService(ProductService<ProductDto> productService){
         this.productService = productService;
     }
 
     @Autowired
-    public void setCategoryService(CategoryService categoryService){
+    public void setCategoryService(CategoryService<Category> categoryService){
         this.categoryService = categoryService;
     }
 
@@ -35,7 +35,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
 
-        List<ProductDto> productDtoList = productService.allProducts();
+        List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
 
         return modelAndView;
@@ -45,7 +45,7 @@ public class ProductController {
     public ModelAndView productsPageAdmin() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productsAdmin");
-        List<ProductDto> productDtoList = productService.allProducts();
+        List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
         return modelAndView;
     }
@@ -54,7 +54,7 @@ public class ProductController {
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<Category> categories = categoryService.allCategories();
+        List<Category> categories = categoryService.allItems();
         ProductDto productDto = productService.getById(id);
         modelAndView.addObject("product", productDto);
         modelAndView.addObject("categoriesList", categories);
@@ -73,7 +73,7 @@ public class ProductController {
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<Category> categories = categoryService.allCategories();
+        List<Category> categories = categoryService.allItems();
         modelAndView.addObject("categoriesList", categories);
         return modelAndView;
     }
