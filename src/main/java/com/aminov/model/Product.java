@@ -22,7 +22,7 @@ public class Product {
     private Parameters parameters;
 
     @ManyToOne
-    @JoinColumn(name = "order")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
