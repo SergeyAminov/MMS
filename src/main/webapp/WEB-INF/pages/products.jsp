@@ -15,6 +15,7 @@
 
 <!-- Header -->
 <header>
+    <c:url value="/login" var="login"/>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
             <span class="navbar-brand mb-0 h1 font-weight-bold text-uppercase">
@@ -27,7 +28,7 @@
             </ul>
             <a class="nav-link text-white font-weight-bold" href="#">Cart</a>
             <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
-            <a class="nav-link text-white font-weight-bold" href="#">Log In</a>
+            <a class="nav-link text-white font-weight-bold" href="${login}">Log In</a>
         </nav>
     </div>
 </header>
