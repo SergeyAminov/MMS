@@ -23,7 +23,7 @@ public class ProductServiceImpl implements ProductService<ProductDto> {
     }
 
     @Autowired
-    public void setExProductMapper(ProductMapper productMapper){
+    public void setProductMapper(ProductMapper productMapper){
         this.productMapper = productMapper;
     }
 
