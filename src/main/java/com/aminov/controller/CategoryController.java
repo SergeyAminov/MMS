@@ -1,5 +1,6 @@
 package com.aminov.controller;
 
+import com.aminov.dto.CategoryDto;
 import com.aminov.model.Category;
 import com.aminov.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +16,19 @@ import java.util.List;
 @Controller
 public class CategoryController {
 
-    private CategoryService<Category> categoryService;
+    private CategoryService<CategoryDto> categoryDtoService;
 
     @Autowired
-    public void setCategoryService(CategoryService<Category> categoryService){
-        this.categoryService = categoryService;
+    public void setCategoryService(CategoryService<CategoryDto> categoryDtoService){
+        this.categoryDtoService = categoryDtoService;
     }
 
     @RequestMapping(value = "/categories", method = RequestMethod.GET)
     public ModelAndView categoriesPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("categories");
-
-        List<Category> categories = categoryService.allItems();
-        modelAndView.addObject("categoriesList", categories);
-
+        List<CategoryDto> categoryDtoList = categoryDtoService.allItems();
+        modelAndView.addObject("categoriesList", categoryDtoList);
         return modelAndView;
     }
 
@@ -37,23 +36,23 @@ public class CategoryController {
     public ModelAndView deleteCategory(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/categories");
-        Category category = categoryService.getById(id);
-        categoryService.delete(category);
+        CategoryDto categoryDto = categoryDtoService.getById(id);
+        categoryDtoService.delete(categoryDto);
         return modelAndView;
     }
 
     @RequestMapping(value = "/categories/add", method = RequestMethod.POST)
-    public ModelAndView addCategory(@ModelAttribute("category") Category category){
+    public ModelAndView addCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
-        categoryService.add(category);
+        categoryDtoService.add(categoryDto);
         modelAndView.setViewName("redirect:/categories");
         return modelAndView;
     }
 
     @RequestMapping(value = "/categories/edit", method = RequestMethod.POST)
-    public ModelAndView editCategory(@ModelAttribute("category") Category category){
+    public ModelAndView editCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
-        categoryService.edit(category);
+        categoryDtoService.edit(categoryDto);
         modelAndView.setViewName("redirect:/categories");
         return modelAndView;
     }

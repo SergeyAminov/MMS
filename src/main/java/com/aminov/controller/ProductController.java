@@ -1,5 +1,6 @@
 package com.aminov.controller;
 
+import com.aminov.dto.CategoryDto;
 import com.aminov.dto.ProductDto;
 import com.aminov.model.Category;
 import com.aminov.service.CategoryService;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ProductController {
 
     private ProductService<ProductDto> productService;
-    private CategoryService<Category> categoryService;
+    private CategoryService<CategoryDto> categoryDtoService;
 
     @Autowired
     public void setProductService(ProductService<ProductDto> productService){
@@ -26,8 +27,8 @@ public class ProductController {
     }
 
     @Autowired
-    public void setCategoryService(CategoryService<Category> categoryService){
-        this.categoryService = categoryService;
+    public void setCategoryService(CategoryService<CategoryDto> categoryDtoService){
+        this.categoryDtoService = categoryDtoService;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -54,10 +55,10 @@ public class ProductController {
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<Category> categories = categoryService.allItems();
+        List<CategoryDto> categoryDtoList = categoryDtoService.allItems();
         ProductDto productDto = productService.getById(id);
         modelAndView.addObject("product", productDto);
-        modelAndView.addObject("categoriesList", categories);
+        modelAndView.addObject("categoriesList", categoryDtoList);
         return modelAndView;
     }
 
@@ -73,7 +74,7 @@ public class ProductController {
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<Category> categories = categoryService.allItems();
+        List<CategoryDto> categories = categoryDtoService.allItems();
         modelAndView.addObject("categoriesList", categories);
         return modelAndView;
     }

@@ -47,9 +47,9 @@
 
         <p>
             <label for="category">Choose category</label>
-            <select size="3" multiple name="categoryId" id="category">
-                <c:forEach var="category" items="${categoriesList}">
-                    <option value="${category.id}">${category.title}</option>
+            <select size="3" multiple name="categoryDto" id="category">
+                <c:forEach var="categoryDto" items="${categoriesList}">
+                    <option value="${categoryDto}">${categoryDto.title}</option>
                 </c:forEach>
             </select>
         </p>

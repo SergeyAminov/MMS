@@ -48,7 +48,7 @@
                     <a class="text-warning" href="#">
                         <h5 class="card-title font-weight-bold text-warning">${product.title}</h5>
                     </a>
-                    <p class="card-text text-secondary">Category: ${product.categoryId}</p>
+                    <p class="card-text text-secondary">Category: ${product.categoryDto.title}</p>
                     <p class="card-text text-secondary">Left : ${product.count}</p>
                     <p class="card-text font-weight-bold text-dark">
                         Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
