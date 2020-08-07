@@ -5,15 +5,13 @@ import javax.validation.constraints.NotEmpty;
 
 public class UserDto {
 
-    private int id;
+    @NotNull
+    @NotEmpty
+    private String name;
 
     @NotNull
     @NotEmpty
-    private String firstName;
-
-    @NotNull
-    @NotEmpty
-    private String lastName;
+    private String surname;
 
     @NotNull
     @NotEmpty
@@ -24,30 +22,24 @@ public class UserDto {
     @NotEmpty
     private String email;
 
+    private String role;
+
     private String birthday;
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getPassword() {

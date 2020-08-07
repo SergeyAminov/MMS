@@ -6,18 +6,18 @@
 </head>
 <body>
     <h1>Registration</h1>
-    <c:url value="/login" var="login"/>
-    <form name='f' action="${login}" method='POST'>
-        <label for="user">Name:</label>
-        <input type='text' name='username' id="user" value=''>
+    <c:url value="/registration" var="registration"/>
+    <form name='user' action="${registration}" method='POST'>
+        <label for="name">Name:</label>
+        <input type='text' name='name' id="name" value=''>
         <label for="surname">Surname:</label>
         <input type='text' name='surname' id="surname" />
         <label for="email">Email:</label>
         <input type='email' name='email' id="email" />
         <label for="password">Password:</label>
         <input type='password' name='password' id="password" />
-        <label for="confirm_password">Confirm password:</label>
-        <input type='password' name='confirm_password' id="confirm_password" />
+        <label for="matching_password">Confirm password:</label>
+        <input type='password' name='matchingPassword' id="matching_password" />
         <input name="submit" type="submit" value="submit" />
     </form>
 </body>

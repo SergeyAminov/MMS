@@ -1,6 +1,8 @@
 package com.aminov.controller;
 
 import com.aminov.dto.UserDto;
+import com.aminov.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,20 +13,32 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
+    private UserService<UserDto> userService;
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @Autowired
+    public void setUserService(UserService<UserDto> userService){
+        this.userService = userService;
+    }
+
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public ModelAndView loginPage() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
+        modelAndView.setViewName("registration");
         UserDto userDto = new UserDto();
         modelAndView.addObject("user", userDto);
         return modelAndView;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/products");
+        try {
+            userService.registerNewUserAccount(userDto);
+        } catch (Exception uaeEx) {
+            modelAndView.addObject("message", "An account for that username/email already exists.");
+            return modelAndView;
+        }
+        modelAndView.setViewName("redirect:/");
         return modelAndView;
     }
 
