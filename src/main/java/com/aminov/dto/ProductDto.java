@@ -7,25 +7,14 @@ public class ProductDto {
     private double price;
     private int count;
     private int categoryId;
-    private int parametersId;
+    private String brand;
+    private String color;
+    private double weight;
+    private double diagonal;
+    private double storage;
+    private int ram;
 
     public ProductDto() {}
-
-    public ProductDto(
-            int id,
-            String title,
-            double price,
-            int count,
-            int categoryId,
-            int parametersId
-    ) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.count = count;
-        this.categoryId = categoryId;
-        this.parametersId = parametersId;
-    }
 
     public int getId() {
         return id;
@@ -67,12 +56,52 @@ public class ProductDto {
         this.categoryId = categoryId;
     }
 
-    public int getParametersId() {
-        return parametersId;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setParametersId(int parametersId) {
-        this.parametersId = parametersId;
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getDiagonal() {
+        return diagonal;
+    }
+
+    public void setDiagonal(double diagonal) {
+        this.diagonal = diagonal;
+    }
+
+    public double getStorage() {
+        return storage;
+    }
+
+    public void setStorage(double storage) {
+        this.storage = storage;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
     }
 
     @Override

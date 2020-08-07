@@ -15,7 +15,9 @@
         <div class="product">
             <h5>${product.title}</h5>
             <p>Category: ${product.categoryId}</p>
-            <p>Parameters: ${product.parametersId}</p>
+            <p>Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
+                    ${product.storage} Gb memory, ${product.ram} Gb RAM;
+            </p>
             <p>${product.price} &#36;</p>
             <p>${product.count}</p>
             <p>

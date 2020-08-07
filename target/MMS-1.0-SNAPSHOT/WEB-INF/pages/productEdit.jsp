@@ -24,51 +24,42 @@
 
         <c:if test="${!empty product.title}">
             <input type="hidden" name="id" value="${product.id}">
-            <input type="hidden" name="title" value="${product.title}">
-            <input type="hidden" name="price" value="${product.price}">
-            <input type="hidden" name="parametersId" value="${product.parametersId}">
-            <input type="hidden" name="categoryId" value="${product.categoryId}">
         </c:if>
-
-        <%--
-
-        <c:if test="${empty product.title}">
-            <label for="title">Title</label>
-            <input type="text" name="title" id="title" value="${product.title}">
-            <label for="price">Price</label>
-            <input type="number" name="price" id="price" value="${product.price}">
-            <input type="hidden" name="parameters" value="${product.parameters}">
-        </c:if>
-
-        --%>
 
         <label for="count">Count</label>
         <input type="number" name="count" id="count" value="${product.count}">
-
-        <%--
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" value="${product.title}">
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" value="${product.price}">
+        <label for="brand">Brand</label>
+        <input type="text" name="brand" id="brand" value="${product.brand}">
+        <label for="color">Color</label>
+        <input type="text" name="color" id="color" value="${product.color}">
+        <label for="weight">Weight</label>
+        <input type="number" name="weight" id="weight" value="${product.weight}">
+        <label for="diagonal">Diagonal</label>
+        <input type="number" name="diagonal" id="diagonal" value="${product.diagonal}">
+        <label for="storage">Storage</label>
+        <input type="number" name="storage" id="storage" value="${product.storage}">
+        <label for="ram">RAM</label>
+        <input type="number" name="ram" id="ram" value="${product.ram}">
 
         <p>
             <label for="category">Choose category</label>
-            <select size="3" multiple name="categoryTitle" id="category">
+            <select size="3" multiple name="categoryId" id="category">
                 <c:forEach var="category" items="${categoriesList}">
-                    <option value="${category.title}">${category.title}</option>
+                    <option value="${category.id}">${category.title}</option>
                 </c:forEach>
             </select>
         </p>
 
-        --%>
-
         <c:if test="${!empty product.title}">
             <input type="submit" value="Edit product">
         </c:if>
-
-        <%--
-
         <c:if test="${empty product.title}">
             <input type="submit" value="Add new product">
         </c:if>
-
-        --%>
 
     </form>
 </body>

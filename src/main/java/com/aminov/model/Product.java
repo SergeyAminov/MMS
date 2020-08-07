@@ -17,10 +17,6 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    @OneToOne(optional = false, cascade = CascadeType.ALL)
-    @JoinColumn(name="parameters")
-    private Parameters parameters;
-
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -32,16 +28,25 @@ public class Product {
     @Column(name = "count")
     private int count;
 
-    public Product() {}
+    @Column(name = "brand")
+    private String brand;
 
-    public Product(int id, String title, double price, Parameters parameters, Category category, int count) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-        this.parameters = parameters;
-        this.category = category;
-        this.count = count;
-    }
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "weight")
+    private double weight;
+
+    @Column(name = "diagonal")
+    private double diagonal;
+
+    @Column(name = "storage")
+    private double storage;
+
+    @Column(name = "ram")
+    private int ram;
+
+    public Product() {}
 
     public int getId() {
         return id;
@@ -67,14 +72,6 @@ public class Product {
         this.price = price;
     }
 
-    public Parameters getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(Parameters parameters) {
-        this.parameters = parameters;
-    }
-
     public Order getOrder() {
         return order;
     }
@@ -97,6 +94,54 @@ public class Product {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public double getDiagonal() {
+        return diagonal;
+    }
+
+    public void setDiagonal(double diagonal) {
+        this.diagonal = diagonal;
+    }
+
+    public double getStorage() {
+        return storage;
+    }
+
+    public void setStorage(double storage) {
+        this.storage = storage;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
     }
 
     @Override

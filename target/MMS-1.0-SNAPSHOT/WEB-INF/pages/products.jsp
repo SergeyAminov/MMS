@@ -51,7 +51,8 @@
                     <p class="card-text text-secondary">Category: ${product.categoryId}</p>
                     <p class="card-text text-secondary">Left : ${product.count}</p>
                     <p class="card-text font-weight-bold text-dark">
-                        Parameters: ${product.parametersId};
+                        Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
+                        ${product.storage} Gb memory, ${product.ram} Gb RAM;
                     </p>
                     <p class="card-text font-weight-bold text-dark">${product.price} &#36;</p>
                     <button type="button" class="btn btn-warning text-white font-weight-bold">To cart</button>
