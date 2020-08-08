@@ -50,6 +50,6 @@ public class UserDAOImpl implements UserDAO<User>{
     @Override
     public User getByEmail(String email) {
         Session session = sessionFactory.getCurrentSession();
-        return session.get(User.class, email);
+        return session.getSession().createQuery("select user from User user where user.email=:email", User.class).setParameter("email", email).uniqueResult();
     }
 }

@@ -1,7 +1,6 @@
 package com.aminov.controller;
 
 import com.aminov.dto.CategoryDto;
-import com.aminov.model.Category;
 import com.aminov.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

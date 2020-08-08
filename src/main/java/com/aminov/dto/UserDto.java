@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 
 public class UserDto {
 
+    private int id;
+
     @NotNull
     @NotEmpty
     private String name;
@@ -25,6 +27,14 @@ public class UserDto {
     private String role;
 
     private String birthday;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

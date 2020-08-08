@@ -76,11 +76,8 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
     @Transactional
     @Override
     public void registerNewUserAccount(UserDto userDto) throws Exception {
-        if (emailExist(userDto.getEmail())) {
-            throw new Exception(
-                    "There is an account with that email address: "
-                            +  userDto.getEmail());
-        }
+        if (emailExist(userDto.getEmail()))
+            throw new Exception("There is an account with that email address: " + userDto.getEmail());
         userDto.setRole("ROLE_USER");
         userDAO.add(this.userMapper.toEntity(userDto));
     }
