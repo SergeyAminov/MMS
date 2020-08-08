@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form name='f' action="login" method='POST'>
+    <form name='f' action="/login" method='POST'>
         <table>
             <tr>
                 <td>User:</td>

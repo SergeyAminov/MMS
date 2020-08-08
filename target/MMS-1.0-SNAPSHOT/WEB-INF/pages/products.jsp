@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +18,7 @@
 <header>
     <c:url value="/registration" var="registration"/>
     <c:url value="/login" var="login"/>
+    <c:url value="/logout" var="logout"/>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
             <span class="navbar-brand mb-0 h1 font-weight-bold text-uppercase">
@@ -28,6 +30,18 @@
                 </li>
             </ul>
             <a class="nav-link text-white font-weight-bold" href="#">Cart</a>
+
+            <sec:authorize access="!isAuthenticated()">
+                <a href="${registration}">
+                    <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
+                </a>
+                <a class="nav-link text-white font-weight-bold" href="${login}">Log In</a>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <a class="nav-link text-white font-weight-bold" href="#">${pageContext.request.userPrincipal.name}</a>
+                <a class="nav-link text-white font-weight-bold" href="${logout}">Log Out</a>
+            </sec:authorize>
+
             <a href="${registration}">
                 <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
             </a>

@@ -27,6 +27,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Transient
+    private String matchingPassword;
+
     @Column(name = "role")
     private String role;
 
@@ -84,6 +87,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMatchingPassword() {
+        return matchingPassword;
+    }
+
+    public void setMatchingPassword(String matchingPassword) {
+        this.matchingPassword = matchingPassword;
     }
 
     public String getRole() {

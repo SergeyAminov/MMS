@@ -49,11 +49,4 @@ public class LoginRegistrationController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/perform_login", method = RequestMethod.POST)
-    public ModelAndView loginUser() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("login");
-        return modelAndView;
-    }
-
 }
