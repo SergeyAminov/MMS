@@ -23,7 +23,7 @@ public class CategoryController {
         this.categoryDtoService = categoryDtoService;
     }
 
-    @RequestMapping(value = "/categories", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
     public ModelAndView categoriesPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("categories");
@@ -32,7 +32,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/categories/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/categories/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteCategory(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/categories");
@@ -41,7 +41,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/categories/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/categories/add", method = RequestMethod.POST)
     public ModelAndView addCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
         categoryDtoService.add(categoryDto);
@@ -49,7 +49,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/categories/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/categories/edit", method = RequestMethod.POST)
     public ModelAndView editCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
         categoryDtoService.edit(categoryDto);

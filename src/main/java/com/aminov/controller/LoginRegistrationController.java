@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.validation.Valid;
 
 @Controller
-public class RegistrationController {
+public class LoginRegistrationController {
     private UserService<UserDto> userService;
 
     @Autowired
@@ -21,7 +21,7 @@ public class RegistrationController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public ModelAndView loginPage() {
+    public ModelAndView registrationPage() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("registration");
         UserDto userDto = new UserDto();
@@ -39,6 +39,20 @@ public class RegistrationController {
             return modelAndView;
         }
         modelAndView.setViewName("redirect:/");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public ModelAndView loginPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/perform_login", method = RequestMethod.POST)
+    public ModelAndView loginUser() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("login");
         return modelAndView;
     }
 

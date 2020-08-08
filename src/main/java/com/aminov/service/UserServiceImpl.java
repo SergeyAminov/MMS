@@ -81,11 +81,8 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
                     "There is an account with that email address: "
                             +  userDto.getEmail());
         }
-        User user = new User();
-
-        user = this.userMapper.toEntity(userDto);
-        user.setRole("ROLE_USER");
-        userDAO.add(user);
+        userDto.setRole("ROLE_USER");
+        userDAO.add(this.userMapper.toEntity(userDto));
     }
 
     @Transactional

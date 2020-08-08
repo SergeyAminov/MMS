@@ -42,7 +42,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/products", method = RequestMethod.GET)
     public ModelAndView productsPageAdmin() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productsAdmin");
@@ -51,7 +51,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/products/edit/{id}", method = RequestMethod.GET)
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -62,7 +62,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products/edit", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/products/edit", method = RequestMethod.POST)
     public ModelAndView editProduct(@ModelAttribute("product") ProductDto productDto) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(productDto);
@@ -70,7 +70,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/products/add", method = RequestMethod.GET)
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
@@ -79,7 +79,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/products/add", method = RequestMethod.POST)
     public ModelAndView addProduct(@ModelAttribute("product") ProductDto productDto){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(productDto);
@@ -87,7 +87,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/products/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/products/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("redirect:/products");

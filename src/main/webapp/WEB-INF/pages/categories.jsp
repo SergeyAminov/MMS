@@ -8,7 +8,7 @@
 <body>
     <h3>Categories</h3>
 
-    <c:url value="/categories/add" var="add"/>
+    <c:url value="/admin/categories/add" var="add"/>
     <form action="${add}" method="POST">
         <label for="title">Category</label>
         <input type="text" name="title" id="title">
@@ -16,8 +16,8 @@
     </form>
 
     <c:forEach var="category" items="${categoriesList}">
-        <c:url value="/categories/delete/${category.id}" var="delete"/>
-        <c:url value="/categories/edit" var="edit"/>
+        <c:url value="/admin/categories/delete/${category.id}" var="delete"/>
+        <c:url value="/admin/categories/edit" var="edit"/>
         <hr>
         <div>${category.title}
             <form action="${edit}" method="POST">

@@ -14,10 +14,10 @@
 
     <!-- Set action variable -->
     <c:if test="${empty product.title}">
-        <c:url value="/products/add" var="var"/>
+        <c:url value="/admin/products/add" var="var"/>
     </c:if>
     <c:if test="${!empty product.title}">
-        <c:url value="/products/edit" var="var"/>
+        <c:url value="/admin/products/edit" var="var"/>
     </c:if>
 
     <form action="${var}" method="POST">

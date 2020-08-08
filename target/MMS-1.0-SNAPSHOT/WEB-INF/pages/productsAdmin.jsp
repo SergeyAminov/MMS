@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Add</h2>
-    <c:url value="/products/add" var="add"/>
+    <c:url value="/admin/products/add" var="add"/>
     <a href="${add}">Add new product</a>
 
     <h2>All products</h2>
@@ -21,9 +21,9 @@
             <p>${product.price} &#36;</p>
             <p>${product.count}</p>
             <p>
-                <c:url value="/products/edit/${product.id}" var="edit"/>
+                <c:url value="/admin/products/edit/${product.id}" var="edit"/>
                 <a href="${edit}">edit</a>
-                <c:url value="/products/delete/${product.id}" var="delete"/>
+                <c:url value="/admin/products/delete/${product.id}" var="delete"/>
                 <a href="${delete}">delete</a>
             </p>
         </div>
