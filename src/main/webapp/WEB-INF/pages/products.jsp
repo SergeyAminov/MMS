@@ -18,6 +18,7 @@
 <header>
     <c:url value="/registration" var="registration"/>
     <c:url value="/login" var="login"/>
+    <c:url value="/profile" var="profile"/>
     <c:url value="/perform_logout" var="logout"/>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
@@ -30,22 +31,18 @@
                 </li>
             </ul>
             <a class="nav-link text-white font-weight-bold" href="#">Cart</a>
-
-            <sec:authorize access="!isAuthenticated()">
-                <a href="${registration}">
-                    <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
-                </a>
-                <a class="nav-link text-white font-weight-bold" href="${login}">Log In</a>
-            </sec:authorize>
-            <sec:authorize access="isAuthenticated()">
-                <a class="nav-link text-white font-weight-bold" href="#">${pageContext.request.userPrincipal.name}</a>
-                <a class="nav-link text-white font-weight-bold" href="${logout}">Log Out</a>
-            </sec:authorize>
-
-            <a href="${registration}">
-                <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
-            </a>
-            <a class="nav-link text-white font-weight-bold" href="${login}">Log In</a>
+            <c:choose>
+                <c:when test="${!empty authentication}">
+                    <a class="nav-link text-white font-weight-bold" href="${profile}">Profile</a>
+                    <a class="nav-link text-white font-weight-bold" href="${logout}">Log Out</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="${registration}">
+                        <button type="button" class="btn btn-outline-light font-weight-bold">Registration</button>
+                    </a>
+                    <a class="nav-link text-white font-weight-bold" href="${login}">Log In</a>
+                </c:otherwise>
+            </c:choose>
         </nav>
     </div>
 </header>

@@ -9,7 +9,7 @@
     <form name='f' action="${login}" method='POST'>
         <table>
             <tr>
-                <td>User:</td>
+                <td>User(email):</td>
                 <td><input type='text' name='username' value=''></td>
             </tr>
             <tr>
