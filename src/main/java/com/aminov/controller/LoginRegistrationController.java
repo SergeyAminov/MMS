@@ -2,6 +2,7 @@ package com.aminov.controller;
 
 import com.aminov.dto.UserDto;
 import com.aminov.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 public class LoginRegistrationController {
+    private static final Logger logger = Logger.getLogger(LoginRegistrationController.class);
     private UserService<UserDto> userService;
 
     @Autowired
@@ -33,10 +35,20 @@ public class LoginRegistrationController {
     public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto userDto) {
         ModelAndView modelAndView = new ModelAndView();
         try {
+            if(logger.isDebugEnabled()){
+                logger.debug("Trying to create new user...");
+            }
             userService.registerNewUserAccount(userDto);
         } catch (Exception uaeEx) {
-            modelAndView.addObject("message", "An account for that username/email already exists.");
+            logger.error("Error: ", uaeEx);
+            modelAndView.addObject(
+                    "message",
+                    "An account for that username/email already exists."
+            );
             return modelAndView;
+        }
+        if(logger.isDebugEnabled()){
+            logger.debug("User successfully created!");
         }
         modelAndView.setViewName("redirect:/");
         return modelAndView;
