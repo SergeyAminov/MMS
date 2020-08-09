@@ -18,7 +18,7 @@
 <header>
     <c:url value="/registration" var="registration"/>
     <c:url value="/login" var="login"/>
-    <c:url value="/logout" var="logout"/>
+    <c:url value="/perform_logout" var="logout"/>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
             <span class="navbar-brand mb-0 h1 font-weight-bold text-uppercase">

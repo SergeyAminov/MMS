@@ -1,6 +1,8 @@
 package com.aminov.service;
 
-public interface UserService<T> extends InterfaceService<T>{
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public interface UserService<T> extends InterfaceService<T>, UserDetailsService {
 
     T getByEmail(String email);
 

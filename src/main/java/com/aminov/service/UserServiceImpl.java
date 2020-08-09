@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService<UserDto>, UserDetailsService {
+public class UserServiceImpl implements UserService<UserDto>{
 
     private UserDAO<User> userDAO;
     private UserMapper userMapper;
@@ -98,7 +97,7 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
 
         UserDto userDto = this.userMapper.toDto(this.userDAO.getByEmail(email));
         if (userDto == null) {
-            throw new UsernameNotFoundException("No user found with username: "+ email);
+            throw new UsernameNotFoundException("No user found with email: " + email);
         }
 
         return  new org.springframework.security.core.userdetails.User(

@@ -48,7 +48,7 @@ public class LoginRegistrationController {
             return modelAndView;
         }
         if(logger.isDebugEnabled()){
-            logger.debug("User successfully created!");
+            logger.debug("User was successfully created!");
         }
         modelAndView.setViewName("redirect:/");
         return modelAndView;

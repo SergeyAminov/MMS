@@ -109,7 +109,7 @@ public class UserDto implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.password;
+        return this.email;
     }
 
     @Override
