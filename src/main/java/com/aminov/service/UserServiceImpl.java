@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,13 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
 
     private UserDAO<User> userDAO;
     private UserMapper userMapper;
+
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public void setBCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Autowired
     public void setUserDAO(UserDAO<User> userDAO){
@@ -46,6 +54,7 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
     @Transactional
     @Override
     public void add(UserDto userDto) {
+        userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         this.userDAO.add(this.userMapper.toEntity(userDto));
     }
 
@@ -87,22 +96,19 @@ public class UserServiceImpl implements UserService<UserDto>, UserDetailsService
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
 
-        User user = userDAO.getByEmail(email);
-        if (user == null) {
+        UserDto userDto = this.userMapper.toDto(this.userDAO.getByEmail(email));
+        if (userDto == null) {
             throw new UsernameNotFoundException("No user found with username: "+ email);
         }
-        boolean enabled = true;
-        boolean accountNonExpired = true;
-        boolean credentialsNonExpired = true;
-        boolean accountNonLocked = true;
+
         return  new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword().toLowerCase(),
-                enabled,
-                accountNonExpired,
-                credentialsNonExpired,
-                accountNonLocked,
-                getAuthorities(user.getRole())
+                userDto.getEmail(),
+                userDto.getPassword().toLowerCase(),
+                userDto.isEnabled(),
+                userDto.isAccountNonExpired(),
+                userDto.isCredentialsNonExpired(),
+                userDto.isAccountNonLocked(),
+                getAuthorities(userDto.getRole())
         );
     }
 
