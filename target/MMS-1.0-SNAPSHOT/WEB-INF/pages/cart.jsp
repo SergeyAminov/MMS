@@ -52,7 +52,10 @@
 <main class="flex-shrink-0">
     <h1 class="container text-dark font-weight-bold">Cart</h1>
     <div class="container">
-        <p>${product.title}</p>
+        <c:forEach var="item" items="${cartItems}">
+            <c:url value="/cart/remove/${item.id}" var="remove"/>
+            <p>${item.title}</p> <a href="${remove}">remove</a>
+        </c:forEach>
         <c:url value="/order" var="order"/>
         <a href="${order}">
             <button type="button" class="btn btn-outline-light font-weight-bold">To order</button>

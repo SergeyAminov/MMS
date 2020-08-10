@@ -2,6 +2,7 @@ package com.aminov.controller;
 
 import com.aminov.dto.CategoryDto;
 import com.aminov.dto.ProductDto;
+import com.aminov.model.Cart;
 import com.aminov.service.CategoryService;
 import com.aminov.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -19,6 +22,12 @@ public class ProductController {
 
     private ProductService<ProductDto> productService;
     private CategoryService<CategoryDto> categoryDtoService;
+    private Cart cart;
+
+    @Autowired
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     @Autowired
     public void setProductService(ProductService<ProductDto> productService){
@@ -42,12 +51,13 @@ public class ProductController {
 
     @RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
     public ModelAndView addProductToCart(@PathVariable("id") int id,
-                                         Authentication authentication) {
+                                         Authentication authentication,
+                                         HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        ProductDto product = productService.getById(id);
-        modelAndView.addObject("product", product);
+        session.setAttribute("cart", this.cart);
+        this.cart.addItem(productService.getById(id));
         modelAndView.addObject("authentication", authentication);
-        modelAndView.setViewName("cart");
+        modelAndView.setViewName("redirect:/cart");
         return modelAndView;
     }
 

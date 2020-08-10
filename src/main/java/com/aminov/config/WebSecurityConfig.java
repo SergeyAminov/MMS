@@ -1,5 +1,6 @@
 package com.aminov.config;
 
+import com.aminov.model.Cart;
 import com.aminov.security.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration", "/login", "/catalog", "/cart", "/about").anonymous()
-                .antMatchers("/profile").authenticated()
+                .antMatchers("/registration", "/login", "/catalog", "/cart").anonymous()
+                .antMatchers("/profile", "/catalog", "/cart").authenticated()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
@@ -59,6 +60,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public Cart cart(){
+        return new Cart();
     }
 
 }
