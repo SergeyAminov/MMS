@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html lang="en" class="h-100">
 <head>
     <meta charset="UTF-8">
@@ -16,9 +15,11 @@
 
 <!-- Header -->
 <header>
+    <c:url value="/catalog" var="catalog"/>
     <c:url value="/registration" var="registration"/>
     <c:url value="/login" var="login"/>
     <c:url value="/profile" var="profile"/>
+    <c:url value="/cart" var="cart"/>
     <c:url value="/perform_logout" var="logout"/>
     <div class="navigation-header container">
         <nav class="navbar nav navbar-light bg-warning">
@@ -27,10 +28,10 @@
             </span>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white font-weight-bold" href="#">Catalog</a>
+                    <a class="nav-link text-white font-weight-bold" href="${catalog}">Catalog</a>
                 </li>
             </ul>
-            <a class="nav-link text-white font-weight-bold" href="#">Cart</a>
+            <a class="nav-link text-white font-weight-bold" href="${cart}">Cart</a>
             <c:choose>
                 <c:when test="${!empty authentication}">
                     <a class="nav-link text-white font-weight-bold" href="${profile}">Profile</a>
@@ -49,29 +50,13 @@
 
 <!-- Main -->
 <main class="flex-shrink-0">
-    <h1 class="container text-dark font-weight-bold">Goods Catalog</h1>
-    <!-- All items container -->
-    <div class="shop-items container">
-        <c:forEach var="product" items="${productsList}">
-            <!-- Item -->
-            <hr>
-            <div class="item-card card container">
-                <div class="card-body">
-                    <a class="text-warning" href="#">
-                        <h5 class="card-title font-weight-bold text-warning">${product.title}</h5>
-                    </a>
-                    <p class="card-text text-secondary">Category: ${product.categoryDto.title}</p>
-                    <p class="card-text text-secondary">Left : ${product.count}</p>
-                    <p class="card-text font-weight-bold text-dark">
-                        Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
-                        ${product.storage} Gb memory, ${product.ram} Gb RAM;
-                    </p>
-                    <p class="card-text font-weight-bold text-dark">${product.price} &#36;</p>
-                    <button type="button" class="btn btn-warning text-white font-weight-bold">To cart</button>
-                </div>
-            </div>
-        </c:forEach>
-        <hr>
+    <h1 class="container text-dark font-weight-bold">Cart</h1>
+    <div class="container">
+        <p>${product.title}</p>
+        <c:url value="/order" var="order"/>
+        <a href="${order}">
+            <button type="button" class="btn btn-outline-light font-weight-bold">To order</button>
+        </a>
     </div>
 </main>
 

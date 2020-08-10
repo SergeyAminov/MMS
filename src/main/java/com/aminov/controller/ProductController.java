@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -33,13 +30,24 @@ public class ProductController {
         this.categoryDtoService = categoryDtoService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/catalog", method = RequestMethod.GET)
     public ModelAndView productsPageClient(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("products");
+        modelAndView.setViewName("catalog");
         List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
         modelAndView.addObject("authentication", authentication);
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/add/{id}", method = RequestMethod.GET)
+    public ModelAndView addProductToCart(@PathVariable("id") int id,
+                                         Authentication authentication) {
+        ModelAndView modelAndView = new ModelAndView();
+        ProductDto product = productService.getById(id);
+        modelAndView.addObject("product", product);
+        modelAndView.addObject("authentication", authentication);
+        modelAndView.setViewName("cart");
         return modelAndView;
     }
 
@@ -67,7 +75,7 @@ public class ProductController {
     public ModelAndView editProduct(@ModelAttribute("product") ProductDto productDto) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(productDto);
-        modelAndView.setViewName("redirect:/products");
+        modelAndView.setViewName("catalog");
         return modelAndView;
     }
 
@@ -84,14 +92,14 @@ public class ProductController {
     public ModelAndView addProduct(@ModelAttribute("product") ProductDto productDto){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(productDto);
-        modelAndView.setViewName("redirect:/products");
+        modelAndView.setViewName("catalog");
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/products/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/products");
+        modelAndView.setViewName("catalog");
         ProductDto productDto = productService.getById(id);
         productService.delete(productDto);
         return modelAndView;
