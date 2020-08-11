@@ -11,8 +11,8 @@ public class AddressDto {
     private int postcode;
     private int building;
     private int apartNumber;
-    private UserDto userDto;
-    private List<OrderDto> orderDtoList;
+    private Integer userId;
+    private List<Integer> orderIdList;
 
     public AddressDto() { }
 
@@ -72,20 +72,20 @@ public class AddressDto {
         this.apartNumber = apartNumber;
     }
 
-    public UserDto getUserDto() {
-        return userDto;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserDto(UserDto userDto) {
-        this.userDto = userDto;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public List<OrderDto> getOrderDtoList() {
-        return orderDtoList;
+    public List<Integer> getOrderIdList() {
+        return orderIdList;
     }
 
-    public void setOrderDtoList(List<OrderDto> orderDtoList) {
-        this.orderDtoList = orderDtoList;
+    public void setOrderIdList(List<Integer> orderIdList) {
+        this.orderIdList = orderIdList;
     }
 
     @Override

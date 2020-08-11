@@ -32,8 +32,9 @@ public class UserDto implements UserDetails {
     private String email;
 
     private String role;
-
     private String birthday;
+    private List<Integer> addressIdList;
+    private List<Integer> orderIdList;
 
     public int getId() {
         return id;
@@ -98,6 +99,22 @@ public class UserDto implements UserDetails {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public List<Integer> getAddressIdList() {
+        return addressIdList;
+    }
+
+    public void setAddressIdList(List<Integer> addressIdList) {
+        this.addressIdList = addressIdList;
+    }
+
+    public List<Integer> getOrderIdList() {
+        return orderIdList;
+    }
+
+    public void setOrderIdList(List<Integer> orderIdList) {
+        this.orderIdList = orderIdList;
     }
 
     @Override
