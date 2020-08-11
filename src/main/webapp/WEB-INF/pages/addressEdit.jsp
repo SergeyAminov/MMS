@@ -9,7 +9,7 @@
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
     <link href="<c:url value="/res/navbar-styles.css"/>" rel="stylesheet" type="text/css"/>
-    <title>Home</title>
+    <title>Edit address</title>
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -50,19 +50,42 @@
 
 <!-- Main -->
 <main class="flex-shrink-0 container">
-    <div>
-        <h3>${user.name} ${user.surname}</h3>
-        <c:url value="/profile/addresses/add" var="add"/>
-        <p><a href="${add}">Add new address</a></p>
-        <h4>Your address-list:</h4>
-        <c:forEach var="address" items="${addressMap}">
-            <hr>
-            <c:url value="/profile/addresses/edit/${address.key}" var="edit"/>
-            <c:url value="/profile/addresses/delete/${address.key}" var="delete"/>
-            <p>${address.value}</p>
-            <p><a href="${edit}">edit</a> <a href="${delete}">delete</a></p>
-        </c:forEach>
-    </div>
+
+    <!-- Set action variable -->
+    <c:if test="${empty address.city}">
+        <c:url value="/profile/addresses/add" var="var"/>
+    </c:if>
+    <c:if test="${!empty address.city}">
+        <c:url value="/profile/addresses/edit" var="var"/>
+    </c:if>
+
+    <form action="${var}" method="POST">
+
+        <c:if test="${!empty address.city}">
+            <input type="hidden" name="id" value="${address.id}">
+        </c:if>
+        <input type="hidden" name="userId" value="${userId}">
+        <label for="country">Country</label>
+        <input type="text" name="country" id="country" value="${address.country}">
+        <label for="city">City</label>
+        <input type="text" name="city" id="city" value="${address.city}">
+        <label for="street">Street</label>
+        <input type="text" name="street" id="street" value="${address.street}">
+        <label for="postcode">Postcode</label>
+        <input type="number" name="postcode" id="postcode" value="${address.postcode}">
+        <label for="building">Building</label>
+        <input type="number" name="building" id="building" value="${address.building}">
+        <label for="apartNumber">Apartment number</label>
+        <input type="number" name="apartNumber" id="apartNumber" value="${address.apartNumber}">
+
+        <c:if test="${!empty address.city}">
+            <input type="submit" value="Edit address">
+        </c:if>
+        <c:if test="${empty address.city}">
+            <input type="submit" value="Add new address">
+        </c:if>
+
+    </form>
 </main>
 
 <!-- Footer -->

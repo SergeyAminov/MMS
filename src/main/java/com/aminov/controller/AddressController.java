@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AddressController {
@@ -34,61 +36,64 @@ public class AddressController {
     @RequestMapping(value = "/profile/addresses", method = RequestMethod.GET)
     public ModelAndView addressesPage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
-        List<Integer> addressIdList = this.userService
-                .getByEmail(authentication.getName())
-                .getAddressIdList();
+        int userId = this.userService.getByEmail(authentication.getName()).getId();
+        List<Integer> addressIdList = this.addressService.getAddressIdListByUserId(userId);
         if (addressIdList != null){
-            modelAndView.addObject("addressIdList", addressIdList);
-            modelAndView.addObject("addressService", this.addressService);
+            Map<Integer, String> addressMap = new HashMap<>();
+            for (int id : addressIdList){
+                addressMap.put(id, this.addressService.getById(id).toString());
+            }
             UserDto user = this.userService.getByEmail(authentication.getName());
+            modelAndView.addObject("addressMap", addressMap);
             modelAndView.addObject("user", user);
         }
+        modelAndView.addObject("authentication", authentication);
         modelAndView.setViewName("addresses");
         return modelAndView;
     }
-    /*
+
     @RequestMapping(value = "/profile/addresses/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editProductPage(@PathVariable("id") int id) {
+    public ModelAndView editAddressPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("productEdit");
-        ProductDto productDto = productService.getById(id);
-        modelAndView.addObject("product", productDto);
-        modelAndView.addObject("categoryService", this.categoryService);
+        modelAndView.setViewName("addressEdit");
+        AddressDto addressDto = addressService.getById(id);
+        modelAndView.addObject("address", addressDto);
         return modelAndView;
     }
 
     @RequestMapping(value = "/profile/addresses/edit", method = RequestMethod.POST)
-    public ModelAndView editProduct(@ModelAttribute("product") AddressDto addressDto) {
+    public ModelAndView editAddress(@ModelAttribute("product") AddressDto addressDto) {
         ModelAndView modelAndView = new ModelAndView();
         addressService.edit(addressDto);
-        modelAndView.setViewName("redirect:/admin/products");
+        modelAndView.setViewName("redirect:/profile/addresses");
         return modelAndView;
     }
 
     @RequestMapping(value = "/profile/addresses/add", method = RequestMethod.GET)
-    public ModelAndView addProductPage(){
+    public ModelAndView addAddressPage(Authentication authentication){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("productEdit");
-        modelAndView.addObject("categoryService", this.categoryService);
+        modelAndView.setViewName("addressEdit");
+        int userId = this.userService.getByEmail(authentication.getName()).getId();
+        modelAndView.addObject("userId", userId);
+        modelAndView.addObject("authentication", authentication);
         return modelAndView;
     }
 
     @RequestMapping(value = "/profile/addresses/add", method = RequestMethod.POST)
-    public ModelAndView addProduct(@ModelAttribute("product") AddressDto addressDto){
+    public ModelAndView addAddress(@ModelAttribute("product") AddressDto addressDto){
         ModelAndView modelAndView = new ModelAndView();
-        addressService.add(addressDto);
+        this.addressService.add(addressDto);
         modelAndView.setViewName("redirect:/profile/addresses");
         return modelAndView;
     }
 
     @RequestMapping(value = "/profile/addresses/delete/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteProduct(@PathVariable("id") int id){
+    public ModelAndView deleteAddress(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/admin/products");
-        ProductDto productDto = productService.getById(id);
-        productService.delete(productDto);
+        modelAndView.setViewName("redirect:/profile/addresses");
+        AddressDto addressDto = this.addressService.getById(id);
+        this.addressService.delete(addressDto);
         return modelAndView;
     }
-    */
 
 }

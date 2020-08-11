@@ -60,4 +60,10 @@ public class AddressServiceImpl implements AddressService<AddressDto> {
     public AddressDto getById(int id) {
         return this.addressMapper.toDto(this.addressDAO.getById(id));
     }
+
+    @Transactional
+    @Override
+    public List<Integer> getAddressIdListByUserId(int id){
+        return this.addressDAO.getAddressIdListByUserId(id);
+    }
 }

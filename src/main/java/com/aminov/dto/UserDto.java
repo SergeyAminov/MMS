@@ -117,6 +117,22 @@ public class UserDto implements UserDetails {
         this.orderIdList = orderIdList;
     }
 
+    public void addAddress(int id){
+        this.addressIdList.add(id);
+    }
+
+    public void removeAddress(int id){
+        this.addressIdList.remove(Integer.valueOf(id));
+    }
+
+    public void addOrder(int id){
+        this.addressIdList.add(id);
+    }
+
+    public void removeOrder(int id){
+        this.addressIdList.remove(Integer.valueOf(id));
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

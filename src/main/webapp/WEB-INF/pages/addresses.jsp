@@ -49,10 +49,19 @@
 </header>
 
 <!-- Main -->
-<main class="flex-shrink-0">
-    <div class="container">
+<main class="flex-shrink-0 container">
+    <div>
         <h3>${user.name} ${user.surname}</h3>
-        <p>Your address-list</p>
+        <c:url value="/profile/addresses/add" var="add"/>
+        <p><a href="${add}">Add new address</a></p>
+        <h4>Your address-list:</h4>
+        <c:forEach var="address" items="${addressMap}">
+            <hr>
+            <c:url value="/profile/addresses/edit/${address.key}" var="edit"/>
+            <c:url value="/profile/addresses/delete/${address.key}" var="delete"/>
+            <p>${address.value}</p>
+            <p><a href="${edit}">edit</a> <a href="${delete}">delete</a></p>
+        </c:forEach>
     </div>
 </main>
 

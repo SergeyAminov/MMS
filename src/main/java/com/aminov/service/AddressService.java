@@ -1,3 +1,7 @@
 package com.aminov.service;
 
-public interface AddressService<T> extends InterfaceService<T> { }
+import java.util.List;
+
+public interface AddressService<T> extends InterfaceService<T> {
+    public List<Integer> getAddressIdListByUserId(int id);
+}

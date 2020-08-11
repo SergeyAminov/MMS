@@ -90,6 +90,6 @@ public class AddressDto {
 
     @Override
     public String toString() {
-        return this.city + ", " + this.postcode + ", " + this.street + " " + this.building + ", " + this.apartNumber;
+        return this.city + " " + this.postcode + ", " + this.street + " st. " + this.building + ", " + this.apartNumber;
     }
 }
