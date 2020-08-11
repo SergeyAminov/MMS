@@ -50,11 +50,9 @@
 
 <!-- Main -->
 <main class="flex-shrink-0">
-    <c:url value="/profile/addresses" var="addresses"/>
     <div class="container">
         <h3>${user.name} ${user.surname}</h3>
-        <p>Mail: ${user.email}</p>
-        <a href="${addresses}">Addresses</a>
+        <p>Your address-list</p>
     </div>
 </main>
 

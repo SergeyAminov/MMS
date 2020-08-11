@@ -64,7 +64,7 @@ public class SecurityController {
         if(logger.isDebugEnabled()){
             logger.debug("User was successfully created!");
         }
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/catalog");
         return modelAndView;
     }
 
@@ -80,7 +80,7 @@ public class SecurityController {
         sc.setAuthentication(auth);
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
-        modelAndView.setViewName("redirect:/");
+        modelAndView.setViewName("redirect:/catalog");
         return modelAndView;
     }
 
@@ -92,9 +92,15 @@ public class SecurityController {
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
-    public ModelAndView profilePage() {
+    public ModelAndView profilePage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("profile");
+        UserDto user = this.userService.getByEmail(authentication.getName());
+        if (authentication.getName() == null)
+            modelAndView.setViewName("redirect:/login");
+        else{
+            modelAndView.addObject("user", user);
+            modelAndView.setViewName("profile");
+        }
         return modelAndView;
     }
 
