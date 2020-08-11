@@ -21,7 +21,7 @@ import java.util.List;
 public class ProductController {
 
     private ProductService<ProductDto> productService;
-    private CategoryService<CategoryDto> categoryDtoService;
+    private CategoryService<CategoryDto> categoryService;
     private Cart cart;
 
     @Autowired
@@ -35,8 +35,8 @@ public class ProductController {
     }
 
     @Autowired
-    public void setCategoryService(CategoryService<CategoryDto> categoryDtoService){
-        this.categoryDtoService = categoryDtoService;
+    public void setCategoryService(CategoryService<CategoryDto> categoryService){
+        this.categoryService = categoryService;
     }
 
     @RequestMapping(value = "/catalog", method = RequestMethod.GET)
@@ -47,6 +47,7 @@ public class ProductController {
         modelAndView.setViewName("catalog");
         List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
+        modelAndView.addObject("categoryService", this.categoryService);
         modelAndView.addObject("authentication", authentication);
         return modelAndView;
     }
@@ -69,6 +70,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productsAdmin");
         List<ProductDto> productDtoList = productService.allItems();
+        modelAndView.addObject("categoryService", this.categoryService);
         modelAndView.addObject("productsList", productDtoList);
         return modelAndView;
     }
@@ -77,10 +79,9 @@ public class ProductController {
     public ModelAndView editProductPage(@PathVariable("id") int id) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<CategoryDto> categoryDtoList = categoryDtoService.allItems();
         ProductDto productDto = productService.getById(id);
         modelAndView.addObject("product", productDto);
-        modelAndView.addObject("categoriesList", categoryDtoList);
+        modelAndView.addObject("categoryService", this.categoryService);
         return modelAndView;
     }
 
@@ -96,8 +97,7 @@ public class ProductController {
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<CategoryDto> categoryDtoList = categoryDtoService.allItems();
-        modelAndView.addObject("categoriesList", categoryDtoList);
+        modelAndView.addObject("categoryService", this.categoryService);
         return modelAndView;
     }
 

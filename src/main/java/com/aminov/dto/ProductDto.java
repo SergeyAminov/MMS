@@ -7,7 +7,7 @@ public class ProductDto {
     private double price;
     private OrderDto orderDto;
     private int count;
-    private CategoryDto categoryDto;
+    private Integer categoryId;
     private String brand;
     private String color;
     private double weight;
@@ -57,12 +57,12 @@ public class ProductDto {
         this.count = count;
     }
 
-    public CategoryDto getCategoryDto() {
-        return categoryDto;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryDto(CategoryDto categoryDto) {
-        this.categoryDto = categoryDto;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getBrand() {
