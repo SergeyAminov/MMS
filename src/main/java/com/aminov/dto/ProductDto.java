@@ -5,6 +5,7 @@ public class ProductDto {
     private int id;
     private String title;
     private double price;
+    private OrderDto orderDto;
     private int count;
     private CategoryDto categoryDto;
     private String brand;
@@ -38,6 +39,14 @@ public class ProductDto {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public OrderDto getOrderDto() {
+        return orderDto;
+    }
+
+    public void setOrderDto(OrderDto orderDto) {
+        this.orderDto = orderDto;
     }
 
     public int getCount() {
