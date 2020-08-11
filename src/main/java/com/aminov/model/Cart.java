@@ -11,26 +11,39 @@ import java.util.List;
 @Scope("session")
 public class Cart {
 
-    private List<ProductDto> productList;
+    private List<ProductDto> itemList;
 
     public Cart(){
-        this.productList = new ArrayList<>();
+        this.itemList = new ArrayList<>();
+    }
+
+    public Cart(Cart cart) {
+        this.itemList = cart.itemList;
+    }
+
+    public List<ProductDto> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<ProductDto> itemList) {
+        this.itemList = itemList;
     }
 
     public void addItem(ProductDto product){
-        this.productList.add(product);
+        this.itemList.add(product);
     }
 
     public void removeItem(ProductDto product){
-        this.productList.remove(product);
+        this.itemList.removeIf(item -> item.equals(product));
+
     }
 
     public List<ProductDto> getItems(){
-        return this.productList;
+        return this.itemList;
     }
 
     public void clearCart(){
-        this.productList.clear();
+        this.itemList.clear();
     }
 
 }

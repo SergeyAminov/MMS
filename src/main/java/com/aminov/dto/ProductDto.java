@@ -105,6 +105,12 @@ public class ProductDto {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        ProductDto productDto = (ProductDto) obj;
+        return (obj instanceof ProductDto) && (((ProductDto) obj).id == this.id);
+    }
+
+    @Override
     public String toString() {
         return this.getTitle();
     }

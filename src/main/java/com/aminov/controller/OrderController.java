@@ -29,7 +29,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public ModelAndView productsPageClient(Authentication authentication,
+    public ModelAndView cartPage(Authentication authentication,
                                            HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cart");
@@ -42,7 +42,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/cart/remove/{id}", method = RequestMethod.GET)
-    public ModelAndView deleteProduct(@PathVariable("id") int id,
+    public ModelAndView removeItemFromCart(@PathVariable("id") int id,
                                       HttpSession session){
         this.cart.removeItem(this.productService.getById(id));
         session.setAttribute("cart", this.cart);

@@ -40,8 +40,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/catalog", method = RequestMethod.GET)
-    public ModelAndView productsPageClient(Authentication authentication) {
+    public ModelAndView productsPageClient(Authentication authentication,
+                                           HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
+        session.setAttribute("cart", new Cart(this.cart));
         modelAndView.setViewName("catalog");
         List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
@@ -54,8 +56,9 @@ public class ProductController {
                                          Authentication authentication,
                                          HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        session.setAttribute("cart", this.cart);
-        this.cart.addItem(productService.getById(id));
+        Cart cart = (Cart) session.getAttribute("cart");
+        cart.addItem(productService.getById(id));
+        session.setAttribute("cart", cart);
         modelAndView.addObject("authentication", authentication);
         modelAndView.setViewName("redirect:/cart");
         return modelAndView;
