@@ -88,7 +88,7 @@ public class ProductController {
     public ModelAndView editProduct(@ModelAttribute("product") ProductDto productDto) {
         ModelAndView modelAndView = new ModelAndView();
         productService.edit(productDto);
-        modelAndView.setViewName("catalog");
+        modelAndView.setViewName("redirect:/admin/products");
         return modelAndView;
     }
 
@@ -96,8 +96,8 @@ public class ProductController {
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        List<CategoryDto> categories = categoryDtoService.allItems();
-        modelAndView.addObject("categoriesList", categories);
+        List<CategoryDto> categoryDtoList = categoryDtoService.allItems();
+        modelAndView.addObject("categoriesList", categoryDtoList);
         return modelAndView;
     }
 
@@ -105,14 +105,14 @@ public class ProductController {
     public ModelAndView addProduct(@ModelAttribute("product") ProductDto productDto){
         ModelAndView modelAndView = new ModelAndView();
         productService.add(productDto);
-        modelAndView.setViewName("catalog");
+        modelAndView.setViewName("redirect:/admin/products");
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/products/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteProduct(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("catalog");
+        modelAndView.setViewName("redirect:/admin/products");
         ProductDto productDto = productService.getById(id);
         productService.delete(productDto);
         return modelAndView;

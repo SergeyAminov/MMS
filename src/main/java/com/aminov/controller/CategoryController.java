@@ -34,7 +34,7 @@ public class CategoryController {
     @RequestMapping(value = "/admin/categories/delete/{id}", method = RequestMethod.GET)
     public ModelAndView deleteCategory(@PathVariable("id") int id){
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/categories");
+        modelAndView.setViewName("redirect:/admin/categories");
         CategoryDto categoryDto = categoryDtoService.getById(id);
         categoryDtoService.delete(categoryDto);
         return modelAndView;
@@ -44,7 +44,7 @@ public class CategoryController {
     public ModelAndView addCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
         categoryDtoService.add(categoryDto);
-        modelAndView.setViewName("redirect:/categories");
+        modelAndView.setViewName("redirect:/admin/categories");
         return modelAndView;
     }
 
@@ -52,7 +52,7 @@ public class CategoryController {
     public ModelAndView editCategory(@ModelAttribute("category") CategoryDto categoryDto){
         ModelAndView modelAndView = new ModelAndView();
         categoryDtoService.edit(categoryDto);
-        modelAndView.setViewName("redirect:/categories");
+        modelAndView.setViewName("redirect:/admin/categories");
         return modelAndView;
     }
 

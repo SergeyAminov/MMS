@@ -24,8 +24,11 @@
 
         <c:if test="${!empty product.title}">
             <input type="hidden" name="id" value="${product.id}">
+            <input type="hidden" name="orderDto" value="${product.orderDto}">
         </c:if>
-
+        <c:if test="${empty product.title}">
+            <input type="hidden" name="orderDto" value="${null}">
+        </c:if>
         <label for="count">Count</label>
         <input type="number" name="count" id="count" value="${product.count}">
         <label for="title">Title</label>
@@ -47,7 +50,7 @@
 
         <p>
             <label for="category">Choose category</label>
-            <select size="3" multiple name="categoryDto" id="category">
+            <select size="3" name="categoryDto" id="category">
                 <c:forEach var="categoryDto" items="${categoriesList}">
                     <option value="${categoryDto}">${categoryDto.title}</option>
                 </c:forEach>
