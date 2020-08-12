@@ -47,7 +47,7 @@ public class ProductController {
         modelAndView.setViewName("catalog");
         List<ProductDto> productDtoList = productService.allItems();
         modelAndView.addObject("productsList", productDtoList);
-        modelAndView.addObject("categoryMap", this.categoryService.getCategoryIdTitleMap());
+        modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         modelAndView.addObject("authentication", authentication);
         return modelAndView;
     }
@@ -70,7 +70,7 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productsAdmin");
         List<ProductDto> productDtoList = productService.allItems();
-        modelAndView.addObject("categoryMap", this.categoryService.getCategoryIdTitleMap());
+        modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         modelAndView.addObject("productsList", productDtoList);
         return modelAndView;
     }
@@ -81,7 +81,7 @@ public class ProductController {
         modelAndView.setViewName("productEdit");
         ProductDto productDto = productService.getById(id);
         modelAndView.addObject("product", productDto);
-        modelAndView.addObject("categoryMap", this.categoryService.getCategoryIdTitleMap());
+        modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         return modelAndView;
     }
 
@@ -97,7 +97,7 @@ public class ProductController {
     public ModelAndView addProductPage(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("productEdit");
-        modelAndView.addObject("categoryMap", this.categoryService.getCategoryIdTitleMap());
+        modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         return modelAndView;
     }
 

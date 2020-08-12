@@ -66,7 +66,7 @@ public class CategoryServiceImpl implements CategoryService<CategoryDto> {
 
     @Transactional
     @Override
-    public Map<Integer, String> getCategoryIdTitleMap(){
+    public Map<Integer, String> getIdTitleMap(){
         Map<Integer, String> categoryMap = new HashMap<>();
         for (CategoryDto category : this.allItems())
             categoryMap.put(category.getId(), category.getTitle());
