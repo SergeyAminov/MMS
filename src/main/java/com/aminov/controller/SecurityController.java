@@ -1,7 +1,7 @@
 package com.aminov.controller;
 
 import com.aminov.dto.UserDto;
-import com.aminov.service.UserService;
+import com.aminov.service.interfaces.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

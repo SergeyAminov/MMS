@@ -2,8 +2,8 @@ package com.aminov.controller;
 
 import com.aminov.dto.AddressDto;
 import com.aminov.dto.UserDto;
-import com.aminov.service.AddressService;
-import com.aminov.service.UserService;
+import com.aminov.service.interfaces.AddressService;
+import com.aminov.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

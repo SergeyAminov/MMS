@@ -2,7 +2,7 @@ package com.aminov.controller;
 
 import com.aminov.dto.ProductDto;
 import com.aminov.model.Cart;
-import com.aminov.service.ProductService;
+import com.aminov.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

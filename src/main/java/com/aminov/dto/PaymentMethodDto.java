@@ -5,7 +5,7 @@ import java.util.List;
 public class PaymentMethodDto {
     private int id;
     private String title;
-    private List<OrderDto> orderDtoList;
+    private List<Integer> orderIdList;
 
     public PaymentMethodDto() { }
 
@@ -25,12 +25,12 @@ public class PaymentMethodDto {
         this.title = title;
     }
 
-    public List<OrderDto> getOrderDtoList() {
-        return orderDtoList;
+    public List<Integer> getOrderIdList() {
+        return orderIdList;
     }
 
-    public void setOrderDtoList(List<OrderDto> orderDtoList) {
-        this.orderDtoList = orderDtoList;
+    public void setOrderIdList(List<Integer> orderIdList) {
+        this.orderIdList = orderIdList;
     }
 
     @Override
