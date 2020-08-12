@@ -14,7 +14,7 @@
     <c:forEach var="product" items="${productsList}">
         <div class="product">
             <h5>${product.title}</h5>
-            <p>Category: ${categoryService.getById(product.categoryId)}</p>
+            <p>Category: ${categoryMap.get(product.categoryId)}</p>
             <p>Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
                     ${product.storage} Gb memory, ${product.ram} Gb RAM;
             </p>

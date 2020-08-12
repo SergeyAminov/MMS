@@ -65,6 +65,7 @@
             <input type="hidden" name="id" value="${address.id}">
         </c:if>
         <input type="hidden" name="userId" value="${userId}">
+        <input type="hidden" name="orderIdList" value="${address.orderIdList}">
         <label for="country">Country</label>
         <input type="text" name="country" id="country" value="${address.country}">
         <label for="city">City</label>

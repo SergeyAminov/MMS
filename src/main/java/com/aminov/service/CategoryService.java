@@ -1,3 +1,7 @@
 package com.aminov.service;
 
-public interface CategoryService<T> extends InterfaceService<T> {}
+import java.util.Map;
+
+public interface CategoryService<T> extends InterfaceService<T> {
+    public Map<Integer, String> getCategoryIdTitleMap();
+}

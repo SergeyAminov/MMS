@@ -36,14 +36,13 @@ public class AddressController {
     @RequestMapping(value = "/profile/addresses", method = RequestMethod.GET)
     public ModelAndView addressesPage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
-        int userId = this.userService.getByEmail(authentication.getName()).getId();
-        List<Integer> addressIdList = this.addressService.getAddressIdListByUserId(userId);
+        UserDto user = this.userService.getByEmail(authentication.getName());
+        List<Integer> addressIdList = this.addressService.getAddressIdListByUserId(user.getId());
         if (addressIdList != null){
             Map<Integer, String> addressMap = new HashMap<>();
             for (int id : addressIdList){
                 addressMap.put(id, this.addressService.getById(id).toString());
             }
-            UserDto user = this.userService.getByEmail(authentication.getName());
             modelAndView.addObject("addressMap", addressMap);
             modelAndView.addObject("user", user);
         }
