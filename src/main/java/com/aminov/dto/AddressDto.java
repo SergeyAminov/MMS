@@ -1,7 +1,5 @@
 package com.aminov.dto;
 
-import java.util.List;
-
 public class AddressDto {
 
     private int id;
@@ -12,7 +10,6 @@ public class AddressDto {
     private int building;
     private int apartNumber;
     private Integer userId;
-    private List<Integer> orderIdList;
 
     public AddressDto() { }
 
@@ -78,14 +75,6 @@ public class AddressDto {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
-    }
-
-    public List<Integer> getOrderIdList() {
-        return orderIdList;
-    }
-
-    public void setOrderIdList(List<Integer> orderIdList) {
-        this.orderIdList = orderIdList;
     }
 
     @Override

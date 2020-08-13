@@ -16,12 +16,8 @@ public class Order {
     @JoinColumn(name = "user")
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "address")
-    private Address address;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    private List<Product> productList;
+    @Column(name = "address")
+    private String address;
 
     @ManyToOne
     @JoinColumn(name = "payment_method")
@@ -57,20 +53,12 @@ public class Order {
         this.user = user;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
-    }
-
-    public List<Product> getProductList() {
-        return productList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
     }
 
     public PaymentMethod getPayment_method() {

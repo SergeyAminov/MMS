@@ -1,0 +1,60 @@
+package com.aminov.dao.implementations;
+
+import com.aminov.dao.interfaces.OrderItemDAO;
+import com.aminov.model.OrderItem;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
+    private SessionFactory sessionFactory;
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public List<OrderItem> allItems() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select orderHistory from OrderItem orderHistory", OrderItem.class).list();
+    }
+
+    @Override
+    public void add(OrderItem orderItem) {
+        Session session = sessionFactory.getCurrentSession();
+        session.persist(orderItem);
+    }
+
+    @Override
+    public void delete(OrderItem orderItem) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(orderItem);
+    }
+
+    @Override
+    public void edit(OrderItem orderItem) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(orderItem);
+    }
+
+    @Override
+    public OrderItem getById(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(OrderItem.class, id);
+    }
+
+    @Override
+    public List<OrderItem> getOrderItemListByOrderId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .getSession()
+                .createQuery("select orderHistory from OrderItem orderHistory where orderHistory.order_id=:id", OrderItem.class)
+                .setParameter("id", id)
+                .list();
+    }
+}

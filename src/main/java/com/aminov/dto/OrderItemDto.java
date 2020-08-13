@@ -1,48 +1,20 @@
-package com.aminov.model;
+package com.aminov.dto;
 
-import javax.persistence.*;
+public class OrderItemDto {
 
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    @Column(name = "title")
+    int order_id;
     private String title;
-
-    @Column(name = "price")
     private double price;
-
-    @ManyToOne
-    @JoinColumn(name = "category")
-    private Category category;
-
-    @Column(name = "count")
-    private int count;
-
-    @Column(name = "brand")
+    private String category;
     private String brand;
-
-    @Column(name = "color")
     private String color;
-
-    @Column(name = "weight")
     private double weight;
-
-    @Column(name = "diagonal")
     private double diagonal;
-
-    @Column(name = "storage")
     private double storage;
-
-    @Column(name = "ram")
     private int ram;
 
-    public Product() {}
+    public OrderItemDto() { }
 
     public int getId() {
         return id;
@@ -50,6 +22,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getOrder_id() {
+        return order_id;
+    }
+
+    public void setOrder_id(int order_id) {
+        this.order_id = order_id;
     }
 
     public String getTitle() {
@@ -68,20 +48,12 @@ public class Product {
         this.price = price;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Category category) {
+    public void setCategory(String category) {
         this.category = category;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
     }
 
     public String getBrand() {
@@ -132,8 +104,4 @@ public class Product {
         this.ram = ram;
     }
 
-    @Override
-    public String toString() {
-        return this.title;
-    }
 }

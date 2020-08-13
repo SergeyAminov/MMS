@@ -1,12 +1,9 @@
 package com.aminov.dto;
 
-import java.util.List;
-
 public class OrderDto {
     private int id;
     private UserDto userId;
-    private Integer addressId;
-    private List<Integer> productId;
+    private String address;
     private Integer paymentMethodId;
     private Integer deliveryMethodId;
     private Integer paymentStatusId;
@@ -28,20 +25,12 @@ public class OrderDto {
         this.userId = userId;
     }
 
-    public Integer getAddressId() {
-        return addressId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressId(Integer addressId) {
-        this.addressId = addressId;
-    }
-
-    public List<Integer> getProductId() {
-        return productId;
-    }
-
-    public void setProductId(List<Integer> productId) {
-        this.productId = productId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public Integer getPaymentMethodId() {

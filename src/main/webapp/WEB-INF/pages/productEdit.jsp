@@ -24,7 +24,6 @@
 
         <c:if test="${!empty product.title}">
             <input type="hidden" name="id" value="${product.id}">
-            <input type="hidden" name="categoryId" value="${categoryMap.get(product.id)}">
         </c:if>
         <label for="count">Count</label>
         <input type="number" name="count" id="count" value="${product.count}">

@@ -34,9 +34,6 @@ public class Address {
     @JoinColumn(name = "user")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address")
-    private List<Order> orderList;
-
     public Address() {}
 
     public int getId() {
@@ -101,14 +98,6 @@ public class Address {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
     }
 
     @Override
