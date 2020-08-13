@@ -48,13 +48,4 @@ public class AddressDAOImpl implements AddressDAO<Address> {
         return session.get(Address.class, id);
     }
 
-    @Override
-    public List<Integer> getAddressIdListByUserId(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return session
-                .getSession()
-                .createQuery("select address.id from Address address where address.user.id=:id", Integer.class)
-                .setParameter("id", id)
-                .list();
-    }
 }

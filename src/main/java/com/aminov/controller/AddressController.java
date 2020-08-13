@@ -37,15 +37,10 @@ public class AddressController {
     public ModelAndView addressesPage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
         UserDto user = this.userService.getByEmail(authentication.getName());
-        List<Integer> addressIdList = this.addressService.getAddressIdListByUserId(user.getId());
-        if (addressIdList != null){
-            Map<Integer, String> addressMap = new HashMap<>();
-            for (int id : addressIdList){
-                addressMap.put(id, this.addressService.getById(id).toString());
-            }
-            modelAndView.addObject("addressMap", addressMap);
-            modelAndView.addObject("user", user);
-        }
+
+        modelAndView.addObject("addressMap", this.addressService.getIdTitleMap());
+        modelAndView.addObject("user", user);
+
         modelAndView.addObject("authentication", authentication);
         modelAndView.setViewName("addresses");
         return modelAndView;

@@ -2,6 +2,7 @@ package com.aminov.dao.implementations;
 
 import com.aminov.dao.interfaces.OrderDAO;
 import com.aminov.model.Order;
+import com.aminov.model.OrderItem;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,15 @@ public class OrderDAOImpl implements OrderDAO<Order> {
     public Order getById(int id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Order.class, id);
+    }
+
+    @Override
+    public List<Order> getOrderListByUserId(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .getSession()
+                .createQuery("select order from Order order where order.user.id=:id", Order.class)
+                .setParameter("id", id)
+                .list();
     }
 }

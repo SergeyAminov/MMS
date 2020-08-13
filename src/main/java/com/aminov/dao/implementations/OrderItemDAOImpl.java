@@ -21,7 +21,7 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
     @Override
     public List<OrderItem> allItems() {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("select orderHistory from OrderItem orderHistory", OrderItem.class).list();
+        return session.createQuery("select orderItem from OrderItem orderItem", OrderItem.class).list();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
         Session session = sessionFactory.getCurrentSession();
         return session
                 .getSession()
-                .createQuery("select orderHistory from OrderItem orderHistory where orderHistory.order_id=:id", OrderItem.class)
+                .createQuery("select orderItem from OrderItem orderItem where orderItem.order_id=:id", OrderItem.class)
                 .setParameter("id", id)
                 .list();
     }

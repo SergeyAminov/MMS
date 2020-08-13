@@ -17,16 +17,17 @@ import javax.servlet.http.HttpSession;
 public class OrderController {
 
     private ProductService<ProductDto> productService;
-    private UserService<UserDto> userService;
-    private AddressService<AddressDto> addressService;
-    private PaymentMethodService<PaymentMethodDto> paymentMethodService;
-    private DeliveryMethodService<DeliveryMethodDto> dtoDeliveryMethodService;
-    private CategoryService<CategoryDto> categoryService;
     private Cart cart;
 
+    private AddressService<AddressDto> addressService;
+    private PaymentMethodService<PaymentMethodDto> paymentMethodService;
+    private DeliveryMethodService<DeliveryMethodDto> deliveryMethodService;
+    private CategoryService<CategoryDto> categoryService;
+    private UserService<UserDto> userService;
+
     @Autowired
-    public void setCart(Cart cart) {
-        this.cart = cart;
+    public void setUserService(UserService<UserDto> userService) {
+        this.userService = userService;
     }
 
     @Autowired
@@ -35,28 +36,28 @@ public class OrderController {
     }
 
     @Autowired
-    public void setProductService(ProductService<ProductDto> productService){
-        this.productService = productService;
-    }
-
-    @Autowired
     public void setPaymentMethodService(PaymentMethodService<PaymentMethodDto> paymentMethodService) {
         this.paymentMethodService = paymentMethodService;
     }
 
     @Autowired
-    public void setUserService(UserService<UserDto> userService) {
-        this.userService = userService;
-    }
-
-    @Autowired
-    public void setDtoDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> dtoDeliveryMethodService) {
-        this.dtoDeliveryMethodService = dtoDeliveryMethodService;
+    public void setDtoDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> deliveryMethodService) {
+        this.deliveryMethodService = deliveryMethodService;
     }
 
     @Autowired
     public void setCategoryService(CategoryService<CategoryDto> categoryService) {
         this.categoryService = categoryService;
+    }
+
+    @Autowired
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+
+    @Autowired
+    public void setProductService(ProductService<ProductDto> productService){
+        this.productService = productService;
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
@@ -87,14 +88,14 @@ public class OrderController {
                                   HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("order");
-        modelAndView.addObject("authentication", authentication);
+        Cart cart = (Cart) session.getAttribute("cart");
         int userId = this.userService.getByEmail(authentication.getName()).getId();
         modelAndView.addObject("userId", userId);
-        modelAndView.addObject("addressMap", this.addressService.getAddressIdListByUserId(userId));
+        modelAndView.addObject("authentication", authentication);
+        modelAndView.addObject("addressMap", this.addressService.getIdTitleMap());
         modelAndView.addObject("paymentMethodMap", this.paymentMethodService.getIdTitleMap());
-        modelAndView.addObject("deliveryMethodMap", this.dtoDeliveryMethodService.getIdTitleMap());
+        modelAndView.addObject("deliveryMethodMap", this.deliveryMethodService.getIdTitleMap());
         modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
-        Cart cart = (Cart) session.getAttribute("cart");
         modelAndView.addObject("cartList", cart.getItemList());
         return modelAndView;
     }

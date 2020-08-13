@@ -2,6 +2,7 @@ package com.aminov.service.implementations;
 
 import com.aminov.dao.interfaces.AddressDAO;
 import com.aminov.dto.AddressDto;
+import com.aminov.dto.CategoryDto;
 import com.aminov.mapper.AddressMapper;
 import com.aminov.model.Address;
 import com.aminov.service.interfaces.AddressService;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,7 +67,10 @@ public class AddressServiceImpl implements AddressService<AddressDto> {
 
     @Transactional
     @Override
-    public List<Integer> getAddressIdListByUserId(int id){
-        return this.addressDAO.getAddressIdListByUserId(id);
+    public Map<Integer, String> getIdTitleMap(){
+        Map<Integer, String> categoryMap = new HashMap<>();
+        for (AddressDto address : this.allItems())
+            categoryMap.put(address.getId(), address.toString());
+        return categoryMap;
     }
 }

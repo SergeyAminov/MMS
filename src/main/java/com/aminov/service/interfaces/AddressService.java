@@ -1,7 +1,7 @@
 package com.aminov.service.interfaces;
 
-import java.util.List;
+import java.util.Map;
 
 public interface AddressService<T> extends InterfaceService<T> {
-    public List<Integer> getAddressIdListByUserId(int id);
+    public Map<Integer, String> getIdTitleMap();
 }
