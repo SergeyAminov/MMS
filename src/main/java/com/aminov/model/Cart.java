@@ -34,16 +34,12 @@ public class Cart {
     }
 
     public void removeItem(ProductDto product){
-        this.itemList.removeIf(item -> item.equals(product));
-
-    }
-
-    public List<ProductDto> getItems(){
-        return this.itemList;
-    }
-
-    public void clearCart(){
-        this.itemList.clear();
+        for (ProductDto productDto : this.itemList) {
+            if (productDto.equals(product)) {
+                this.itemList.remove(productDto);
+                break;
+            }
+        }
     }
 
 }

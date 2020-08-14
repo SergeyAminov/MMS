@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,6 +35,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "delivery_status")
     private DeliveryStatus delivery_status;
+
+    @OneToMany(mappedBy = "order_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderItem> orderItemList = new ArrayList<>();
 
     public Order() {}
 
@@ -91,5 +95,13 @@ public class Order {
 
     public void setDelivery_status(DeliveryStatus delivery_status) {
         this.delivery_status = delivery_status;
+    }
+
+    public List<OrderItem> getOrderItemList() {
+        return orderItemList;
+    }
+
+    public void setOrderItemList(List<OrderItem> orderItemList) {
+        this.orderItemList = orderItemList;
     }
 }

@@ -3,10 +3,9 @@ package com.aminov.dto;
 public class OrderItemDto {
 
     private int id;
-    int order_id;
+    int orderId;
     private String title;
     private double price;
-    private String category;
     private String brand;
     private String color;
     private double weight;
@@ -16,6 +15,20 @@ public class OrderItemDto {
 
     public OrderItemDto() { }
 
+    public OrderItemDto(int id, int orderId, String title, double price, String brand, String color,
+                        double weight, double diagonal, double storage, int ram) {
+        this.id = id;
+        this.orderId = orderId;
+        this.title = title;
+        this.price = price;
+        this.brand = brand;
+        this.color = color;
+        this.weight = weight;
+        this.diagonal = diagonal;
+        this.storage = storage;
+        this.ram = ram;
+    }
+
     public int getId() {
         return id;
     }
@@ -24,12 +37,12 @@ public class OrderItemDto {
         this.id = id;
     }
 
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public String getTitle() {
@@ -46,14 +59,6 @@ public class OrderItemDto {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getBrand() {

@@ -73,4 +73,15 @@ public class AddressServiceImpl implements AddressService<AddressDto> {
             categoryMap.put(address.getId(), address.toString());
         return categoryMap;
     }
+
+    @Transactional
+    @Override
+    public Map<Integer, String> getIdTitleMapByUserId(int userId){
+        Map<Integer, String> categoryMap = new HashMap<>();
+        for (AddressDto address : this.allItems()) {
+            if (address.getUserId() == userId)
+                categoryMap.put(address.getId(), address.toString());
+        }
+        return categoryMap;
+    }
 }

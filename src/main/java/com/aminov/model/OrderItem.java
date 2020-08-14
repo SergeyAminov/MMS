@@ -11,17 +11,15 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "order_id")
-    int order_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    Order order_id;
 
     @Column(name = "title")
     private String title;
 
     @Column(name = "price")
     private double price;
-
-    @Column(name = "category")
-    private String category;
 
     @Column(name = "brand")
     private String brand;
@@ -51,11 +49,11 @@ public class OrderItem {
         this.id = id;
     }
 
-    public int getOrder_id() {
+    public Order getOrder_id() {
         return order_id;
     }
 
-    public void setOrder_id(int order_id) {
+    public void setOrder_id(Order order_id) {
         this.order_id = order_id;
     }
 
@@ -73,14 +71,6 @@ public class OrderItem {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
     }
 
     public String getBrand() {

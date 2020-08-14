@@ -2,6 +2,7 @@ package com.aminov.service.implementations;
 
 import com.aminov.dao.interfaces.OrderDAO;
 import com.aminov.dto.OrderDto;
+import com.aminov.dto.OrderItemDto;
 import com.aminov.mapper.OrderMapper;
 import com.aminov.model.Order;
 import com.aminov.service.interfaces.OrderService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +44,16 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
     @Override
     public void add(OrderDto orderDto) {
         this.orderDAO.add(this.orderMapper.toEntity(orderDto));
+    }
+
+    @Transactional
+    @Override
+    public void add(OrderDto orderDto, List<OrderItemDto> orderItemDtoList){
+        List<Integer> orderItemIdList = new ArrayList<>();
+        for (OrderItemDto orderItemDto : orderItemDtoList)
+            orderItemIdList.add(orderItemDto.getId());
+        orderDto.setOrderItemIdList(orderItemIdList);
+        this.add(orderDto);
     }
 
     @Transactional

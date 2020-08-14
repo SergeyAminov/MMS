@@ -7,6 +7,7 @@ import com.aminov.model.DeliveryMethod;
 import com.aminov.service.interfaces.DeliveryMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ public class DeliveryMethodServiceImpl implements DeliveryMethodService<Delivery
         this.deliveryMethodDAO = deliveryMethodDAO;
     }
 
+    @Transactional
     @Override
     public Map<Integer, String> getIdTitleMap() {
         Map<Integer, String> map = new HashMap<>();
@@ -36,6 +38,7 @@ public class DeliveryMethodServiceImpl implements DeliveryMethodService<Delivery
         return map;
     }
 
+    @Transactional
     @Override
     public List<DeliveryMethodDto> allItems() {
         return this.deliveryMethodDAO
@@ -45,21 +48,25 @@ public class DeliveryMethodServiceImpl implements DeliveryMethodService<Delivery
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void add(DeliveryMethodDto deliveryMethodDto) {
         this.deliveryMethodDAO.add(this.deliveryMethodMapper.toEntity(deliveryMethodDto));
     }
 
+    @Transactional
     @Override
     public void delete(DeliveryMethodDto deliveryMethodDto) {
         this.deliveryMethodDAO.delete(this.deliveryMethodMapper.toEntity(deliveryMethodDto));
     }
 
+    @Transactional
     @Override
     public void edit(DeliveryMethodDto deliveryMethodDto) {
         this.deliveryMethodDAO.edit(this.deliveryMethodMapper.toEntity(deliveryMethodDto));
     }
 
+    @Transactional
     @Override
     public DeliveryMethodDto getById(int id) {
         return this.deliveryMethodMapper.toDto(this.deliveryMethodDAO.getById(id));

@@ -6,24 +6,39 @@ import com.aminov.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class OrderController {
 
-    private ProductService<ProductDto> productService;
     private Cart cart;
 
+    private ProductService<ProductDto> productService;
     private AddressService<AddressDto> addressService;
     private PaymentMethodService<PaymentMethodDto> paymentMethodService;
     private DeliveryMethodService<DeliveryMethodDto> deliveryMethodService;
     private CategoryService<CategoryDto> categoryService;
     private UserService<UserDto> userService;
+
+    private OrderService<OrderDto> orderService;
+    private OrderItemService<OrderItemDto> orderItemService;
+
+    @Autowired
+    public void setOrderService(OrderService<OrderDto> orderService) {
+        this.orderService = orderService;
+    }
+
+    @Autowired
+    public void setOrderItemService(OrderItemService<OrderItemDto> orderItemService) {
+        this.orderItemService = orderItemService;
+    }
 
     @Autowired
     public void setUserService(UserService<UserDto> userService) {
@@ -41,7 +56,7 @@ public class OrderController {
     }
 
     @Autowired
-    public void setDtoDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> deliveryMethodService) {
+    public void setDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> deliveryMethodService) {
         this.deliveryMethodService = deliveryMethodService;
     }
 
@@ -66,8 +81,8 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cart");
         Cart cart = (Cart) session.getAttribute("cart");
-        if (cart.getItems().size() != 0)
-            modelAndView.addObject("cartItems", cart.getItems());
+        if (cart.getItemList().size() != 0)
+            modelAndView.addObject("cartItems", cart.getItemList());
         if (authentication != null)
             modelAndView.addObject("authentication", authentication);
         return modelAndView;
@@ -92,11 +107,27 @@ public class OrderController {
         int userId = this.userService.getByEmail(authentication.getName()).getId();
         modelAndView.addObject("userId", userId);
         modelAndView.addObject("authentication", authentication);
-        modelAndView.addObject("addressMap", this.addressService.getIdTitleMap());
+        modelAndView.addObject("addressMap", this.addressService.getIdTitleMapByUserId(userId));
         modelAndView.addObject("paymentMethodMap", this.paymentMethodService.getIdTitleMap());
         modelAndView.addObject("deliveryMethodMap", this.deliveryMethodService.getIdTitleMap());
         modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         modelAndView.addObject("cartList", cart.getItemList());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public ModelAndView doOrder(@ModelAttribute("order") OrderDto orderDto,
+                                HttpSession session){
+        ModelAndView modelAndView = new ModelAndView();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart.getItemList().size() != 0) {
+            List<OrderItemDto> orderItemDtoList = this.orderItemService.getOrderItemDtoList(this.cart.getItemList());
+            this.orderService.add(orderDto, orderItemDtoList);
+            this.cart.getItemList().clear();
+            session.setAttribute("cart", this.cart);
+        }
+
+        modelAndView.setViewName("redirect:/profile");
         return modelAndView;
     }
 

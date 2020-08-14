@@ -7,6 +7,7 @@ import com.aminov.model.PaymentMethod;
 import com.aminov.service.interfaces.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService<PaymentMet
         this.paymentMethodDAO = paymentMethodDAO;
     }
 
+    @Transactional
     @Override
     public Map<Integer, String> getIdTitleMap() {
         Map<Integer, String> map = new HashMap<>();
@@ -36,6 +38,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService<PaymentMet
         return map;
     }
 
+    @Transactional
     @Override
     public List<PaymentMethodDto> allItems() {
         return this.paymentMethodDAO
@@ -45,21 +48,25 @@ public class PaymentMethodServiceImpl implements PaymentMethodService<PaymentMet
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public void add(PaymentMethodDto paymentMethodDto) {
         this.paymentMethodDAO.add(this.paymentMethodMapper.toEntity(paymentMethodDto));
     }
 
+    @Transactional
     @Override
     public void delete(PaymentMethodDto paymentMethodDto) {
         this.paymentMethodDAO.delete(this.paymentMethodMapper.toEntity(paymentMethodDto));
     }
 
+    @Transactional
     @Override
     public void edit(PaymentMethodDto paymentMethodDto) {
         this.paymentMethodDAO.edit(this.paymentMethodMapper.toEntity(paymentMethodDto));
     }
 
+    @Transactional
     @Override
     public PaymentMethodDto getById(int id) {
         return this.paymentMethodMapper.toDto(this.paymentMethodDAO.getById(id));

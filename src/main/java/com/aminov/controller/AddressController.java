@@ -13,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Controller
 public class AddressController {
 
@@ -37,10 +33,8 @@ public class AddressController {
     public ModelAndView addressesPage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
         UserDto user = this.userService.getByEmail(authentication.getName());
-
-        modelAndView.addObject("addressMap", this.addressService.getIdTitleMap());
+        modelAndView.addObject("addressMap", this.addressService.getIdTitleMapByUserId(user.getId()));
         modelAndView.addObject("user", user);
-
         modelAndView.addObject("authentication", authentication);
         modelAndView.setViewName("addresses");
         return modelAndView;

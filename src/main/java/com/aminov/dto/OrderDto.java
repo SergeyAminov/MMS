@@ -1,5 +1,8 @@
 package com.aminov.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OrderDto {
     private int id;
     private UserDto userId;
@@ -8,6 +11,7 @@ public class OrderDto {
     private Integer deliveryMethodId;
     private Integer paymentStatusId;
     private Integer deliveryStatusId;
+    private List<Integer> orderItemIdList = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -63,5 +67,13 @@ public class OrderDto {
 
     public void setDeliveryStatusId(Integer deliveryStatusId) {
         this.deliveryStatusId = deliveryStatusId;
+    }
+
+    public List<Integer> getOrderItemIdList() {
+        return orderItemIdList;
+    }
+
+    public void setOrderItemIdList(List<Integer> orderItemIdList) {
+        this.orderItemIdList = orderItemIdList;
     }
 }
