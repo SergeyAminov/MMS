@@ -97,7 +97,7 @@ public class OrderItemServiceImpl implements OrderItemService<OrderItemDto> {
 
     @Transactional
     @Override
-    public double getOrderPrice(int orderId) {
+    public double getTotal(int orderId) {
         double orderPrice = 0;
         for (OrderItemDto orderItemDto : this.getOrderItemDtoListByOrderId(orderId))
             orderPrice += orderItemDto.getPrice();

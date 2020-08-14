@@ -3,14 +3,15 @@ package com.aminov.service.implementations;
 import com.aminov.dao.interfaces.OrderDAO;
 import com.aminov.dto.OrderDto;
 import com.aminov.dto.OrderItemDto;
+import com.aminov.mapper.OrderItemMapper;
 import com.aminov.mapper.OrderMapper;
 import com.aminov.model.Order;
+import com.aminov.model.OrderItem;
 import com.aminov.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,13 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService<OrderDto> {
 
     private OrderDAO<Order> orderDAO;
+    private OrderItemMapper orderItemMapper;
     private OrderMapper orderMapper;
+
+    @Autowired
+    public void setOrderItemMapper(OrderItemMapper orderItemMapper) {
+        this.orderItemMapper = orderItemMapper;
+    }
 
     @Autowired
     public void setOrderDAO(OrderDAO<Order> orderDAO) {
@@ -49,11 +56,11 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
     @Transactional
     @Override
     public void add(OrderDto orderDto, List<OrderItemDto> orderItemDtoList){
-        List<Integer> orderItemIdList = new ArrayList<>();
-        for (OrderItemDto orderItemDto : orderItemDtoList)
-            orderItemIdList.add(orderItemDto.getId());
-        orderDto.setOrderItemIdList(orderItemIdList);
-        this.add(orderDto);
+        List<OrderItem> orderItemList = orderItemDtoList
+                .stream()
+                .map(this.orderItemMapper::toEntity)
+                .collect(Collectors.toList());
+        this.orderDAO.add(this.orderMapper.toEntity(orderDto), orderItemList);
     }
 
     @Transactional

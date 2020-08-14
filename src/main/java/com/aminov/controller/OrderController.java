@@ -99,23 +99,18 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public ModelAndView orderPage(Authentication authentication,
-                                  HttpSession session) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("order");
-        Cart cart = (Cart) session.getAttribute("cart");
+    public ModelAndView orderPage(Authentication authentication) {
+        ModelAndView modelAndView = new ModelAndView("order", "order", new OrderDto());
         int userId = this.userService.getByEmail(authentication.getName()).getId();
-        modelAndView.addObject("userId", userId);
         modelAndView.addObject("authentication", authentication);
+        modelAndView.addObject("userId", userId);
         modelAndView.addObject("addressMap", this.addressService.getIdTitleMapByUserId(userId));
         modelAndView.addObject("paymentMethodMap", this.paymentMethodService.getIdTitleMap());
         modelAndView.addObject("deliveryMethodMap", this.deliveryMethodService.getIdTitleMap());
-        modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
-        modelAndView.addObject("cartList", cart.getItemList());
         return modelAndView;
     }
 
-    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    @RequestMapping(value = "/order/add", method = RequestMethod.POST)
     public ModelAndView doOrder(@ModelAttribute("order") OrderDto orderDto,
                                 HttpSession session){
         ModelAndView modelAndView = new ModelAndView();

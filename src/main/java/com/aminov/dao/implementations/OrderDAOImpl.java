@@ -32,6 +32,13 @@ public class OrderDAOImpl implements OrderDAO<Order> {
     }
 
     @Override
+    public void add(Order order, List<OrderItem> orderItemList) {
+        Session session = sessionFactory.getCurrentSession();
+        order.setOrderItemList(orderItemList);
+        session.persist(order);
+    }
+
+    @Override
     public void delete(Order order) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(order);

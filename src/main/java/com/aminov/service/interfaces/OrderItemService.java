@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface OrderItemService<T> extends InterfaceService<T>{
     List<T> getOrderItemDtoListByOrderId(int id);
-    double getOrderPrice(int orderId);
+    double getTotal(int orderId);
     List<T> getOrderItemDtoList(List<ProductDto> productDtoList);
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class OrderDto {
     private int id;
     private UserDto userId;
-    private String address;
+    private Integer addressId;
     private Integer paymentMethodId;
     private Integer deliveryMethodId;
     private Integer paymentStatusId;
@@ -29,12 +29,12 @@ public class OrderDto {
         this.userId = userId;
     }
 
-    public String getAddress() {
-        return address;
+    public int getAddressId() {
+        return addressId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressId(int addressId) {
+        this.addressId = addressId;
     }
 
     public Integer getPaymentMethodId() {
