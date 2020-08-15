@@ -131,4 +131,14 @@ public class OrderController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
+    public ModelAndView getOrderHistoryClient(Authentication authentication){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("orderHistory");
+        int userId = this.userService.getByEmail(authentication.getName()).getId();
+        modelAndView.addObject("orderMap", this.orderService.getOrderMap(userId));
+        modelAndView.addObject("authentication", authentication);
+        return modelAndView;
+    }
+
 }

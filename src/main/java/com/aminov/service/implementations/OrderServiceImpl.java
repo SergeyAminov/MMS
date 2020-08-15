@@ -85,6 +85,20 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
 
     @Transactional
     @Override
+    public Map<OrderDto, List<OrderItemDto>> getOrderMap(int id){
+        Map<OrderDto, List<OrderItemDto>> orderMap = new HashMap<>();
+        for (OrderDto orderDto : this.allItems())
+            if (orderDto.getUserId() == id){
+                orderMap.put(
+                        orderDto,
+                        this.orderItemService.getOrderItemDtoListByOrderId(orderDto.getId())
+                );
+            }
+        return orderMap;
+    }
+
+    @Transactional
+    @Override
     public void delete(OrderDto orderDto) {
         this.orderDAO.delete(this.orderMapper.toEntity(orderDto));
     }

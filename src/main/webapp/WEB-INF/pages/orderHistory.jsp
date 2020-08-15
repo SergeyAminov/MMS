@@ -49,15 +49,34 @@
 </header>
 
 <!-- Main -->
-<main class="flex-shrink-0">
-    <c:url value="/profile/addresses" var="addresses"/>
-    <c:url value="/profile/orders" var="orders"/>
-    <div class="container">
-        <h3>${user.name} ${user.surname}</h3>
-        <p>Mail: ${user.email}</p>
-        <p><a href="${addresses}">Addresses</a></p>
-        <p><a href="${orders}">History</a></p>
-    </div>
+<main class="flex-shrink-0 container">
+    <h2>History</h2>
+    <hr>
+    <c:forEach var="order" items="${orderMap}">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Delivery method</th>
+                <th>Delivery status</th>
+                <th>Payment method</th>
+                <th>Payment status</th>
+            </tr>
+            <tr>
+                <td>${order.key.id}</td>
+                <td>${order.key.deliveryMethod}</td>
+                <td>${order.key.deliveryStatus}</td>
+                <td>${order.key.paymentMethod}</td>
+                <td>${order.key.paymentStatus}</td>
+            </tr>
+        </table>
+        <h5>Items:</h5>
+        <c:forEach var="product" items="${order.value}">
+            <p>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
+                    ${product.storage} Gb memory, ${product.ram} Gb RAM;
+            </p>
+        </c:forEach>
+        <hr>
+    </c:forEach>
 </main>
 
 <!-- Footer -->
