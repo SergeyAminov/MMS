@@ -20,24 +20,32 @@ public class Order {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne
     @JoinColumn(name = "payment_method")
-    private PaymentMethod payment_method;
+    private String payment_method;
 
-    @ManyToOne
     @JoinColumn(name = "delivery_method")
-    private DeliveryMethod delivery_method;
+    private String delivery_method;
 
-    @ManyToOne
     @JoinColumn(name = "payment_status")
-    private PaymentStatus payment_status;
+    private String payment_status;
 
-    @ManyToOne
     @JoinColumn(name = "delivery_status")
-    private DeliveryStatus delivery_status;
+    private String delivery_status;
 
-    @OneToMany(mappedBy = "order_id", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItemList = new ArrayList<>();
+
+    public Order(int id, User user, String address, String payment_method, String delivery_method,
+                 String payment_status, String delivery_status, List<OrderItem> orderItemList) {
+        this.id = id;
+        this.user = user;
+        this.address = address;
+        this.payment_method = payment_method;
+        this.delivery_method = delivery_method;
+        this.payment_status = payment_status;
+        this.delivery_status = delivery_status;
+        this.orderItemList = orderItemList;
+    }
 
     public Order() {}
 
@@ -65,35 +73,35 @@ public class Order {
         this.address = address;
     }
 
-    public PaymentMethod getPayment_method() {
+    public String getPayment_method() {
         return payment_method;
     }
 
-    public void setPayment_method(PaymentMethod payment_method) {
+    public void setPayment_method(String payment_method) {
         this.payment_method = payment_method;
     }
 
-    public DeliveryMethod getDelivery_method() {
+    public String getDelivery_method() {
         return delivery_method;
     }
 
-    public void setDelivery_method(DeliveryMethod delivery_method) {
+    public void setDelivery_method(String delivery_method) {
         this.delivery_method = delivery_method;
     }
 
-    public PaymentStatus getPayment_status() {
+    public String getPayment_status() {
         return payment_status;
     }
 
-    public void setPayment_status(PaymentStatus payment_status) {
+    public void setPayment_status(String payment_status) {
         this.payment_status = payment_status;
     }
 
-    public DeliveryStatus getDelivery_status() {
+    public String getDelivery_status() {
         return delivery_status;
     }
 
-    public void setDelivery_status(DeliveryStatus delivery_status) {
+    public void setDelivery_status(String delivery_status) {
         this.delivery_status = delivery_status;
     }
 
@@ -104,4 +112,15 @@ public class Order {
     public void setOrderItemList(List<OrderItem> orderItemList) {
         this.orderItemList = orderItemList;
     }
+
+    public void setOrderItem(OrderItem orderItem){
+        this.orderItemList.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void removeOrderItem(OrderItem orderItem){
+        this.orderItemList.remove(orderItem);
+        orderItem.setOrder(null);
+    }
+
 }

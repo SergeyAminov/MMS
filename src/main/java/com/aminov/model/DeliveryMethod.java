@@ -15,9 +15,6 @@ public class DeliveryMethod {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "delivery_method")
-    private List<Order> orderList;
-
     public DeliveryMethod() {}
 
     public int getId() {
@@ -34,14 +31,6 @@ public class DeliveryMethod {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
     }
 
     @Override

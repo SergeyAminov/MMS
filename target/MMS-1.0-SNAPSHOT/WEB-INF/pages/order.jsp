@@ -57,38 +57,36 @@
                 ${product.storage} Gb memory, ${product.ram} Gb RAM</p>
     </c:forEach>
 
-    <c:url value="/order/add" var="var"/>
+    <c:url value="/order" var="var"/>
     <form action="${var}" method="POST">
         <input type="hidden" name="userId" value="${userId}">
-        <input type="hidden" name="paymentStatusId" value="${1}">
-        <input type="hidden" name="deliveryStatusId" value="${1}">
+        <input type="hidden" name="paymentStatus" value="Waiting for payment">
+        <input type="hidden" name="deliveryStatus" value="Waiting for payment">
 
         <!-- Choose address -->
         <p>
             <label for="address">Choose address:</label>
-            <select size="3" name="addressId" id="address">
+            <select size="3" name="address" id="address">
                 <c:forEach var="address" items="${addressMap}">
-                    <option value="${address.key}">${address.value}</option>
+                    <option value="${address.value}">${address.value}</option>
                 </c:forEach>
             </select>
         </p>
-
 
         <p>
             <label for="paymentMethod">Choose payment method:</label>
-            <select size="3" name="paymentMethodId" id="paymentMethod">
+            <select size="3" name="paymentMethod" id="paymentMethod">
                 <c:forEach var="paymentMethod" items="${paymentMethodMap}">
-                    <option value="${paymentMethod.key}">${paymentMethod.value}</option>
+                    <option value="${paymentMethod.value}">${paymentMethod.value}</option>
                 </c:forEach>
             </select>
         </p>
 
-
         <p>
             <label for="deliveryMethod">Choose delivery method:</label>
-            <select size="3" name="deliveryMethodId" id="deliveryMethod">
+            <select size="3" name="deliveryMethod" id="deliveryMethod">
                 <c:forEach var="deliveryMethod" items="${deliveryMethodMap}">
-                    <option value="${deliveryMethod.key}">${deliveryMethod.value}</option>
+                    <option value="${deliveryMethod.value}">${deliveryMethod.value}</option>
                 </c:forEach>
             </select>
         </p>

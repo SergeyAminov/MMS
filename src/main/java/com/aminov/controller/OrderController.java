@@ -19,14 +19,11 @@ import java.util.List;
 public class OrderController {
 
     private Cart cart;
-
     private ProductService<ProductDto> productService;
     private AddressService<AddressDto> addressService;
     private PaymentMethodService<PaymentMethodDto> paymentMethodService;
     private DeliveryMethodService<DeliveryMethodDto> deliveryMethodService;
-    private CategoryService<CategoryDto> categoryService;
     private UserService<UserDto> userService;
-
     private OrderService<OrderDto> orderService;
     private OrderItemService<OrderItemDto> orderItemService;
 
@@ -58,11 +55,6 @@ public class OrderController {
     @Autowired
     public void setDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> deliveryMethodService) {
         this.deliveryMethodService = deliveryMethodService;
-    }
-
-    @Autowired
-    public void setCategoryService(CategoryService<CategoryDto> categoryService) {
-        this.categoryService = categoryService;
     }
 
     @Autowired
@@ -110,8 +102,8 @@ public class OrderController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/order/add", method = RequestMethod.POST)
-    public ModelAndView doOrder(@ModelAttribute("order") OrderDto orderDto,
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public ModelAndView sendOrder(@ModelAttribute("order") OrderDto orderDto,
                                 HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         Cart cart = (Cart) session.getAttribute("cart");

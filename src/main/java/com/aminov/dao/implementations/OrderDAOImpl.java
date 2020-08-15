@@ -34,8 +34,10 @@ public class OrderDAOImpl implements OrderDAO<Order> {
     @Override
     public void add(Order order, List<OrderItem> orderItemList) {
         Session session = sessionFactory.getCurrentSession();
-        order.setOrderItemList(orderItemList);
-        session.persist(order);
+        Order finalOrder = order;
+        for(OrderItem orderItem : orderItemList)
+            finalOrder.setOrderItem(orderItem);
+        session.persist(finalOrder);
     }
 
     @Override

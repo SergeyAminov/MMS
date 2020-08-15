@@ -2,25 +2,39 @@ package com.aminov.mapper;
 
 import com.aminov.dto.OrderItemDto;
 import com.aminov.model.OrderItem;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class OrderItemMapper {
-    private ModelMapper modelMapper;
-
-    @Autowired
-    public void setModelMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
 
     public OrderItem toEntity(OrderItemDto orderItemDto){
-        return modelMapper.map(orderItemDto, OrderItem.class);
+        return new OrderItem(
+                orderItemDto.getId(),
+                null,
+                orderItemDto.getTitle(),
+                orderItemDto.getPrice(),
+                orderItemDto.getBrand(),
+                orderItemDto.getColor(),
+                orderItemDto.getWeight(),
+                orderItemDto.getDiagonal(),
+                orderItemDto.getStorage(),
+                orderItemDto.getRam()
+        );
     }
 
     public OrderItemDto toDto(OrderItem orderItem){
-        return modelMapper.map(orderItem, OrderItemDto.class);
+        return new OrderItemDto(
+                orderItem.getId(),
+                orderItem.getOrder().getId(),
+                orderItem.getTitle(),
+                orderItem.getPrice(),
+                orderItem.getBrand(),
+                orderItem.getColor(),
+                orderItem.getWeight(),
+                orderItem.getDiagonal(),
+                orderItem.getStorage(),
+                orderItem.getRam()
+        );
     }
 
 }

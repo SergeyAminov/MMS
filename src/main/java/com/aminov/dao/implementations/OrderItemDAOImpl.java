@@ -68,7 +68,8 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
         Session session = sessionFactory.getCurrentSession();
         return session
                 .getSession()
-                .createQuery("select orderItem from OrderItem orderItem where orderItem.order_id=:id", OrderItem.class)
+                .createQuery("select orderItem from OrderItem orderItem where orderItem.order.id=:id",
+                        OrderItem.class)
                 .setParameter("id", id)
                 .list();
     }

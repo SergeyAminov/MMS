@@ -1,11 +1,9 @@
 package com.aminov.dto;
 
-import java.util.List;
-
 public class DeliveryMethodDto {
     private int id;
     private String title;
-    private List<Integer> orderIdList;
+
 
     public  DeliveryMethodDto() { }
 
@@ -23,14 +21,6 @@ public class DeliveryMethodDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Integer> getOrderIdList() {
-        return orderIdList;
-    }
-
-    public void setOrderIdList(List<Integer> orderIdList) {
-        this.orderIdList = orderIdList;
     }
 
     @Override

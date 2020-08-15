@@ -15,9 +15,6 @@ public class PaymentMethod {
     @Column(name = "title")
     private String title;
 
-    @OneToMany(mappedBy = "payment_method")
-    private List<Order> orderList;
-
     public PaymentMethod() {}
 
     public int getId() {
@@ -34,14 +31,6 @@ public class PaymentMethod {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Order> getOrderList() {
-        return orderList;
-    }
-
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
     }
 
     @Override

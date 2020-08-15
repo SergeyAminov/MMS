@@ -1,17 +1,30 @@
 package com.aminov.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDto {
     private int id;
-    private UserDto userId;
-    private Integer addressId;
-    private Integer paymentMethodId;
-    private Integer deliveryMethodId;
-    private Integer paymentStatusId;
-    private Integer deliveryStatusId;
-    private List<Integer> orderItemIdList = new ArrayList<>();
+    private Integer userId;
+    private String address;
+    private String paymentMethod;
+    private String deliveryMethod;
+    private String paymentStatus;
+    private String deliveryStatus;
+    private List<Integer> orderItemIdList;
+
+    public OrderDto() { }
+
+    public OrderDto(int id, Integer userId, String address, String paymentMethod, String deliveryMethod,
+                    String paymentStatus, String deliveryStatus, List<Integer> orderItemIdList) {
+        this.id = id;
+        this.userId = userId;
+        this.address = address;
+        this.paymentMethod = paymentMethod;
+        this.deliveryMethod = deliveryMethod;
+        this.paymentStatus = paymentStatus;
+        this.deliveryStatus = deliveryStatus;
+        this.orderItemIdList = orderItemIdList;
+    }
 
     public int getId() {
         return id;
@@ -21,52 +34,52 @@ public class OrderDto {
         this.id = id;
     }
 
-    public UserDto getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(UserDto userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public int getAddressId() {
-        return addressId;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressId(int addressId) {
-        this.addressId = addressId;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public Integer getPaymentMethodId() {
-        return paymentMethodId;
+    public String getPaymentMethod() {
+        return paymentMethod;
     }
 
-    public void setPaymentMethodId(Integer paymentMethodId) {
-        this.paymentMethodId = paymentMethodId;
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 
-    public Integer getDeliveryMethodId() {
-        return deliveryMethodId;
+    public String getDeliveryMethod() {
+        return deliveryMethod;
     }
 
-    public void setDeliveryMethodId(Integer deliveryMethodId) {
-        this.deliveryMethodId = deliveryMethodId;
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
     }
 
-    public Integer getPaymentStatusId() {
-        return paymentStatusId;
+    public String getPaymentStatus() {
+        return paymentStatus;
     }
 
-    public void setPaymentStatusId(Integer paymentStatusId) {
-        this.paymentStatusId = paymentStatusId;
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
-    public Integer getDeliveryStatusId() {
-        return deliveryStatusId;
+    public String getDeliveryStatus() {
+        return deliveryStatus;
     }
 
-    public void setDeliveryStatusId(Integer deliveryStatusId) {
-        this.deliveryStatusId = deliveryStatusId;
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
     }
 
     public List<Integer> getOrderItemIdList() {

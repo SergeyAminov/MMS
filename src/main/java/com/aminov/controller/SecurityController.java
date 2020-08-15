@@ -99,6 +99,7 @@ public class SecurityController {
             modelAndView.setViewName("redirect:/login");
         else{
             modelAndView.addObject("user", user);
+            modelAndView.addObject("authentication", authentication);
             modelAndView.setViewName("profile");
         }
         return modelAndView;

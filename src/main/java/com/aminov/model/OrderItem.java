@@ -12,7 +12,7 @@ public class OrderItem {
     private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    Order order_id;
+    Order order;
 
     @Column(name = "title")
     private String title;
@@ -40,6 +40,20 @@ public class OrderItem {
 
     public OrderItem() { }
 
+    public OrderItem(int id, Order order, String title, double price, String brand, String color, double weight,
+                     double diagonal, double storage, int ram) {
+        this.id = id;
+        this.order = order;
+        this.title = title;
+        this.price = price;
+        this.brand = brand;
+        this.color = color;
+        this.weight = weight;
+        this.diagonal = diagonal;
+        this.storage = storage;
+        this.ram = ram;
+    }
+
     public int getId() {
         return id;
     }
@@ -48,12 +62,12 @@ public class OrderItem {
         this.id = id;
     }
 
-    public Order getOrder_id() {
-        return order_id;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrder_id(Order order_id) {
-        this.order_id = order_id;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getTitle() {
