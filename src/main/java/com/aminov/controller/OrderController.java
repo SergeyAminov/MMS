@@ -2,6 +2,7 @@ package com.aminov.controller;
 
 import com.aminov.dto.*;
 import com.aminov.model.Cart;
+import com.aminov.model.Order;
 import com.aminov.service.interfaces.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,57 +19,42 @@ import java.util.List;
 @Controller
 public class OrderController {
 
-    private Cart cart;
-    private ProductService<ProductDto> productService;
-    private AddressService<AddressDto> addressService;
-    private PaymentMethodService<PaymentMethodDto> paymentMethodService;
-    private DeliveryMethodService<DeliveryMethodDto> deliveryMethodService;
-    private UserService<UserDto> userService;
-    private OrderService<OrderDto> orderService;
-    private OrderItemService<OrderItemDto> orderItemService;
+    private final Cart cart;
+    private final ProductService<ProductDto> productService;
+    private final AddressService<AddressDto> addressService;
+    private final PaymentMethodService<PaymentMethodDto> paymentMethodService;
+    private final DeliveryMethodService<DeliveryMethodDto> deliveryMethodService;
+    private final DeliveryStatusService<DeliveryStatusDto> deliveryStatusService;
+    private final PaymentStatusService<PaymentStatusDto> paymentStatusService;
+    private final UserService<UserDto> userService;
+    private final OrderService<OrderDto> orderService;
+    private final OrderItemService<OrderItemDto> orderItemService;
 
     @Autowired
-    public void setOrderService(OrderService<OrderDto> orderService) {
+    public OrderController(PaymentStatusService<PaymentStatusDto> paymentStatusService,
+                           DeliveryStatusService<DeliveryStatusDto> deliveryStatusService,
+                           OrderItemService<OrderItemDto> orderItemService,
+                           OrderService<OrderDto> orderService,
+                           UserService<UserDto> userService,
+                           AddressService<AddressDto> addressService,
+                           PaymentMethodService<PaymentMethodDto> paymentMethodService,
+                           DeliveryMethodService<DeliveryMethodDto> deliveryMethodService,
+                           ProductService<ProductDto> productService,
+                           Cart cart) {
+        this.deliveryStatusService = deliveryStatusService;
         this.orderService = orderService;
-    }
-
-    @Autowired
-    public void setOrderItemService(OrderItemService<OrderItemDto> orderItemService) {
         this.orderItemService = orderItemService;
-    }
-
-    @Autowired
-    public void setUserService(UserService<UserDto> userService) {
         this.userService = userService;
-    }
-
-    @Autowired
-    public void setAddressService(AddressService<AddressDto> addressService) {
-        this.addressService = addressService;
-    }
-
-    @Autowired
-    public void setPaymentMethodService(PaymentMethodService<PaymentMethodDto> paymentMethodService) {
         this.paymentMethodService = paymentMethodService;
-    }
-
-    @Autowired
-    public void setDeliveryMethodService(DeliveryMethodService<DeliveryMethodDto> deliveryMethodService) {
         this.deliveryMethodService = deliveryMethodService;
-    }
-
-    @Autowired
-    public void setCart(Cart cart) {
+        this.productService = productService;
+        this.addressService = addressService;
+        this.paymentStatusService = paymentStatusService;
         this.cart = cart;
     }
 
-    @Autowired
-    public void setProductService(ProductService<ProductDto> productService){
-        this.productService = productService;
-    }
-
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
-    public ModelAndView cartPage(Authentication authentication,
+    public ModelAndView getCartPage(Authentication authentication,
                                            HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("cart");
@@ -91,7 +77,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public ModelAndView orderPage(Authentication authentication) {
+    public ModelAndView getOrderPage(Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView("order", "order", new OrderDto());
         int userId = this.userService.getByEmail(authentication.getName()).getId();
         modelAndView.addObject("authentication", authentication);
@@ -115,6 +101,33 @@ public class OrderController {
         }
 
         modelAndView.setViewName("redirect:/profile");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
+    public ModelAndView getOrderHistoryAdmin(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("ordersAdmin");
+        modelAndView.addObject("orderMap", this.orderService.getOrderMap());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/orders/edit/{id}", method = RequestMethod.GET)
+    public ModelAndView editOrderPage(@PathVariable("id") int id) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("orderEdit");
+        OrderDto orderDto = orderService.getById(id);
+        modelAndView.addObject("order", orderDto);
+        modelAndView.addObject("paymentStatusMap", this.paymentStatusService.getIdTitleMap());
+        modelAndView.addObject("deliveryStatusMap", this.deliveryStatusService.getIdTitleMap());
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/orders/edit", method = RequestMethod.POST)
+    public ModelAndView editOrder(@ModelAttribute("order") OrderDto orderDto) {
+        ModelAndView modelAndView = new ModelAndView();
+        orderService.edit(orderDto);
+        modelAndView.setViewName("redirect:/admin/orders");
         return modelAndView;
     }
 
