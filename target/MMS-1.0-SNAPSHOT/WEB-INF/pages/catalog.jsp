@@ -49,8 +49,86 @@
 </header>
 
 <!-- Main -->
-<main class="flex-shrink-0">
-    <h1 class="container text-dark font-weight-bold">Goods Catalog</h1>
+<main class="flex-shrink-0 container">
+    <h1 class="container text-dark font-weight-bold">Catalog</h1>
+    <!-- Filters menu -->
+    <div class="dropdown-menu-block d-flex flex-row bd-highlight mb-3">
+        <!-- Price filter -->
+        <div class="dropdown filter-price">
+            <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
+                    type="button"
+                    id="filterPrice"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Price
+            </button>
+            <c:url value = "/catalog" var = "priceRange1">
+                <c:param name = "min-price" value = "99"/>
+                <c:param name = "max-price" value = "499"/>
+            </c:url>
+            <c:url value = "/catalog" var = "priceRange2">
+                <c:param name = "min-price" value = "500"/>
+                <c:param name = "max-price" value = "999"/>
+            </c:url>
+            <c:url value = "/catalog" var = "priceRange3">
+                <c:param name = "min-price" value = "1000"/>
+                <c:param name = "max-price" value = "1499"/>
+            </c:url>
+            <div class="dropdown-menu" aria-labelledby="filterPrice">
+                <a class="dropdown-item" href="${priceRange1}">99 - 499 &#36;</a>
+                <a class="dropdown-item" href="${priceRange2}">500 - 999 &#36;</a>
+                <a class="dropdown-item" href="${priceRange3}">1000 - 1499 &#36;</a>
+            </div>
+        </div>
+        <!-- Weight filter -->
+        <div class="dropdown filter-weight">
+            <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
+                    type="button"
+                    id="filterWeight"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Weight
+            </button>
+            <c:url value = "/catalog" var = "weightRange1">
+                <c:param name = "min-weight" value = "0.01"/>
+                <c:param name = "max-weight" value = "0.99"/>
+            </c:url>
+            <c:url value = "/catalog" var = "weightRange2">
+                <c:param name = "min-weight" value = "1"/>
+                <c:param name = "max-weight" value = "1.99"/>
+            </c:url>
+            <c:url value = "/catalog" var = "weightRange3">
+                <c:param name = "min-weight" value = "2"/>
+                <c:param name = "max-weight" value = "2.99"/>
+            </c:url>
+            <div class="dropdown-menu" aria-labelledby="filterWeight">
+                <a class="dropdown-item" href="${weightRange1}">< 1 kg</a>
+                <a class="dropdown-item" href="${weightRange2}">1 - 1.99 kg</a>
+                <a class="dropdown-item" href="${weightRange3}">> 2 kg</a>
+            </div>
+        </div>
+        <!-- Weight filter -->
+        <div class="dropdown filter-category">
+            <button class="btn btn-link dropdown-toggle text-dark font-weight-bold"
+                    type="button"
+                    id="filterCategory"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false">
+                Category
+            </button>
+            <div class="dropdown-menu" aria-labelledby="filterWeight">
+                <c:forEach var="categoryMap" items="${categoryMap}">
+                    <c:url value = "/catalog" var = "category">
+                        <c:param name = "category" value = "${categoryMap.key}"/>
+                    </c:url>
+                    <a class="dropdown-item" href="${category}">${categoryMap.value}</a>
+                </c:forEach>
+            </div>
+        </div>
+    </div>
     <!-- All items container -->
     <div class="shop-items container">
         <c:forEach var="product" items="${productsList}">
@@ -58,9 +136,7 @@
             <hr>
             <div class="item-card card container">
                 <div class="card-body">
-                    <a class="text-warning" href="#">
-                        <h5 class="card-title font-weight-bold text-warning">${product.title}</h5>
-                    </a>
+                    <h5 class="card-title font-weight-bold text-warning">${product.title}</h5>
                     <p class="card-text text-secondary">Category: ${categoryMap.get(product.categoryId)}</p>
                     <p class="card-text text-secondary">Left : ${product.count}</p>
                     <p class="card-text font-weight-bold text-dark">

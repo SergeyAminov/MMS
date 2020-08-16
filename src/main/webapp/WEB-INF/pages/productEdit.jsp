@@ -30,17 +30,17 @@
         <label for="title">Title</label>
         <input type="text" name="title" id="title" value="${product.title}">
         <label for="price">Price</label>
-        <input type="number" name="price" id="price" value="${product.price}">
+        <input type="number" step=any name="price" id="price" value="${product.price}">
         <label for="brand">Brand</label>
         <input type="text" name="brand" id="brand" value="${product.brand}">
         <label for="color">Color</label>
         <input type="text" name="color" id="color" value="${product.color}">
         <label for="weight">Weight</label>
-        <input type="number" name="weight" id="weight" value="${product.weight}">
+        <input type="number" step=any name="weight" id="weight" value="${product.weight}">
         <label for="diagonal">Diagonal</label>
-        <input type="number" name="diagonal" id="diagonal" value="${product.diagonal}">
+        <input type="number" step=any name="diagonal" id="diagonal" value="${product.diagonal}">
         <label for="storage">Storage</label>
-        <input type="number" name="storage" id="storage" value="${product.storage}">
+        <input type="number" step=any name="storage" id="storage" value="${product.storage}">
         <label for="ram">RAM</label>
         <input type="number" name="ram" id="ram" value="${product.ram}">
 

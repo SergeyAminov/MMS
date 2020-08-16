@@ -8,14 +8,13 @@ import com.aminov.service.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProductController {
@@ -41,11 +40,23 @@ public class ProductController {
 
     @RequestMapping(value = "/catalog", method = RequestMethod.GET)
     public ModelAndView productsPageClient(Authentication authentication,
-                                           HttpSession session) {
+                                           HttpSession session,
+                                           @RequestParam(name = "min-price", required = false) String minPrice,
+                                           @RequestParam(name = "max-price", required = false) String maxPrice,
+                                           @RequestParam(name = "min-weight", required = false) String minWeight,
+                                           @RequestParam(name = "max-weight", required = false) String maxWeight,
+                                           @RequestParam(name = "category", required = false) String category
+                                           ) {
         ModelAndView modelAndView = new ModelAndView();
         session.setAttribute("cart", new Cart(this.cart));
         modelAndView.setViewName("catalog");
-        List<ProductDto> productDtoList = productService.allItems();
+        Map<String, String> params = new HashMap<>();
+        params.put("min-price", minPrice);
+        params.put("max-price", maxPrice);
+        params.put("min-weight", minWeight);
+        params.put("max-weight", maxWeight);
+        params.put("category", category);
+        List<ProductDto> productDtoList = productService.getFilteredItems(params);
         modelAndView.addObject("productsList", productDtoList);
         modelAndView.addObject("categoryMap", this.categoryService.getIdTitleMap());
         modelAndView.addObject("authentication", authentication);

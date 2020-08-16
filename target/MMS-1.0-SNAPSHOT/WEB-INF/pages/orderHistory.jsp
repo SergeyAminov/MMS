@@ -69,7 +69,7 @@
                 <td>${order.key.paymentStatus}</td>
             </tr>
         </table>
-        <h3>Items:</h3>
+        <h5>Items:</h5>
         <c:forEach var="product" items="${order.value}">
             <p>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
                     ${product.storage} Gb memory, ${product.ram} Gb RAM;

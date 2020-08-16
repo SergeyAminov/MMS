@@ -51,16 +51,17 @@
 <!-- Main -->
 <main class="flex-shrink-0 container">
     <h1 class="text-dark font-weight-bold">Cart</h1>
-    <div>
-        <c:forEach var="item" items="${cartItems}">
-            <c:url value="/cart/remove/${item.id}" var="remove"/>
-            <p>${item.title} <a href="${remove}">remove</a></p>
-        </c:forEach>
-    </div>
     <c:url value="/order" var="order"/>
     <a href="${order}">
         <button type="button" class="btn btn-outline-dark font-weight-bold">To order</button>
     </a>
+    <div>
+        <c:forEach var="item" items="${cartItems}">
+            <hr>
+            <c:url value="/cart/remove/${item.id}" var="remove"/>
+            <p>${item.title} <a href="${remove}">remove</a></p>
+        </c:forEach>
+    </div>
 </main>
 
 <!-- Footer -->

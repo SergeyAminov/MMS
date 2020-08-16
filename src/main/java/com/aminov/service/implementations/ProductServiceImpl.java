@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +38,36 @@ public class ProductServiceImpl implements ProductService<ProductDto> {
                 .stream()
                 .map(this.productMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<ProductDto> getFilteredItems(Map<String, String> params) {
+        List<ProductDto> filteredList = new ArrayList<>();
+        for (ProductDto product : this.allItems()){
+            if (params.get("min-price") != null){
+                double minPrice = Double.parseDouble(params.get("min-price"));
+                double maxPrice = Double.parseDouble(params.get("max-price"));
+                if (!(product.getPrice() >= minPrice && product.getPrice() <= maxPrice)){
+                    continue;
+                }
+            }
+            if (params.get("min-weight") != null){
+                double minWeight = Double.parseDouble(params.get("min-weight"));
+                double maxWeight = Double.parseDouble(params.get("max-weight"));
+                if (!(product.getWeight() >= minWeight && product.getWeight() <= maxWeight)){
+                    continue;
+                }
+            }
+            if (params.get("category") != null){
+                String category = params.get("category");
+                if (!(product.getCategoryId() == Integer.parseInt(category))){
+                    continue;
+                }
+            }
+            filteredList.add(product);
+        }
+        return filteredList;
     }
 
     @Override

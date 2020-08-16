@@ -11,23 +11,38 @@
     <a href="${add}">Add new product</a>
 
     <h2>All products</h2>
-    <c:forEach var="product" items="${productsList}">
-        <div class="product">
-            <h5>${product.title}</h5>
-            <p>Category: ${categoryMap.get(product.categoryId)}</p>
-            <p>Parameters: ${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
-                    ${product.storage} Gb memory, ${product.ram} Gb RAM;
-            </p>
-            <p>${product.price} &#36;</p>
-            <p>${product.count}</p>
-            <p>
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Brand</th>
+                <th>Color</th>
+                <th>Weight (kg)</th>
+                <th>Diagonal (inch)</th>
+                <th>Storage(Gb)</th>
+                <th>RAM(Gb)</th>
+                <th>Price (&#36;)</th>
+                <th>Count</th>
+                <th>Action</th>
+            </tr>
+            <c:forEach var="product" items="${productsList}">
                 <c:url value="/admin/products/edit/${product.id}" var="edit"/>
-                <a href="${edit}">edit</a>
                 <c:url value="/admin/products/delete/${product.id}" var="delete"/>
-                <a href="${delete}">delete</a>
-            </p>
-        </div>
+                <tr>
+                    <td>${product.title}</td>
+                    <td>${categoryMap.get(product.categoryId)}</td>
+                    <td>${product.brand}</td>
+                    <td>${product.color}</td>
+                    <td>${product.weight}</td>
+                    <td>${product.diagonal}</td>
+                    <td>${product.storage}</td>
+                    <td>${product.ram}</td>
+                    <td>${product.price}</td>
+                    <td>${product.count}</td>
+                    <td><a href="${edit}">edit</a> <a href="${delete}">delete</a></td>
+                </tr>
+            </c:forEach>
+        </table>
         <hr>
-    </c:forEach>
 </body>
 </html>
