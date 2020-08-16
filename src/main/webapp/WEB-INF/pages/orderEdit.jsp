@@ -13,27 +13,23 @@
         <input type="hidden" name="address" value="${order.address}">
         <input type="hidden" name="paymentMethod" value="${order.paymentMethod}">
         <input type="hidden" name="deliveryMethod" value="${order.deliveryMethod}">
-
         <p>
             <label for="paymentStatus">Payment status:</label>
-            <select size="3" name="paymentStatus" id="paymentStatus">
+            <select name="paymentStatus" id="paymentStatus">
                 <c:forEach var="paymentStatus" items="${paymentStatusMap}">
                     <option value="${paymentStatus.value}">${paymentStatus.value}</option>
                 </c:forEach>
             </select>
         </p>
-
         <p>
             <label for="deliveryStatus">Delivery status:</label>
-            <select size="3" name="deliveryStatus" id="deliveryStatus">
+            <select name="deliveryStatus" id="deliveryStatus">
                 <c:forEach var="deliveryStatus" items="${deliveryStatusMap}">
                     <option value="${deliveryStatus.value}">${deliveryStatus.value}</option>
                 </c:forEach>
             </select>
         </p>
-
         <input type="submit" value="Edit">
-
     </form>
 </body>
 </html>

@@ -65,8 +65,8 @@
 
         <!-- Choose address -->
         <p>
-            <label for="address">Choose address:</label>
-            <select size="3" name="address" id="address">
+            <label for="address">Address</label>
+            <select name="address" id="address">
                 <c:forEach var="address" items="${addressMap}">
                     <option value="${address.value}">${address.value}</option>
                 </c:forEach>
@@ -74,8 +74,8 @@
         </p>
 
         <p>
-            <label for="paymentMethod">Choose payment method:</label>
-            <select size="3" name="paymentMethod" id="paymentMethod">
+            <label for="paymentMethod">Payment method</label>
+            <select name="paymentMethod" id="paymentMethod">
                 <c:forEach var="paymentMethod" items="${paymentMethodMap}">
                     <option value="${paymentMethod.value}">${paymentMethod.value}</option>
                 </c:forEach>
@@ -83,8 +83,8 @@
         </p>
 
         <p>
-            <label for="deliveryMethod">Choose delivery method:</label>
-            <select size="3" name="deliveryMethod" id="deliveryMethod">
+            <label for="deliveryMethod">Delivery method</label>
+            <select name="deliveryMethod" id="deliveryMethod">
                 <c:forEach var="deliveryMethod" items="${deliveryMethodMap}">
                     <option value="${deliveryMethod.value}">${deliveryMethod.value}</option>
                 </c:forEach>

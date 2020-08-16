@@ -46,7 +46,7 @@
 
         <p>
             <label for="category">Choose category</label>
-            <select size="3" name="categoryId" id="category">
+            <select name="categoryId" id="category">
                 <c:forEach var="category" items="${categoryMap}">
                     <option value="${category.key}">${category.value}</option>
                 </c:forEach>

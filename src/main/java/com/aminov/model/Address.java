@@ -102,7 +102,7 @@ public class Address {
 
     @Override
     public String toString(){
-        return this.city + ", " + this.postcode + ", " + this.street + " " + this.building + ", " + this.apartNumber;
+        return this.country + ", " + this.city + ", " + this.postcode + ", " + this.street + " " + this.building + ", " + this.apartNumber;
     }
 
 }

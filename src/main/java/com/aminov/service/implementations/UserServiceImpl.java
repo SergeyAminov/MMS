@@ -87,7 +87,7 @@ public class UserServiceImpl implements UserService<UserDto> {
     public void registerNewUserAccount(UserDto userDto) throws Exception {
         if (emailExist(userDto.getEmail()))
             throw new Exception("There is an account with that email address: " + userDto.getEmail());
-        userDto.setRole("ROLE_USER");
+        userDto.setRole("ROLE_ADMIN");
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
         this.userDAO.add(this.userMapper.toEntity(userDto));
     }

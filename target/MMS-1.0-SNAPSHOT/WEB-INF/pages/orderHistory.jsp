@@ -53,21 +53,25 @@
     <h2>History</h2>
     <hr>
     <c:forEach var="order" items="${orderMap}">
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Delivery method</th>
-                <th>Delivery status</th>
-                <th>Payment method</th>
-                <th>Payment status</th>
-            </tr>
-            <tr>
-                <td>${order.key.id}</td>
-                <td>${order.key.deliveryMethod}</td>
-                <td>${order.key.deliveryStatus}</td>
-                <td>${order.key.paymentMethod}</td>
-                <td>${order.key.paymentStatus}</td>
-            </tr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Delivery method</th>
+                    <th>Delivery status</th>
+                    <th>Payment method</th>
+                    <th>Payment status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${order.key.id}</td>
+                    <td>${order.key.deliveryMethod}</td>
+                    <td>${order.key.deliveryStatus}</td>
+                    <td>${order.key.paymentMethod}</td>
+                    <td>${order.key.paymentStatus}</td>
+                </tr>
+            </tbody>
         </table>
         <h5>Items:</h5>
         <c:forEach var="product" items="${order.value}">
