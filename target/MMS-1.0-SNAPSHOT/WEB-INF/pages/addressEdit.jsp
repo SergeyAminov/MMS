@@ -59,33 +59,44 @@
         <c:url value="/profile/addresses/edit" var="var"/>
     </c:if>
 
-    <form action="${var}" method="POST">
-
+    <form class="container mt-1" action="${var}" method="POST">
+        <h3>Address data:</h3>
         <c:if test="${!empty address.city}">
             <input type="hidden" name="id" value="${address.id}">
         </c:if>
         <input type="hidden" name="userId" value="${userId}">
-        <input type="hidden" name="orderIdList" value="${address.orderIdList}">
-        <label for="country">Country</label>
-        <input type="text" name="country" id="country" value="${address.country}">
-        <label for="city">City</label>
-        <input type="text" name="city" id="city" value="${address.city}">
-        <label for="street">Street</label>
-        <input type="text" name="street" id="street" value="${address.street}">
-        <label for="postcode">Postcode</label>
-        <input type="number" name="postcode" id="postcode" value="${address.postcode}">
-        <label for="building">Building</label>
-        <input type="number" name="building" id="building" value="${address.building}">
-        <label for="apartNumber">Apartment number</label>
-        <input type="number" name="apartNumber" id="apartNumber" value="${address.apartNumber}">
-
-        <c:if test="${!empty address.city}">
-            <input type="submit" value="Edit address">
-        </c:if>
-        <c:if test="${empty address.city}">
-            <input type="submit" value="Add new address">
-        </c:if>
-
+        <p>
+            <label for="country">Country</label>
+            <input type="text" name="country" id="country" value="${address.country}">
+        </p>
+        <p>
+            <label for="city">City</label>
+            <input type="text" name="city" id="city" value="${address.city}">
+        </p>
+        <p>
+            <label for="street">Street</label>
+            <input type="text" name="street" id="street" value="${address.street}">
+        </p>
+        <p>
+            <label for="postcode">Postcode</label>
+            <input type="number" name="postcode" id="postcode" value="${address.postcode}">
+        </p>
+        <p>
+            <label for="building">Building</label>
+            <input type="number" name="building" id="building" value="${address.building}">
+        </p>
+        <p>
+            <label for="apartNumber">Apartment number</label>
+            <input type="number" name="apartNumber" id="apartNumber" value="${address.apartNumber}">
+        </p>
+        <p>
+            <c:if test="${!empty address.city}">
+                <input type="submit" value="Edit address">
+            </c:if>
+            <c:if test="${empty address.city}">
+                <input type="submit" value="Add new address">
+            </c:if>
+        </p>
     </form>
 </main>
 

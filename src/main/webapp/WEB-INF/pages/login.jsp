@@ -1,25 +1,32 @@
+<!doctype html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+    <link href="<c:url value="/res/navbar-styles.css"/>" rel="stylesheet" type="text/css"/>
+    <title>Log In</title>
 </head>
-<body>
-    <c:url value="/login" var="login"/>
-    <form name='f' action="${login}" method='POST'>
-        <table>
-            <tr>
-                <td>User(email):</td>
-                <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='password' name='password' /></td>
-            </tr>
-            <tr>
-                <td><input name="submit" type="submit" value="submit" /></td>
-            </tr>
-        </table>
-    </form>
+<body class="d-flex flex-column h-100">
+
+<c:url value="/login" var="login"/>
+<form class="form-login container" style="width: 350px; margin-top: 200px;" action="${login}" method='POST'>
+
+    <h1 class="h3 mb-3 font-weight-normal">Please Log In</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required name='username'>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name='password' required>
+
+    <button class="btn btn-lg btn-warning btn-block" type="submit">Submit</button>
+
+    <p class="mt-5 mb-3 text-muted">&copy; 2020 Copyright: <a class="text-warning" href="#"> Sergey Aminov</a></p>
+</form>
+
 </body>
 </html>
