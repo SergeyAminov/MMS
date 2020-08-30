@@ -2,7 +2,6 @@ package com.aminov.service.implementations;
 
 import com.aminov.dao.interfaces.AddressDAO;
 import com.aminov.dto.AddressDto;
-import com.aminov.dto.CategoryDto;
 import com.aminov.mapper.AddressMapper;
 import com.aminov.model.Address;
 import com.aminov.service.interfaces.AddressService;
@@ -77,11 +76,11 @@ public class AddressServiceImpl implements AddressService<AddressDto> {
     @Transactional
     @Override
     public Map<Integer, String> getIdTitleMapByUserId(int userId){
-        Map<Integer, String> categoryMap = new HashMap<>();
+        Map<Integer, String> addressMap = new HashMap<>();
         for (AddressDto address : this.allItems()) {
             if (address.getUserId() == userId)
-                categoryMap.put(address.getId(), address.toString());
+                addressMap.put(address.getId(), address.toString());
         }
-        return categoryMap;
+        return addressMap;
     }
 }
