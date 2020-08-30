@@ -173,6 +173,13 @@
             <artifactId>spring-jms</artifactId>
             <version>5.2.8.RELEASE</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-jms-client-bom -->
+        <dependency>
+            <groupId>org.wildfly</groupId>
+            <artifactId>wildfly-jms-client-bom</artifactId>
+            <version>20.0.1.Final</version>
+            <type>pom</type>
+        </dependency>
 
     </dependencies>
 

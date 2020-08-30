@@ -1,11 +1,11 @@
 package com.aminov.config;
 
-import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.core.JmsTemplate;
 
+import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,11 +20,11 @@ public class MessageConfig {
     private static final String DEFAULT_DESTINATION = "java:jboss/exported/jms/queue/myQueue";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
-    private static final String INITIAL_CONTEXT_FACTORY = "org.wildfly.naming.client.WildFlyInitialContextFactory";
-    private static final String PROVIDER_URL = "http://localhost:8080/";
+    private static final String INITIAL_CONTEXT_FACTORY = "org.jboss.naming.remote.client.InitialContextFactory";
+    private static final String PROVIDER_URL = "http-remoting://127.0.0.1:8080";
 
     @Bean
-    public ActiveMQConnectionFactory connectionFactory() throws NamingException {
+    public ConnectionFactory connectionFactory() throws NamingException {
 
         String username = System.getProperty("username", USERNAME);
         String password = System.getProperty("password", PASSWORD);
@@ -38,7 +38,7 @@ public class MessageConfig {
         Context context = new InitialContext(properties);
         String connectionFactoryString = System.getProperty("connection.factory", DEFAULT_CONNECTION_FACTORY);
 
-        return (ActiveMQConnectionFactory) context.lookup(connectionFactoryString);
+        return (ConnectionFactory) context.lookup(connectionFactoryString);
     }
 
     @Bean
@@ -65,40 +65,3 @@ public class MessageConfig {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
