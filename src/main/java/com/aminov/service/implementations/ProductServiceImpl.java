@@ -5,6 +5,8 @@ import com.aminov.dto.ProductDto;
 import com.aminov.mapper.ProductMapper;
 import com.aminov.model.Product;
 import com.aminov.service.interfaces.ProductService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -93,4 +95,33 @@ public class ProductServiceImpl implements ProductService<ProductDto> {
     public ProductDto getById(int id) {
         return this.productMapper.toDto(this.productDAO.getById(id));
     }
+
+    @Override
+    @Transactional
+    public String convertToJSON(ProductDto productDto){
+        String jsonString;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString(productDto);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            jsonString = "Error with converting to JSON";
+        }
+        return jsonString;
+    }
+
+    @Override
+    @Transactional
+    public String convertToJSON(List<ProductDto> productDtoList){
+        String jsonString;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            jsonString = mapper.writeValueAsString(productDtoList);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            jsonString = "Error with converting to JSON";
+        }
+        return jsonString;
+    }
+
 }

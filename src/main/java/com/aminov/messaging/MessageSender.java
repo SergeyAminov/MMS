@@ -3,15 +3,18 @@ package com.aminov.messaging;
 import javax.jms.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 
+@Lazy
 @Component
 public class MessageSender {
 
     private JmsTemplate jmsTemplate;
 
+    @Lazy
     @Autowired
     public void setJmsTemplate(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;

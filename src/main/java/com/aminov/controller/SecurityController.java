@@ -1,9 +1,11 @@
 package com.aminov.controller;
 
 import com.aminov.dto.UserDto;
+import com.aminov.messaging.MessageSender;
 import com.aminov.service.interfaces.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +27,13 @@ public class SecurityController {
     private static final Logger logger = Logger.getLogger(SecurityController.class);
     private UserService<UserDto> userService;
     private AuthenticationProvider authenticationProvider;
+    private MessageSender messageSender;
+
+    @Lazy
+    @Autowired
+    public void setMessageSender(MessageSender messageSender) {
+        this.messageSender = messageSender;
+    }
 
     @Autowired
     public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
@@ -87,6 +96,7 @@ public class SecurityController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage() {
         ModelAndView modelAndView = new ModelAndView();
+        messageSender.sendMessage();
         modelAndView.setViewName("login");
         return modelAndView;
     }

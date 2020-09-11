@@ -2,7 +2,6 @@ package com.aminov.controller;
 
 import com.aminov.dto.CategoryDto;
 import com.aminov.dto.ProductDto;
-import com.aminov.messaging.MessageSender;
 import com.aminov.model.Cart;
 import com.aminov.service.interfaces.CategoryService;
 import com.aminov.service.interfaces.ProductService;
@@ -23,12 +22,6 @@ public class ProductController {
     private ProductService<ProductDto> productService;
     private CategoryService<CategoryDto> categoryService;
     private Cart cart;
-    private MessageSender messageSender;
-
-    @Autowired
-    public void setMessageSender(MessageSender messageSender) {
-        this.messageSender = messageSender;
-    }
 
     @Autowired
     public void setCart(Cart cart) {
@@ -58,7 +51,6 @@ public class ProductController {
         session.setAttribute("cart", new Cart(this.cart));
         modelAndView.setViewName("catalog");
         Map<String, String> params = new HashMap<>();
-        messageSender.sendMessage();
         params.put("min-price", minPrice);
         params.put("max-price", maxPrice);
         params.put("min-weight", minWeight);
