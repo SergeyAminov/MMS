@@ -130,6 +130,24 @@ public class OrderController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/admin/statistic", method = RequestMethod.GET)
+    public ModelAndView getStatistics(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("statistic");
+
+        List<OrderDto> orderDtoListByLastWeek = this.orderService.getOrderDtoListByLastWeek();
+        double amountByLastWeek = this.orderService.getAmountByLastWeek();
+        modelAndView.addObject("listByWeek", orderDtoListByLastWeek);
+        modelAndView.addObject("amountByWeek", amountByLastWeek);
+
+        List<OrderDto> orderDtoListByLastMonth = this.orderService.getOrderDtoListByLastMonth();
+        double amountByLastMonth = this.orderService.getAmountByLastMonth();
+        modelAndView.addObject("listByMonth", orderDtoListByLastMonth);
+        modelAndView.addObject("amountByMonth", amountByLastMonth);
+
+        return modelAndView;
+    }
+
     @RequestMapping(value = "/profile/orders", method = RequestMethod.GET)
     public ModelAndView getOrderHistoryClient(Authentication authentication){
         ModelAndView modelAndView = new ModelAndView();

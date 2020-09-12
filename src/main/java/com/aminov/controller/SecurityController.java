@@ -1,11 +1,11 @@
 package com.aminov.controller;
 
 import com.aminov.dto.UserDto;
-import com.aminov.messaging.MessageSender;
+//import com.aminov.messaging.MessageSender;
 import com.aminov.service.interfaces.UserService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+//import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,7 +27,13 @@ public class SecurityController {
     private static final Logger logger = Logger.getLogger(SecurityController.class);
     private UserService<UserDto> userService;
     private AuthenticationProvider authenticationProvider;
+    /*private MessageSender messageSender;
 
+    @Lazy
+    @Autowired
+    public void setMessageSender(MessageSender messageSender) {
+        this.messageSender = messageSender;
+    }*/
 
     @Autowired
     public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
@@ -81,6 +87,7 @@ public class SecurityController {
         Authentication auth = authenticationProvider.authenticate(authentication);
         SecurityContext sc = SecurityContextHolder.getContext();
         sc.setAuthentication(auth);
+        //this.messageSender.sendMessage();
         HttpSession session = request.getSession(true);
         session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
         modelAndView.setViewName("redirect:/catalog");

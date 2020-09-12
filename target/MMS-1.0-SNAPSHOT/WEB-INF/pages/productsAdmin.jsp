@@ -15,6 +15,7 @@
 <header>
     <c:url value="/admin/products" var="catalog"/>
     <c:url value="/admin/orders" var="orders"/>
+    <c:url value="/admin/statistic" var="statistic"/>
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <span class="navbar-brand font-weight-bold">Administrator</span>
@@ -25,6 +26,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold" href="${orders}">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-weight-bold" href="${statistic}">Statistic</a>
                     </li>
                 </ul>
             </div>

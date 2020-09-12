@@ -115,4 +115,57 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
     public OrderDto getById(int id) {
         return this.orderMapper.toDto(this.orderDAO.getById(id));
     }
+
+    @Transactional
+    @Override
+    public List<OrderDto> getOrderDtoListByLastMonth(){
+        return this.orderDAO
+                .getOrderListByLastMonth()
+                .stream()
+                .map(this.orderMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public double getAmountByLastMonth(){
+        double amount = 0;
+
+        List<OrderDto> orderDtoList = this.getOrderDtoListByLastMonth();
+
+        for (OrderDto orderDto : orderDtoList){
+            List <OrderItemDto> orderItemDtoList = this.orderItemService.getOrderItemDtoListByOrderId(orderDto.getId());
+            for (OrderItemDto orderItemDto : orderItemDtoList){
+                amount += orderItemDto.getPrice();
+            }
+        }
+        return amount;
+    }
+
+    @Transactional
+    @Override
+    public List<OrderDto> getOrderDtoListByLastWeek(){
+        return this.orderDAO
+                .getOrderListByLastWeek()
+                .stream()
+                .map(this.orderMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public double getAmountByLastWeek(){
+        double amount = 0;
+
+        List<OrderDto> orderDtoList = this.getOrderDtoListByLastWeek();
+
+        for (OrderDto orderDto : orderDtoList){
+            List <OrderItemDto> orderItemDtoList = this.orderItemService.getOrderItemDtoListByOrderId(orderDto.getId());
+            for (OrderItemDto orderItemDto : orderItemDtoList){
+                amount += orderItemDto.getPrice();
+            }
+        }
+        return amount;
+    }
+
 }

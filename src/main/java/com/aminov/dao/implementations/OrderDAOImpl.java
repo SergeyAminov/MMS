@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -67,4 +70,41 @@ public class OrderDAOImpl implements OrderDAO<Order> {
                 .setParameter("id", id)
                 .list();
     }
+
+    @Override
+    public List<Order> getOrderListByLastWeek(){
+        Session session = sessionFactory.getCurrentSession();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, -15);
+        Date endDate = calendar.getTime();
+        Date startDate = new Date();
+
+        return session
+                .getSession()
+                .createQuery("SELECT e FROM Order e WHERE e.date BETWEEN :start AND :end", Order.class)
+                .setParameter("start", java.sql.Date.valueOf(formatter.format(endDate)))
+                .setParameter("end", java.sql.Date.valueOf(formatter.format(startDate)))
+                .list();
+    }
+
+    @Override
+    public List<Order> getOrderListByLastMonth(){
+        Session session = sessionFactory.getCurrentSession();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        Date endDate = calendar.getTime();
+        Date startDate = new Date();
+
+        return session
+                .getSession()
+                .createQuery("SELECT e FROM Order e WHERE e.date BETWEEN :start AND :end", Order.class)
+                .setParameter("start", java.sql.Date.valueOf(formatter.format(endDate)))
+                .setParameter("end", java.sql.Date.valueOf(formatter.format(startDate)))
+                .list();
+    }
+
 }

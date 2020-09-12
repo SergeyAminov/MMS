@@ -6,7 +6,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
           crossorigin="anonymous">
-    <title>Edit Order</title>
+    <title>Order History</title>
 </head>
 <body class="d-flex flex-column h-100">
 
@@ -38,39 +38,23 @@
 <!-- Main -->
 <main class="flex-shrink-0 container">
 
-    <h3>Edit order (ID: ${order.id})</h3>
+    <p>Last month orders: </p>
+    <ul>
+        <c:forEach var="order" items="${listByWeek}">
+            <li> ID : ${order.id}, date : ${order.date} </li>
+        </c:forEach>
+    </ul>
+    <p>Amount : ${amountByWeek}</p>
 
-    <c:url value="/admin/orders/edit" var="edit"/>
+    <hr>
 
-    <form class="item-card card container mt-3 mb-3 w-50" action="${edit}" method="POST">
-
-        <input type="hidden" name="id" value="${order.id}">
-        <input type="hidden" name="userId" value="${order.userId}">
-        <input type="hidden" name="address" value="${order.address}">
-        <input type="hidden" name="paymentMethod" value="${order.paymentMethod}">
-        <input type="hidden" name="deliveryMethod" value="${order.deliveryMethod}">
-
-        <div class="form-group">
-            <label for="paymentStatus">Payment status:</label>
-            <select class="form-control" name="paymentStatus" id="paymentStatus">
-                <c:forEach var="paymentStatus" items="${paymentStatusMap}">
-                    <option value="${paymentStatus.value}">${paymentStatus.value}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="deliveryStatus">Delivery status:</label>
-            <select class="form-control" name="deliveryStatus" id="deliveryStatus">
-                <c:forEach var="deliveryStatus" items="${deliveryStatusMap}">
-                    <option value="${deliveryStatus.value}">${deliveryStatus.value}</option>
-                </c:forEach>
-            </select>
-        </div>
-
-        <input type="submit" class="btn btn-warning text-light mb-1 w-50 mx-auto font-weight-bold" value="Edit">
-
-    </form>
+    <p>Last week orders: </p>
+    <ul>
+        <c:forEach var="order" items="${listByMonth}">
+            <li> ID : ${order.id}, date : ${order.date} </li>
+        </c:forEach>
+    </ul>
+    <p>Amount : ${amountByMonth}</p>
 
 </main>
 

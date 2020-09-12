@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface OrderDAO<T> extends InterfaceDAO<T> {
     List<T> getOrderListByUserId(int id);
-    public void add(Order order, List<OrderItem> orderItemList);
+    void add(Order order, List<OrderItem> orderItemList);
+    List<Order> getOrderListByLastMonth();
+    List<Order> getOrderListByLastWeek();
 }
