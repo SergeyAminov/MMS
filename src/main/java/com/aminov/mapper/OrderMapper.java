@@ -32,6 +32,7 @@ public class OrderMapper {
                 orderDto.getDeliveryMethod(),
                 orderDto.getPaymentStatus(),
                 orderDto.getDeliveryStatus(),
+                java.sql.Date.valueOf(orderDto.getDate()),
                 new ArrayList<>()
         );
     }
@@ -48,6 +49,7 @@ public class OrderMapper {
                 order.getDelivery_method(),
                 order.getPayment_status(),
                 order.getDelivery_status(),
+                order.getDate().toString(),
                 orderItemIdList
         );
     }

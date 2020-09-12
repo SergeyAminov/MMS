@@ -63,6 +63,7 @@
                         <th scope="col">Delivery status</th>
                         <th scope="col">Payment method</th>
                         <th scope="col">Payment status</th>
+                        <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,7 @@
                         <td>${order.key.deliveryStatus}</td>
                         <td>${order.key.paymentMethod}</td>
                         <td>${order.key.paymentStatus}</td>
+                        <td>${order.key.date}</td>
                     </tr>
                 </tbody>
             </table>

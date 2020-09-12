@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,14 @@ public class Order {
     @JoinColumn(name = "delivery_status")
     private String delivery_status;
 
+    @Column(name = "date")
+    private java.sql.Date date;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItemList = new ArrayList<>();
 
     public Order(int id, User user, String address, String payment_method, String delivery_method,
-                 String payment_status, String delivery_status, List<OrderItem> orderItemList) {
+                 String payment_status, String delivery_status, java.sql.Date date, List<OrderItem> orderItemList) {
         this.id = id;
         this.user = user;
         this.address = address;
@@ -44,6 +48,7 @@ public class Order {
         this.delivery_method = delivery_method;
         this.payment_status = payment_status;
         this.delivery_status = delivery_status;
+        this.date = date;
         this.orderItemList = orderItemList;
     }
 
@@ -103,6 +108,14 @@ public class Order {
 
     public void setDelivery_status(String delivery_status) {
         this.delivery_status = delivery_status;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public List<OrderItem> getOrderItemList() {

@@ -16,7 +16,7 @@
 <c:url value="/login" var="login"/>
 <form class="form-login container" action="${login}" method='POST'>
 
-    <h1 class="h3 mb-3 font-weight-bold">Login</h1>
+    <h1 class="h3 mb-3 font-weight-bold text-center">Login</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
     <input type="email" id="inputEmail" class="form-control mt-2" placeholder="Email address" required name='username'>
 

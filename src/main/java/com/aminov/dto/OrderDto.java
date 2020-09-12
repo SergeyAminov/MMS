@@ -10,12 +10,13 @@ public class OrderDto {
     private String deliveryMethod;
     private String paymentStatus;
     private String deliveryStatus;
+    private String date;
     private List<Integer> orderItemIdList;
 
     public OrderDto() { }
 
     public OrderDto(int id, Integer userId, String address, String paymentMethod, String deliveryMethod,
-                    String paymentStatus, String deliveryStatus, List<Integer> orderItemIdList) {
+                    String paymentStatus, String deliveryStatus, String date, List<Integer> orderItemIdList) {
         this.id = id;
         this.userId = userId;
         this.address = address;
@@ -23,6 +24,7 @@ public class OrderDto {
         this.deliveryMethod = deliveryMethod;
         this.paymentStatus = paymentStatus;
         this.deliveryStatus = deliveryStatus;
+        this.date = date;
         this.orderItemIdList = orderItemIdList;
     }
 
@@ -80,6 +82,14 @@ public class OrderDto {
 
     public void setDeliveryStatus(String deliveryStatus) {
         this.deliveryStatus = deliveryStatus;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public List<Integer> getOrderItemIdList() {

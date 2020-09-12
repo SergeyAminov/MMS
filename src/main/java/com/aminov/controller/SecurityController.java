@@ -27,13 +27,7 @@ public class SecurityController {
     private static final Logger logger = Logger.getLogger(SecurityController.class);
     private UserService<UserDto> userService;
     private AuthenticationProvider authenticationProvider;
-    private MessageSender messageSender;
 
-    @Lazy
-    @Autowired
-    public void setMessageSender(MessageSender messageSender) {
-        this.messageSender = messageSender;
-    }
 
     @Autowired
     public void setAuthenticationProvider(AuthenticationProvider authenticationProvider) {
@@ -96,7 +90,7 @@ public class SecurityController {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView loginPage() {
         ModelAndView modelAndView = new ModelAndView();
-        messageSender.sendMessage();
+
         modelAndView.setViewName("login");
         return modelAndView;
     }

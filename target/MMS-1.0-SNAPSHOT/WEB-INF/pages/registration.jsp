@@ -16,7 +16,7 @@
     <c:url value="/registration" var="registration"/>
     <form name='user' class="form-login container" action="${registration}" method='POST'>
 
-        <h1 class="h3 mb-3 font-weight-bold px-auto">Registration</h1>
+        <h1 class="h3 mb-3 font-weight-bold text-center">Registration</h1>
 
         <label for="inputName" class="sr-only">Name</label>
         <input type="text" id="inputName" class="form-control mt-2" placeholder="Name" required name='name'>
