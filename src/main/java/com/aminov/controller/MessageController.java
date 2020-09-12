@@ -26,8 +26,8 @@ public class MessageController {
     public String sendMessage(){
         List<ProductDto> productDtoList = new ArrayList<>();
         ProductDto productDto = this.productService.getById(9);
-        ProductDto productDto_2 = this.productService.getById(9);
-        ProductDto productDto_3 = this.productService.getById(9);
+        ProductDto productDto_2 = this.productService.getById(15);
+        ProductDto productDto_3 = this.productService.getById(20);
         productDtoList.add(productDto);
         productDtoList.add(productDto_2);
         productDtoList.add(productDto_3);

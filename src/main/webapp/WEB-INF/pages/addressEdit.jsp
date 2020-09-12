@@ -59,44 +59,50 @@
         <c:url value="/profile/addresses/edit" var="var"/>
     </c:if>
 
-    <form class="container mt-1" action="${var}" method="POST">
-        <h3>Address data:</h3>
+    <form class="item-card card container mt-3 mb-3 w-50" action="${var}" method="POST">
+
         <c:if test="${!empty address.city}">
             <input type="hidden" name="id" value="${address.id}">
         </c:if>
         <input type="hidden" name="userId" value="${userId}">
-        <p>
+
+        <div class="form-group">
             <label for="country">Country</label>
-            <input type="text" name="country" id="country" value="${address.country}">
-        </p>
-        <p>
+            <input type="text" class="form-control" name="country" id="country" value="${address.country}">
+        </div>
+
+        <div class="form-group">
             <label for="city">City</label>
-            <input type="text" name="city" id="city" value="${address.city}">
-        </p>
-        <p>
+            <input type="text" class="form-control" name="city" id="city" value="${address.city}">
+        </div>
+
+        <div class="form-group">
             <label for="street">Street</label>
-            <input type="text" name="street" id="street" value="${address.street}">
-        </p>
-        <p>
+            <input type="text" class="form-control" name="street" id="street" value="${address.street}">
+        </div>
+
+        <div class="form-group">
             <label for="postcode">Postcode</label>
-            <input type="number" name="postcode" id="postcode" value="${address.postcode}">
-        </p>
-        <p>
+            <input type="number" class="form-control" name="postcode" id="postcode" value="${address.postcode}">
+        </div>
+
+        <div class="form-group">
             <label for="building">Building</label>
-            <input type="number" name="building" id="building" value="${address.building}">
-        </p>
-        <p>
+            <input type="number" class="form-control" name="building" id="building" value="${address.building}">
+        </div>
+
+        <div class="form-group">
             <label for="apartNumber">Apartment number</label>
-            <input type="number" name="apartNumber" id="apartNumber" value="${address.apartNumber}">
-        </p>
-        <p>
-            <c:if test="${!empty address.city}">
-                <input type="submit" value="Edit address">
-            </c:if>
-            <c:if test="${empty address.city}">
-                <input type="submit" value="Add new address">
-            </c:if>
-        </p>
+            <input type="number" class="form-control" name="apartNumber" id="apartNumber" value="${address.apartNumber}">
+        </div>
+
+        <c:if test="${!empty address.city}">
+            <input class="btn btn-warning text-light mb-1 w-50 mx-auto font-weight-bold" type="submit" value="Edit address">
+        </c:if>
+        <c:if test="${empty address.city}">
+            <input class="btn btn-warning text-light mb-1 w-50 mx-auto font-weight-bold" type="submit" value="Add new address">
+        </c:if>
+
     </form>
 </main>
 

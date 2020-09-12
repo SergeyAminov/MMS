@@ -50,37 +50,41 @@
 
 <!-- Main -->
 <main class="flex-shrink-0 container">
+
     <h2>History</h2>
-    <hr>
+
     <c:forEach var="order" items="${orderMap}">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Delivery method</th>
-                    <th>Delivery status</th>
-                    <th>Payment method</th>
-                    <th>Payment status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>${order.key.id}</td>
-                    <td>${order.key.deliveryMethod}</td>
-                    <td>${order.key.deliveryStatus}</td>
-                    <td>${order.key.paymentMethod}</td>
-                    <td>${order.key.paymentStatus}</td>
-                </tr>
-            </tbody>
-        </table>
-        <h5>Items:</h5>
-        <c:forEach var="product" items="${order.value}">
-            <p>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
-                    ${product.storage} Gb memory, ${product.ram} Gb RAM;
-            </p>
-        </c:forEach>
-        <hr>
+        <div class="item-card card mx-auto container mt-3">
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Delivery method</th>
+                        <th scope="col">Delivery status</th>
+                        <th scope="col">Payment method</th>
+                        <th scope="col">Payment status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${order.key.id}</td>
+                        <td>${order.key.deliveryMethod}</td>
+                        <td>${order.key.deliveryStatus}</td>
+                        <td>${order.key.paymentMethod}</td>
+                        <td>${order.key.paymentStatus}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h5 class="font-weight-bold">Items:</h5>
+            <ul>
+                <c:forEach var="product" items="${order.value}">
+                    <li>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
+                            ${product.storage} Gb memory, ${product.ram} Gb RAM;</li>
+                </c:forEach>
+            </ul>
+        </div>
     </c:forEach>
+
 </main>
 
 <!-- Footer -->

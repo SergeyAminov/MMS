@@ -14,21 +14,19 @@
 <body class="d-flex flex-column h-100">
 
 <c:url value="/login" var="login"/>
-<form class="form-login container" style="width: 350px; margin-top: 200px;" action="${login}" method='POST'>
+<form class="form-login container" action="${login}" method='POST'>
 
-    <h1 class="h3 mb-3 font-weight-normal">Please Log In</h1>
+    <h1 class="h3 mb-3 font-weight-bold text-center">Login</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required name='username'>
+    <input type="email" id="inputEmail" class="form-control mt-2" placeholder="Email address" required name='username'>
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name='password' required>
+    <input type="password" id="inputPassword" class="form-control mt-2" placeholder="Password" name='password' required>
 
-    <button class="btn btn-lg btn-warning btn-block" type="submit">Submit</button>
+    <button class="btn btn-lg btn-warning btn-block mt-2 text-light w-50 mx-auto font-weight-bold" type="submit">Login</button>
 
     <p class="mt-5 mb-3 text-muted">&copy; 2020 Copyright: <a class="text-warning" href="#"> Sergey Aminov</a></p>
 </form>
-
-<form:e
 
 </body>
 </html>

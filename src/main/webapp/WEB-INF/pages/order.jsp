@@ -50,48 +50,54 @@
 
 <!-- Main -->
 <main class="flex-shrink-0 container">
+
     <h3>Cart list:</h3>
 
-    <c:forEach var="product" items="${sessionScope.cart.itemList}">
-        <p>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
-                ${product.storage} Gb memory, ${product.ram} Gb RAM</p>
-    </c:forEach>
+    <ul>
+        <c:forEach var="product" items="${sessionScope.cart.itemList}">
+            <li>${product.brand}, ${product.color}, ${product.weight} kg, ${product.diagonal} inch,
+                    ${product.storage} Gb memory, ${product.ram} Gb RAM</li>
+        </c:forEach>
+    </ul>
 
     <c:url value="/order" var="var"/>
-    <form action="${var}" method="POST">
+    <form class="item-card card container mt-3 mb-3 w-50" action="${var}" method="POST">
+
         <input type="hidden" name="userId" value="${userId}">
         <input type="hidden" name="paymentStatus" value="Waiting for payment">
         <input type="hidden" name="deliveryStatus" value="Waiting for payment">
 
         <!-- Choose address -->
-        <p>
+        <div class="form-group">
             <label for="address">Address</label>
-            <select name="address" id="address">
+            <select class="form-control" name="address" id="address">
                 <c:forEach var="address" items="${addressMap}">
                     <option value="${address.value}">${address.value}</option>
                 </c:forEach>
             </select>
-        </p>
+        </div>
 
-        <p>
+        <!-- Choose payment method -->
+        <div class="form-group">
             <label for="paymentMethod">Payment method</label>
-            <select name="paymentMethod" id="paymentMethod">
+            <select class="form-control" name="paymentMethod" id="paymentMethod">
                 <c:forEach var="paymentMethod" items="${paymentMethodMap}">
                     <option value="${paymentMethod.value}">${paymentMethod.value}</option>
                 </c:forEach>
             </select>
-        </p>
+        </div>
 
-        <p>
+        <!-- Choose delivery method -->
+        <div class="form-group">
             <label for="deliveryMethod">Delivery method</label>
-            <select name="deliveryMethod" id="deliveryMethod">
+            <select class="form-control" name="deliveryMethod" id="deliveryMethod">
                 <c:forEach var="deliveryMethod" items="${deliveryMethodMap}">
                     <option value="${deliveryMethod.value}">${deliveryMethod.value}</option>
                 </c:forEach>
             </select>
-        </p>
+        </div>
 
-        <input type="submit" value="Order">
+        <input class="btn btn-warning text-light mb-1 w-50 mx-auto font-weight-bold" type="submit" value="Send order">
     </form>
 
 </main>
