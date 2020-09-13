@@ -56,6 +56,16 @@
     </ul>
     <p>Amount : ${amountByMonth}</p>
 
+    <hr>
+
+    <p>Top of items:</p>
+
+    <ul>
+        <c:forEach var="item" items="${topOfItems}">
+            <li> ${item.value} : ${item.key} </li>
+        </c:forEach>
+    </ul>
+
 </main>
 
 <!-- Footer -->

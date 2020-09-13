@@ -74,6 +74,17 @@ public class OrderItemDAOImpl implements OrderItemDAO<OrderItem> {
                 .list();
     }
 
+    @Transactional
+    @Override
+    public List<Object[]> getTopOfItems(){
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .getSession()
+                .createQuery("select count(orderItem.id), orderItem.title from OrderItem orderItem group by orderItem.title order by count(orderItem.id) DESC ", Object[].class)
+                .setMaxResults(10)
+                .list();
+    }
+
 
 
 }

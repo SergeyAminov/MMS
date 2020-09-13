@@ -38,7 +38,7 @@
 <!-- Main -->
 <main class="flex-shrink-0 container">
 
-    <p class="mt-2">Last month orders: </p>
+    <p class="mt-2">Last week orders: </p>
     <ul>
         <c:forEach var="order" items="${listByWeek}">
             <li> ID : ${order.id}, date : ${order.date} </li>
@@ -48,13 +48,23 @@
 
     <hr>
 
-    <p>Last week orders: </p>
+    <p>Last month orders: </p>
     <ul>
         <c:forEach var="order" items="${listByMonth}">
             <li> ID : ${order.id}, date : ${order.date} </li>
         </c:forEach>
     </ul>
     <p>Amount : ${amountByMonth}</p>
+
+    <hr>
+
+    <p>Top of items:</p>
+
+    <ul>
+        <c:forEach var="item" items="${topOfItems}">
+            <li> ${item.value} : ${item.key} </li>
+        </c:forEach>
+    </ul>
 
 </main>
 

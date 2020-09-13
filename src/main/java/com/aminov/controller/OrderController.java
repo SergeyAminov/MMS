@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class OrderController {
@@ -144,6 +145,9 @@ public class OrderController {
         double amountByLastMonth = this.orderService.getAmountByLastMonth();
         modelAndView.addObject("listByMonth", orderDtoListByLastMonth);
         modelAndView.addObject("amountByMonth", amountByLastMonth);
+
+        Map<String, Long> topOfItems = this.orderItemService.getTopOfItems();
+        modelAndView.addObject("topOfItems", topOfItems);
 
         return modelAndView;
     }

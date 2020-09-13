@@ -10,8 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -83,6 +82,18 @@ public class OrderItemServiceImpl implements OrderItemService<OrderItemDto> {
             ));
         }
         return orderItemDtoList;
+    }
+
+    @Transactional
+    @Override
+    public Map<String, Long> getTopOfItems() {
+        Map<String, Long> resultMap = new LinkedHashMap<>();
+        for (Object[] pair : this.orderItemDAO.getTopOfItems()){
+            long count = (Long) pair[0];
+            String title = (String) pair[1];
+            resultMap.put(title, count);
+        }
+        return resultMap;
     }
 
     @Transactional

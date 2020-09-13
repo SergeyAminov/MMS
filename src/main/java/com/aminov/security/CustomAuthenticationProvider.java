@@ -13,6 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -23,6 +24,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     private static final Logger logger = Logger.getLogger(CustomAuthenticationProvider.class);
     private UserService<UserDto> userService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public void setBCryptPasswordEncoder(BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Autowired
     public void setUserService(UserService<UserDto> userService) {
@@ -42,7 +49,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         if (this.userService.getByEmail(name) == null){
             throw new UsernameNotFoundException("User not found.");
         }
-        if (this.userService.getByEmail(name).getPassword().equals(password)){
+        if (!this.bCryptPasswordEncoder.matches(password, this.userService.getByEmail(name).getPassword())){
             throw new BadCredentialsException("Bad credentials.");
         }
         else

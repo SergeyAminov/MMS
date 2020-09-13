@@ -14,12 +14,8 @@ public class UserDto implements UserDetails {
 
     private int id;
 
-    @NotNull
-    @NotEmpty
     private String name;
 
-    @NotNull
-    @NotEmpty
     private String surname;
 
     @NotNull

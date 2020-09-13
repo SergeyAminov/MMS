@@ -5,6 +5,7 @@ import com.aminov.dto.ProductDto;
 import com.aminov.model.Cart;
 import com.aminov.service.interfaces.CategoryService;
 import com.aminov.service.interfaces.ProductService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Controller
 public class ProductController {
 
+    final static Logger logger = Logger.getLogger(ProductController.class);
     private ProductService<ProductDto> productService;
     private CategoryService<CategoryDto> categoryService;
     private Cart cart;
@@ -48,6 +50,9 @@ public class ProductController {
                                            @RequestParam(name = "category", required = false) String category
                                            ) {
         ModelAndView modelAndView = new ModelAndView();
+        if(logger.isDebugEnabled()){
+            logger.debug("This is debug in catalog page.");
+        }
         session.setAttribute("cart", new Cart(this.cart));
         modelAndView.setViewName("catalog");
         Map<String, String> params = new HashMap<>();
