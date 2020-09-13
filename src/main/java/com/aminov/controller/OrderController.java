@@ -149,6 +149,9 @@ public class OrderController {
         Map<String, Long> topOfItems = this.orderItemService.getTopOfItems();
         modelAndView.addObject("topOfItems", topOfItems);
 
+        List<UserDto> topOfUsers = this.userService.getTopOfUsers();
+        modelAndView.addObject("topOfUsers", topOfUsers);
+
         return modelAndView;
     }
 

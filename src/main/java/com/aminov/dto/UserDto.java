@@ -32,6 +32,8 @@ public class UserDto implements UserDetails {
     private List<Integer> addressIdList;
     private List<Integer> orderIdList;
 
+    private double total;
+
     public int getId() {
         return id;
     }
@@ -127,6 +129,14 @@ public class UserDto implements UserDetails {
 
     public void removeOrder(int id){
         this.addressIdList.remove(Integer.valueOf(id));
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override

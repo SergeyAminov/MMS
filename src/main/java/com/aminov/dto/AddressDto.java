@@ -1,5 +1,7 @@
 package com.aminov.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 public class AddressDto {
 
     private int id;

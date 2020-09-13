@@ -1,11 +1,13 @@
 package com.aminov.service.implementations;
 
 import com.aminov.dao.interfaces.OrderDAO;
+import com.aminov.dao.interfaces.UserDAO;
 import com.aminov.dto.OrderDto;
 import com.aminov.dto.OrderItemDto;
 import com.aminov.mapper.OrderItemMapper;
 import com.aminov.mapper.OrderMapper;
 import com.aminov.model.Order;
+import com.aminov.model.User;
 import com.aminov.service.interfaces.OrderItemService;
 import com.aminov.service.interfaces.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,14 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
 
     private OrderItemService<OrderItemDto> orderItemService;
     private OrderDAO<Order> orderDAO;
+    private UserDAO<User> userDAO;
     private OrderItemMapper orderItemMapper;
     private OrderMapper orderMapper;
+
+    @Autowired
+    public void setUserDAO(UserDAO<User> userDAO) {
+        this.userDAO = userDAO;
+    }
 
     @Autowired
     public void setOrderItemMapper(OrderItemMapper orderItemMapper) {
@@ -73,6 +81,9 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
                 this.orderMapper.toEntity(orderDto),
                 orderItemDtoList.stream().map(this.orderItemMapper::toEntity).collect(Collectors.toList())
         );
+        double orderTotal = orderItemService.getTotal(orderItemDtoList);
+        double currentTotal = this.userDAO.getById(orderDto.getUserId()).getTotal();
+        this.userDAO.getById(orderDto.getUserId()).setTotal(orderTotal + currentTotal);
     }
 
     @Transactional

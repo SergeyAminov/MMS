@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -57,4 +58,16 @@ public class UserDAOImpl implements UserDAO<User> {
                 .setParameter("email", email)
                 .uniqueResult();
     }
+
+    @Transactional
+    @Override
+    public List<User> getTopOfUsers(){
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .getSession()
+                .createQuery("select user from User user order by user.total DESC ", User.class)
+                .setMaxResults(10)
+                .list();
+    }
+
 }

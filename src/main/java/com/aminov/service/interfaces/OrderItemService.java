@@ -1,5 +1,6 @@
 package com.aminov.service.interfaces;
 
+import com.aminov.dto.OrderItemDto;
 import com.aminov.dto.ProductDto;
 
 import java.util.List;
@@ -10,4 +11,5 @@ public interface OrderItemService<T> extends InterfaceService<T>{
     double getTotal(int orderId);
     List<T> getOrderItemDtoList(List<ProductDto> productDtoList);
     Map<String, Long> getTopOfItems();
+    double getTotal(List<T> orderItemDtoList);
 }

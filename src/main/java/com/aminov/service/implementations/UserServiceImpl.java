@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -122,4 +124,15 @@ public class UserServiceImpl implements UserService<UserDto> {
     private boolean emailExist(String email) {
         return userDAO.getByEmail(email) != null;
     }
+
+    @Transactional
+    @Override
+    public List<UserDto> getTopOfUsers() {
+        return this.userDAO
+                .getTopOfUsers()
+                .stream()
+                .map(this.userMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 }

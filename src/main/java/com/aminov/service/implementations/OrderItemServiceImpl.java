@@ -114,4 +114,14 @@ public class OrderItemServiceImpl implements OrderItemService<OrderItemDto> {
             orderPrice += orderItemDto.getPrice();
         return orderPrice;
     }
+
+    @Transactional
+    @Override
+    public double getTotal(List<OrderItemDto> orderItemDtoList) {
+        double orderPrice = 0;
+        for (OrderItemDto orderItemDto : orderItemDtoList)
+            orderPrice += orderItemDto.getPrice();
+        return orderPrice;
+    }
+
 }

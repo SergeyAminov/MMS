@@ -39,6 +39,9 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Order> orderList;
 
+    @Column(name = "total")
+    private double total;
+
     public User() {}
 
     public int getId() {
@@ -119,6 +122,14 @@ public class User {
 
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     @Override
