@@ -13,4 +13,5 @@ public interface OrderService<T> extends InterfaceService<T> {
     List<T> getOrderDtoListByLastWeek();
     double getAmountByLastMonth();
     double getAmountByLastWeek();
+    List<T> getOrderDtoListByUserId(int id);
 }

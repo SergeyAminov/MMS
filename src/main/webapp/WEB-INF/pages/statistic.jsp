@@ -38,7 +38,7 @@
 <!-- Main -->
 <main class="flex-shrink-0 container">
 
-    <p>Last month orders: </p>
+    <p class="mt-2">Last month orders: </p>
     <ul>
         <c:forEach var="order" items="${listByWeek}">
             <li> ID : ${order.id}, date : ${order.date} </li>

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +66,9 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
     @Transactional
     @Override
     public void add(OrderDto orderDto, List<OrderItemDto> orderItemDtoList){
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        orderDto.setDate(formatter.format(date));
         this.orderDAO.add(
                 this.orderMapper.toEntity(orderDto),
                 orderItemDtoList.stream().map(this.orderItemMapper::toEntity).collect(Collectors.toList())
@@ -134,10 +139,7 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
         List<OrderDto> orderDtoList = this.getOrderDtoListByLastMonth();
 
         for (OrderDto orderDto : orderDtoList){
-            List <OrderItemDto> orderItemDtoList = this.orderItemService.getOrderItemDtoListByOrderId(orderDto.getId());
-            for (OrderItemDto orderItemDto : orderItemDtoList){
-                amount += orderItemDto.getPrice();
-            }
+            amount += this.orderItemService.getTotal(orderDto.getId());
         }
         return amount;
     }
@@ -160,12 +162,18 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
         List<OrderDto> orderDtoList = this.getOrderDtoListByLastWeek();
 
         for (OrderDto orderDto : orderDtoList){
-            List <OrderItemDto> orderItemDtoList = this.orderItemService.getOrderItemDtoListByOrderId(orderDto.getId());
-            for (OrderItemDto orderItemDto : orderItemDtoList){
-                amount += orderItemDto.getPrice();
-            }
+            amount += this.orderItemService.getTotal(orderDto.getId());
         }
         return amount;
+    }
+
+    @Override
+    public List<OrderDto> getOrderDtoListByUserId(int id) {
+        return this.orderDAO
+                .getOrderListByUserId(id)
+                .stream()
+                .map(this.orderMapper::toDto)
+                .collect(Collectors.toList());
     }
 
 }

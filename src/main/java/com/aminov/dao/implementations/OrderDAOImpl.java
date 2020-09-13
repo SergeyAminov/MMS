@@ -77,15 +77,15 @@ public class OrderDAOImpl implements OrderDAO<Order> {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -15);
-        Date endDate = calendar.getTime();
-        Date startDate = new Date();
+        calendar.add(Calendar.DAY_OF_YEAR, -7);
+        Date startDate = calendar.getTime();
+        Date endDate = new Date();
 
         return session
                 .getSession()
                 .createQuery("SELECT e FROM Order e WHERE e.date BETWEEN :start AND :end", Order.class)
-                .setParameter("start", java.sql.Date.valueOf(formatter.format(endDate)))
-                .setParameter("end", java.sql.Date.valueOf(formatter.format(startDate)))
+                .setParameter("start", java.sql.Date.valueOf(formatter.format(startDate)))
+                .setParameter("end", java.sql.Date.valueOf(formatter.format(endDate)))
                 .list();
     }
 
@@ -96,14 +96,14 @@ public class OrderDAOImpl implements OrderDAO<Order> {
 
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
-        Date endDate = calendar.getTime();
-        Date startDate = new Date();
+        Date startDate = calendar.getTime();
+        Date endDate = new Date();
 
         return session
                 .getSession()
                 .createQuery("SELECT e FROM Order e WHERE e.date BETWEEN :start AND :end", Order.class)
-                .setParameter("start", java.sql.Date.valueOf(formatter.format(endDate)))
-                .setParameter("end", java.sql.Date.valueOf(formatter.format(startDate)))
+                .setParameter("start", java.sql.Date.valueOf(formatter.format(startDate)))
+                .setParameter("end", java.sql.Date.valueOf(formatter.format(endDate)))
                 .list();
     }
 

@@ -49,7 +49,7 @@
 </header>
 
 <!-- Main -->
-<main class="flex-shrink-0 container">
+<main class="flex-shrink-0 container mb-3">
 
     <h2>History</h2>
 

@@ -37,29 +37,23 @@
 
 <!-- Main -->
 <main class="flex-shrink-0 container">
-    <p> Hello from Statistic page! </p>
-    <hr>
 
-    <p>Last month orders: </p>
-
+    <p class="mt-2">Last month orders: </p>
     <ul>
         <c:forEach var="order" items="${listByWeek}">
             <li> ID : ${order.id}, date : ${order.date} </li>
         </c:forEach>
     </ul>
-
     <p>Amount : ${amountByWeek}</p>
 
     <hr>
 
     <p>Last week orders: </p>
-
     <ul>
         <c:forEach var="order" items="${listByMonth}">
             <li> ID : ${order.id}, date : ${order.date} </li>
         </c:forEach>
     </ul>
-
     <p>Amount : ${amountByMonth}</p>
 
 </main>

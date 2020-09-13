@@ -36,7 +36,7 @@
 </header>
 
 <!-- Main -->
-<main class="flex-shrink-0 container">
+<main class="flex-shrink-0 container mb-3">
 
     <h3 class="font-weight-bold mt-2">Order list</h3>
     <c:forEach var="order" items="${orderMap}">
