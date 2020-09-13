@@ -1,10 +1,14 @@
 package com.aminov.dto;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 public class AddressDto {
 
     private int id;
+
+    @NotEmpty
+    @Size(min = 2)
     private String country;
     private String city;
     private String street;

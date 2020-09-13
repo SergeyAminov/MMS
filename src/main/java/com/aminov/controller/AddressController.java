@@ -7,11 +7,14 @@ import com.aminov.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class AddressController {
@@ -41,11 +44,14 @@ public class AddressController {
     }
 
     @RequestMapping(value = "/profile/addresses/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView editAddressPage(@PathVariable("id") int id) {
+    public ModelAndView editAddressPage(@PathVariable("id") int id,
+                                        Authentication authentication) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("addressEdit");
         AddressDto addressDto = addressService.getById(id);
         modelAndView.addObject("address", addressDto);
+        int userId = this.userService.getByEmail(authentication.getName()).getId();
+        modelAndView.addObject("userId", userId);
         return modelAndView;
     }
 
@@ -68,8 +74,15 @@ public class AddressController {
     }
 
     @RequestMapping(value = "/profile/addresses/add", method = RequestMethod.POST)
-    public ModelAndView addAddress(@ModelAttribute("product") AddressDto addressDto){
+    public ModelAndView addAddress(@Valid @ModelAttribute("product") AddressDto addressDto,
+                                   BindingResult result,
+                                   Authentication authentication){
         ModelAndView modelAndView = new ModelAndView();
+        if (result.hasErrors()){
+            modelAndView.setViewName("addressEdit");
+            modelAndView.addObject("authentication", authentication);
+            return modelAndView;
+        }
         this.addressService.add(addressDto);
         modelAndView.setViewName("redirect:/profile/addresses");
         return modelAndView;
