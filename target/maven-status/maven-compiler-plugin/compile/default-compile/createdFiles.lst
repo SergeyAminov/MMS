@@ -77,6 +77,7 @@ com\aminov\dao\interfaces\AddressDAO.class
 com\aminov\mapper\OrderMapper.class
 com\aminov\mapper\ProductMapper.class
 com\aminov\mapper\UserMapper.class
+com\aminov\controller\MessageController.class
 com\aminov\dao\implementations\PaymentMethodDAOImpl.class
 com\aminov\dto\OrderItemDto.class
 com\aminov\dao\implementations\OrderItemDAOImpl.class

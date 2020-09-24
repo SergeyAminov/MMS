@@ -52,11 +52,14 @@
 <main class="flex-shrink-0">
     <c:url value="/profile/addresses" var="addresses"/>
     <c:url value="/profile/orders" var="orders"/>
+    <c:url value="/profile/edit" var="edit"/>
     <div class="container mt-2">
         <h3>${user.name} ${user.surname} (User ID: ${user.id})</h3>
         <p>Mail: ${user.email}</p>
+        <p>Birthday : ${user.birthday.toString()}</p>
         <p><a href="${addresses}">Addresses</a></p>
         <p><a href="${orders}">History</a></p>
+        <p><a href="${edit}">Edit</a></p>
     </div>
 </main>
 

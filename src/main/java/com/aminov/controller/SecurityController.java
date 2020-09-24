@@ -116,4 +116,28 @@ public class SecurityController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.GET)
+    public ModelAndView editProfilePage(Authentication authentication){
+        ModelAndView modelAndView = new ModelAndView();
+        UserDto userDto = this.userService.getByEmail(authentication.getName());
+        modelAndView.addObject("user", userDto);
+        modelAndView.addObject("authentication", authentication);
+        modelAndView.setViewName("profileEdit");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/profile/edit", method = RequestMethod.POST)
+    public ModelAndView editProfile(@ModelAttribute("user") UserDto userDto){
+        ModelAndView modelAndView = new ModelAndView();
+
+        UserDto user = this.userService.getById(userDto.getId());
+        userDto.setAddressIdList(user.getAddressIdList());
+        userDto.setOrderIdList(user.getOrderIdList());
+        userDto.setMatchingPassword(user.getMatchingPassword());
+        this.userService.edit(userDto);
+
+        modelAndView.setViewName("redirect:/profile/addresses");
+        return modelAndView;
+    }
+
 }

@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService<UserDto> {
             throw new Exception("There is an account with that email address: " + userDto.getEmail());
         userDto.setRole("ROLE_USER");
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userDto.setTotal(0);
         this.userDAO.add(this.userMapper.toEntity(userDto));
     }
 

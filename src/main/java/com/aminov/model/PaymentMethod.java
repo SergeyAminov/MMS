@@ -1,7 +1,6 @@
 package com.aminov.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "payment_methods")

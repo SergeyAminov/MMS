@@ -1,6 +1,7 @@
 package com.aminov.model;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class User {
     private String surname;
 
     @Column(name = "birthday")
-    private String birthday;
+    private java.sql.Date birthday;
 
     @Column(name = "email")
     private String email;
@@ -68,11 +69,11 @@ public class User {
         this.surname = surname;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 

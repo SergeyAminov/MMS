@@ -50,17 +50,27 @@
 
 <!-- Main -->
 <main class="flex-shrink-0">
-    <c:url value="/profile/addresses" var="addresses"/>
-    <c:url value="/profile/orders" var="orders"/>
+
     <c:url value="/profile/edit" var="edit"/>
-    <div class="container mt-2">
-        <h3>${user.name} ${user.surname} (User ID: ${user.id})</h3>
-        <p>Mail: ${user.email}</p>
-        <p>Birthday : ${user.birthday.toString()}</p>
-        <p><a href="${addresses}">Addresses</a></p>
-        <p><a href="${orders}">History</a></p>
-        <p><a href="${edit}">Edit</a></p>
-    </div>
+    <form class="item-card card container mt-3 mb-3 w-50" action="${edit}" method="POST">
+
+        <input type="hidden" name="id" value="${user.id}">
+        <input type="hidden" name="name" value="${user.name}">
+        <input type="hidden" name="surname" value="${user.surname}">
+        <input type="hidden" name="password" value="${user.password}">
+        <input type="hidden" name="matchingPassword" value="${user.matchingPassword}">
+        <input type="hidden" name="email" value="${user.email}">
+        <input type="hidden" name="role" value="${user.role}">
+
+        <div class="form-group">
+            <label for="date">Choose date:</label>
+            <input class="form-control" type="date" name="birthday" id="date" value="${user.birthday}">
+        </div>
+
+        <input type="submit" class="btn btn-warning text-light mb-1 w-50 mx-auto font-weight-bold" value="Edit date">
+
+    </form>
+
 </main>
 
 <!-- Footer -->

@@ -1,11 +1,13 @@
 package com.aminov.dto;
 
 import com.sun.istack.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotEmpty;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +30,10 @@ public class UserDto implements UserDetails {
     private String email;
 
     private String role;
-    private String birthday;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private java.sql.Date birthday;
+
     private List<Integer> addressIdList;
     private List<Integer> orderIdList;
 
@@ -91,11 +96,11 @@ public class UserDto implements UserDetails {
         this.role = role;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
