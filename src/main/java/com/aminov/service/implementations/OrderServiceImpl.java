@@ -15,10 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -71,11 +68,22 @@ public class OrderServiceImpl implements OrderService<OrderDto> {
         this.orderDAO.add(this.orderMapper.toEntity(orderDto));
     }
 
+    /**
+     * Add the new Order to the database.
+     *
+     * @param orderDto an object with information about customer, payment- and delivery details etc.
+     * @param orderItemDtoList contains the list of items in Order
+     */
     @Transactional
     @Override
     public void add(OrderDto orderDto, List<OrderItemDto> orderItemDtoList){
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+
+        /* Due to unknown reason program sets current date as the previous day that's why we add one here to fix it */
+        calendar.add(Calendar.DAY_OF_YEAR, +1);
+
+        Date date = calendar.getTime();
         orderDto.setDate(formatter.format(date));
         this.orderDAO.add(
                 this.orderMapper.toEntity(orderDto),

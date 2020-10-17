@@ -136,7 +136,7 @@ public class SecurityController {
         userDto.setMatchingPassword(user.getMatchingPassword());
         this.userService.edit(userDto);
 
-        modelAndView.setViewName("redirect:/profile/addresses");
+        modelAndView.setViewName("redirect:/profile");
         return modelAndView;
     }
 
