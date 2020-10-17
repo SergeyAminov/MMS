@@ -55,7 +55,7 @@
 
     <c:forEach var="order" items="${orderMap}">
         <div class="item-card card mx-auto container mt-3">
-            <table class="table table-md">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>

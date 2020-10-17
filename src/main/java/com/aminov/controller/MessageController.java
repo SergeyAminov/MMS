@@ -25,9 +25,9 @@ public class MessageController {
     @GetMapping(value = "/message", produces = MediaType.APPLICATION_JSON_VALUE)
     public String sendMessage(){
         List<ProductDto> productDtoList = new ArrayList<>();
-        ProductDto productDto = this.productService.getById(9);
-        ProductDto productDto_2 = this.productService.getById(15);
-        ProductDto productDto_3 = this.productService.getById(20);
+        ProductDto productDto = this.productService.getById(1);
+        ProductDto productDto_2 = this.productService.getById(2);
+        ProductDto productDto_3 = this.productService.getById(3);
         productDtoList.add(productDto);
         productDtoList.add(productDto_2);
         productDtoList.add(productDto_3);
